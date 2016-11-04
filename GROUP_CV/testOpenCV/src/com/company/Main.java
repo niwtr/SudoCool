@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.opencv.core.CvType.*;
+import static org.opencv.core.Mat.zeros;
 import static org.opencv.imgproc.Imgproc.*;
 
 import java.io.*;
@@ -74,62 +75,105 @@ public class Main {
                 return (area<=ub && area>=lb);
     }
 
+    /* well this one is not as good as the version1 . */
+    private static boolean isSquare2 (MatOfPoint mp, double lb, double ub){
+        Rect rt=boundingRect(mp);
+        return (rt.area()<=ub && rt.area()>=lb);
 
-    private static List<MatOfPoint> findSquares(Mat oimg, double lb, double ub){ //,int minarea, int maxarea, int maxangl){
+    }
 
 
+    private static Mat prepare_findSquares(Mat oimg){
         Mat img2=new Mat();
         Imgproc.cvtColor(oimg,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
+
+        //Imgproc.GaussianBlur(img2, img2, new Size(3,3), 0);
+
+        Highgui.imwrite("/Users/Heranort/Desktop/blured.jpg", img2);
 
         Imgproc.Canny(img2, img2, 60,200); //canny contour
 
         Highgui.imwrite("/Users/Heranort/Desktop/am.jpg", img2);
 
-        Mat elem10=new Mat(10,10, CV_8U, new Scalar(1));
+        Mat elem10=new Mat(5,5, CV_8U, new Scalar(1));
         Imgproc.morphologyEx(img2, img2, MORPH_CLOSE, elem10);//morph close
+
 
         Highgui.imwrite("/Users/Heranort/Desktop/an.jpg", img2);
 
-        List<MatOfPoint> squares=new ArrayList<>();
+        return img2;
 
+    }
+    private static List<MatOfPoint> findSquares1(Mat oimg, double lb, double ub){ //,int minarea, int maxarea, int maxangl){
+
+        Mat img2=prepare_findSquares(oimg);
+
+        List<MatOfPoint> squares=new ArrayList<>();
 
         List<MatOfPoint> contours=new ArrayList<>();
 
-        Mat timg=img2.clone();
-
         Mat hierarchy=new Mat();
-        Imgproc.findContours(timg, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
-
+        Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
 
         List<MatOfPoint> tmp= new ArrayList<>();
         for(MatOfPoint mp : contours){
-            if (isSquare(mp, lb, ub))
+            if (isSquare(mp, lb, ub)) {
                 tmp.add(mp);
-            else{
-             //   System.out.println(Imgproc.contourArea(mp));
             }
         }
-
-        //cut the image.
-        Mat res=new Mat(img2.size(), CV_8U, new Scalar(0));
-        Core.fillPoly(res, tmp, new Scalar(255));
-        Mat rest=new Mat(img2.size(), CV_8UC3, new Scalar(0, 255, 0));
-        oimg.copyTo(rest, res);
-        Highgui.imwrite("/Users/Heranort/Desktop/ax.jpg", rest);
-
-        squares.addAll(tmp);
-            contours.clear();
-
-        return squares;
+        return tmp;
 
     }
+    private static Mat cut_squares1 (Mat img,  List<MatOfPoint> polys){
+        Mat res=new Mat(img.size(), CV_8U, new Scalar(0));
+        Core.fillPoly(res, polys, new Scalar(255));
+        Mat rest=new Mat(img.size(), CV_8UC3, new Scalar(0, 255, 0));
+        img.copyTo(rest, res);
+        return rest;
+    }
+    private static List<Rect> findSquares2(Mat oimg, double lb, double ub){
 
+            Mat img2=prepare_findSquares(oimg);
 
+            List<MatOfPoint> contours=new ArrayList<>();
+
+            Mat hierarchy=new Mat();
+            Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
+
+            List<Rect> rct=new ArrayList<>();
+            for(MatOfPoint mp : contours){
+                if (isSquare(mp, lb, ub)) {
+                    rct.add(boundingRect(mp));
+                }
+            }
+            return rct;
+    }
+
+    private static Mat cut_squares2 (Mat img, List<Rect> rct){
+        Mat rected_img=new Mat(img.rows(), img.cols(), CV_8UC1, new Scalar(0));
+        for(Rect r : rct) {
+            Core.rectangle(rected_img, new Point(r.x, r.y),new Point(r.x+r.width, r.y+r.height), new Scalar(255,0,0), Core.FILLED);
+        }
+        Mat rest2=new Mat(img.size(), CV_8UC3, new Scalar(0, 255, 0));
+        img.copyTo(rest2, rected_img);
+        return rest2;
+    }
     public static void main(String[] args) {
 
-        Mat imgi= Highgui.imread("/Users/Heranort/Desktop/sudo2.jpg");//low
-        List<MatOfPoint> squares= findSquares(imgi, 2000, 3000);
-        Core.polylines(imgi, squares, true, new Scalar(255,255,0));
+        Mat imgi= Highgui.imread("/Users/Heranort/Desktop/sudo5.jpg");//low
+        List<MatOfPoint> squares= findSquares1(imgi, 6000, 13000);
+        List<Rect> rects=findSquares2(imgi, 6000, 13000);
+        //Core.polylines(imgi, squares, true, new Scalar(255,255,0));
+
+        Mat rst1=cut_squares1(imgi, squares);
+        Mat rst2=cut_squares2(imgi, rects);
+
+
+        System.out.println(rects.size());
+        rects.sort((Rect a, Rect b)->(a.area()>b.area())?1:-1);
+        for(Rect rc : rects){
+            System.out.println(rc.x);
+        }
 
     }
 }

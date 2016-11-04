@@ -68,8 +68,6 @@ public class Main {
         }
     }
 
-
-
     private static  boolean isSquare (MatOfPoint mp, double lb, double ub){
         double area=Imgproc.contourArea(mp);
                 return (area<=ub && area>=lb);
@@ -158,10 +156,38 @@ public class Main {
         img.copyTo(rest2, rected_img);
         return rest2;
     }
+
+
+    private static void arrangeSquares(List<Rect> rct){
+        List<Rect>rects=new ArrayList<Rect>(rct);
+
+        rects.sort((Rect a, Rect b)->(a.y>b.y)?1:-1);
+
+        List <Rect>r =new ArrayList<>();
+
+
+        int i=0;
+        double start = rects.get(0).y;
+        double end = rects.get(rects.size() - 1).y;
+        double delta = (end - start) / 9;
+        while(rects.size()>0) {
+
+            start = rects.get(0).y;
+            while(rects.size()>0) {
+                if ((rects.get(0).y - start) < delta) {
+                    r.add(rects.get(0));
+                    rects.remove(0);
+                } else break;
+            }
+            System.out.println(r.size());
+        }
+    }
+
     public static void main(String[] args) {
 
         Mat imgi= Highgui.imread("/Users/Heranort/Desktop/sudo5.jpg");//low
-        List<MatOfPoint> squares= findSquares1(imgi, 6000, 13000);
+
+                List<MatOfPoint> squares= findSquares1(imgi, 6000, 13000);
         List<Rect> rects=findSquares2(imgi, 6000, 13000);
         //Core.polylines(imgi, squares, true, new Scalar(255,255,0));
 
@@ -170,10 +196,7 @@ public class Main {
 
 
         System.out.println(rects.size());
-        rects.sort((Rect a, Rect b)->(a.area()>b.area())?1:-1);
-        for(Rect rc : rects){
-            System.out.println(rc.x);
-        }
 
+        Highgui.imwrite("/Users/Heranort/Desktop/aaa.jpg", rst1);
     }
 }

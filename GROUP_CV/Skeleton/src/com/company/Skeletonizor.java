@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.ImgProc.nPoint;
-
+import com.company.ImgProc.Utils;
 import org.opencv.core.*;
 
 
@@ -15,35 +15,8 @@ public class Skeletonizor {
 
 
 
-    private static int[][]convertMat(Mat bm){
-        int xbound=bm.rows();
-        int ybound=bm.cols();
-        int [][]rst=new int[xbound][ybound];
-
-        for(int i=0;i<xbound;i++){
-            for(int j=0;j<ybound;j++){
-                rst[i][j]=(int)(bm.get(i,j)[0]>0?1:0);
-            }
-        }
-        return rst;
-    }
-    private static Mat convertByteM(int [][] intm){
-        int xbound=intm.length;
-        int ybound=intm[0].length;
-        Mat bm=new Mat(xbound,ybound,CV_8U);
-        for(int i=0;i<xbound;i++){
-
-            byte[] u=new byte[ybound];
-            for(int j=0;j<ybound;j++)
-                u[j]=(byte)(intm[i][j]>0?255:0);
-            bm.put(i,0, u);
-        }
-
-        return bm;
-    }
-
     public static Mat Skeletonize(final Mat givenImage) {
-        int[][] binaryImage=convertMat(givenImage);
+        int[][] binaryImage=Utils.convertMat(givenImage);
 
         int a, b;
         List<nPoint> pointsToChange = new LinkedList();
@@ -85,7 +58,7 @@ public class Skeletonizor {
             pointsToChange.clear();
         } while (hasChange);
 
-        return convertByteM(binaryImage);
+        return Utils.convertByteM(binaryImage);
     }
 
     private static int getA(int[][] binaryImage, int y, int x) {

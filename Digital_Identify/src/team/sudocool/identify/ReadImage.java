@@ -1,7 +1,6 @@
 package team.sudocool.identify;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
@@ -50,6 +49,35 @@ public class ReadImage {
 
                 Object pixel = raster.getDataElements(i, j, null);
                 ans[j][i] = ((byte[]) pixel)[0] & 0xff;
+            }
+        }
+
+        return ans;
+    }
+
+    public static void outMatrix(int[][] image) {
+        for (int[] anImage : image) {
+            for (int ananImage : anImage) {
+                System.out.print(ananImage + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * convert two-dimensional to one-dimensional and double
+     * @param in
+     * @return ans
+     */
+    public double[] convertOne(int[][] in)
+    {
+        int n = in.length;
+        double[] ans = new double[n*n];
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                ans[i*n+j] = in[i][j];
             }
         }
 

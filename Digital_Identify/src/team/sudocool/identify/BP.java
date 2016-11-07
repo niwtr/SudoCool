@@ -40,7 +40,7 @@ public class BP {
 
         for(int i = 0; i < len-1; i++)
         {
-            layer_weight[i] = new double[layer_num[i]+1][layer_num[i+1]];
+            layer_weight[i] = new double[layer_num[i]+1][layer_num[i+1]+1];
             for(int j = 0; j < layer_num[i]+1; j++)
             {
                 for(int k = 0; k < layer_num[i+1]; k++)
@@ -50,6 +50,20 @@ public class BP {
                 }
             }
         }
+    }
+
+    /**
+     * Try to load weight from file "net_weight.txt"
+     */
+    public void loadWeight() {
+
+    }
+
+    /**
+     * Try to conserve the weight to file "net_weight.txt"
+     */
+    public void saveWeight() {
+
     }
 
     /**
@@ -65,8 +79,8 @@ public class BP {
             layer_net[i][0] = -1;     //threshold
             if(i == 0)
             {
-                for(int j = 0; j < in.length+1; j++)
-                    layer_net[i][j + 1] = in[j];
+                for(int j = 0; j < in.length; j++)
+                    layer_net[0][j + 1] = in[j];
             }
         }
 
@@ -83,7 +97,10 @@ public class BP {
             }
         }
 
-        return layer_net[len-1];
+        double[] ans = new double[layer_num[len-1]];
+        System.arraycopy(layer_net[len-1], 1, ans, 0, layer_num[len-1]);
+
+        return ans;
     }
 
     /**
@@ -94,7 +111,7 @@ public class BP {
         int len = layer_num.length;
 
         //calculate the output layer local gradient
-        for(int i = 1; i <= layer_num[i]; i++)
+        for(int i = 1; i <= layer_num[len-1]; i++)
         {
             double temp_o = layer_net[len-1][i];
             layer_grad[len-1][i] = temp_o * (1-temp_o) * (sample_out[i-1] - temp_o);
@@ -123,22 +140,19 @@ public class BP {
      * @param in
      * @param out
      */
-    public void trainNet(double[][] in, double[][] out) {
-        //loop all the training data
-        for (int j = 0; j < in.length; j++)
-        {
-            //update the network
-            while(true) {
-                double out_error = 0.0;
+    public void trainNet(double[] in, double[] out, double allow_err) {
+        while(true) {
+            double out_error = 0.0;
 
-                double[] ans = this.forwardProp(in[j]);
-                this.backProp(out[j]);
-                for(int i = 0; i < ans.length; i++)
-                    out_error += (out[j][i] - ans[i]) * (out[j][i] - ans[i]) / 2;
+            double[] ans = this.forwardProp(in);
+            this.backProp(out);
+            for(int i = 0; i < ans.length; i++)
+                out_error += (out[i] - ans[i]) * (out[i] - ans[i]) / 2;
 
-                if(out_error < 0.5)
-                    break;
-            }
+            System.out.println("Error: " + out_error);
+
+            if(out_error < allow_err)
+                break;
         }
     }
 }

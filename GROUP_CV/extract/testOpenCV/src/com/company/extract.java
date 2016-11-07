@@ -28,14 +28,14 @@ public class extract {//需要一个将原本二值化的图片切成t_size等�
         return i-j;
     }
 
-    public static double[][] div_square(int [][]bimg, int t_size){
-        double[][] rs= new double[t_size][t_size];
-        for(int i=0;i<t_size;i++){
-            for(int j=0;j<t_size;j++){
+    public static double[][] div_square(int [][]bimg, int t_size, int a_size){
+        double[][] rs= new double[a_size][a_size];//8,7
+        for(int i=0;i<a_size;i++){
+            for(int j=0;j<a_size;j++){
                 int count1=0;
                 int count2=0;
-                for(int k1=i*(8/t_size);k1<(i+1)*(8/t_size);k1++){
-                    for(int k2=j*(8/t_size);k2<(j+1)*(8/t_size);k2++){
+                for(int k1=i*t_size;(k1<(i+1)*t_size)&&(k1<bimg.length);k1++){
+                    for(int k2=j*t_size;(k2<(j+1)*t_size)&&(k2<bimg[0].length);k2++){
                         count1++;
                         if(bimg[k1][k2]==1){
                             count2++;
@@ -107,7 +107,7 @@ public class extract {//需要一个将原本二值化的图片切成t_size等�
     }
 
     public static int CheckCircle(int[][] mat){
-        int count=0;
+        int count=0,count1=0;
         int[][] al = new int[mat.length][mat[0].length];
         int coor1=0,coor2=0;
         int flag=1,flag1=0;
@@ -124,58 +124,73 @@ public class extract {//需要一个将原本二值化的图片切成t_size等�
         }
         int temp1=coor1,temp2=coor2;
         flag1=0;
+        count1=0;
         while(true){
-            if(temp1==coor1&&temp2==coor2&&al[coor1][coor2]==3){//找到圈
+            if(temp1==coor1&&temp2==coor2&&al[coor1][coor2]==3&&count1>=7){//找到圈
                 count++;
                 break;
-            }System.out.print(flag1);
+            }//System.out.print(flag1);
             if(flag1==1){
-                if((abs(coor1-temp1)<=1)&&(abs(coor2-temp2)<=1)){
+                if((abs(coor1-temp1)<=1)&&(abs(coor2-temp2)<=1)&&(count1>=7)){
                     count++;
-                   // System.out.println(count);
+                   // System.out.println("temp2"+temp2);
                     break;
                 }
                 break;
             }
-            if((temp1-1>=0)&&(temp2+1<mat[0].length)&&(al[temp1-1][temp2+1]!=1)&&(mat[temp1-1][temp2+1]==1)){
-                temp1--;
+            if((temp2+1<mat[0].length)&&(al[temp1][temp2+1]!=1)&&(mat[temp1][temp2+1]==1)){
                 temp2++;
                 al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp2-1>=0)&&(al[temp1][temp2-1]!=1)&&(mat[temp1][temp2-1]==1)){
+                temp2--;
+                al[temp1][temp2]++;
+                count1++;
             }
             else if((temp1-1>=0)&&(al[temp1-1][temp2]!=1)&&(mat[temp1-1][temp2]==1)){
                 temp1--;
                 al[temp1][temp2]++;
+                count1++;
             }
             else if((temp1-1>=0)&&(temp2-1>=0)&&(al[temp1-1][temp2-1]!=1)&&(mat[temp1-1][temp2-1]==1)){
                 temp1--;
                 temp2--;
                 al[temp1][temp2]++;
+                count1++;
             }
-            else if((temp2-1>=0)&&(al[temp1][temp2-1]!=1)&&(mat[temp1][temp2-1]==1)){
-                temp2--;
+            else if((temp1-1>=0)&&(temp2+1<mat[0].length)&&(al[temp1-1][temp2+1]!=1)&&(mat[temp1-1][temp2+1]==1)){
+                temp1--;
+                temp2++;
                 al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1+1<mat.length)&&(al[temp1+1][temp2]!=1)&&(mat[temp1+1][temp2]==1)){
+                temp1++;
+                al[temp1][temp2]++;
+                count1++;
             }
             else if((temp1+1<mat.length)&&(temp2-1>=0)&&(al[temp1+1][temp2-1]!=1)&&(mat[temp1+1][temp2-1]==1)){
                 temp1++;
                 temp2--;
                 al[temp1][temp2]++;
-            }
-            else if((temp1+1<mat.length)&&(al[temp1+1][temp2]!=1)&&(mat[temp1+1][temp2]==1)){
-                temp1++;
-                al[temp1][temp2]++;
+                count1++;
             }
             else if((temp1+1<mat.length)&&(temp2+1<mat[0].length)&&(al[temp1+1][temp2+1]!=1)&&(mat[temp1+1][temp2+1]==1)){
                 temp1++;
                 temp2++;
                 al[temp1][temp2]++;
+                count1++;
             }
             else {
                 flag1=1;
             }
-        }
+        }//System.out.println(count);
+        int T1=0,T2=0;
+        T1=coor1;
+        T2=coor2;
 
-      /*  flag=1;
-        flag1=0;
+        flag=1;
         for(int m=mat.length-1;m>=0;m--){
             for(int n=mat[0].length-1;n>=0;n--){
                 al[m][n]=0;
@@ -186,59 +201,74 @@ public class extract {//需要一个将原本二值化的图片切成t_size等�
                     al[m][n]=2;
                 }
             }
-        }System.out.println();
-        //System.out.println(count);
+        }
         temp1=coor1;
-        temp2=coor2;
+        temp2=coor2;//System.out.println("temp1"+temp1+"temp2"+temp2);
+        flag1=0;
+        count1=0;
         while (true){
-            if((temp1==coor1)&&(temp2==coor2)&&(al[coor1][coor2]==3)){
+            if((temp1==coor1)&&(temp2==coor2)&&(al[coor1][coor2]==3)&&(count1>=7)){
                 count++;
                 break;
-            }System.out.print(flag1);
+            }//System.out.print(flag1);
             if(flag1==1){
-                if((abs(coor1-temp1)<=1)&&(abs(coor2-temp2)<=1)){
+                if((abs(coor1-temp1)<=1)&&(abs(coor2-temp2)<=1)&&(count1>=7)){
                     count++;
                     break;
                 }
                 break;
             }
             if((temp2-1>=0)&&(al[temp1][temp2-1]!=1)&&(mat[temp1][temp2-1]==1)){
-                temp2--;
+                temp2--;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp2+1<mat[0].length)&&(al[temp1][temp2+1]!=1)&&(mat[temp1][temp2+1]==1)){
+                temp2++;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1-1>=0)&&(al[temp1-1][temp2]!=1)&&(mat[temp1-1][temp2]==1)){
+                temp1--;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1-1>=0)&&(temp2+1<mat[0].length)&&(al[temp1-1][temp2+1]!=1)&&(mat[temp1-1][temp2+1]==1)){
+                temp1--;
+                temp2++;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1-1>=0)&&(temp2-1>=0)&&(al[temp1-1][temp2-1]!=1)&&(mat[temp1-1][temp2-1]==1)){
+                temp1--;
+                temp2--;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1+1<mat.length)&&(al[temp1+1][temp2]!=1)&&(mat[temp1+1][temp2]==1)){
+                temp1++;//System.out.println(" "+temp1+" "+temp2);
+                al[temp1][temp2]++;
+                count1++;
+            }
+            else if((temp1+1<mat.length)&&(temp2+1<mat[0].length)&&(al[temp1+1][temp2+1]!=1)&&(mat[temp1+1][temp2+1]==1)){
+                temp1++;
+                temp2++;
+                count1++;
                 al[temp1][temp2]++;
             }
             else if((temp1+1<mat.length)&&(temp2-1>=0)&&(al[temp1+1][temp2-1]!=1)&&(mat[temp1+1][temp2-1]==1)){
                 temp1++;
                 temp2--;
-                al[temp1][temp2]++;
-            }
-            else if((temp1+1<mat.length)&&(al[temp1+1][temp2]!=1)&&(mat[temp1+1][temp2]==1)){
-                temp1++;
-                al[temp1][temp2]++;
-            }
-            else if((temp1+1<mat.length)&&(temp2+1<mat[0].length)&&(al[temp1+1][temp2+1]!=1)&&(mat[temp1+1][temp2+1]==1)){
-                temp1++;
-                temp2++;
-                al[temp1][temp2]++;
-            }
-            else if((temp1-1>=0)&&(temp2-1>=0)&&(al[temp1-1][temp2-1]!=1)&&(mat[temp1-1][temp2-1]==1)){
-                temp1--;
-                temp2--;
-                al[temp1][temp2]++;
-            }
-            else if((temp1-1>=0)&&(al[temp1-1][temp2]!=1)&&(mat[temp1-1][temp2]==1)){
-                temp1--;
-                al[temp1][temp2]++;
-            }
-            else if((temp1-1>=0)&&(temp2+1<mat[0].length)&&(al[temp1-1][temp2+1]!=1)&&(mat[temp1-1][temp2+1]==1)){
-                temp1--;
-                temp2++;
+                count1++;
                 al[temp1][temp2]++;
             }
             else {
                 flag1=1;
             }
+        }//System.out.println(count1);
+        if(al[T1][T2]==1&&count>1){
+            count--;
         }
-        System.out.println(count);*/
         return count;
     }
 }

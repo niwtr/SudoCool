@@ -86,7 +86,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Mat imgi= Highgui.imread("F:/number/9.jpg");//low
+        Mat imgi= Highgui.imread("F:/number/8.jpg");//low
         //Imgproc.resize(imgi, imgi,new Size(50,50));
         Imgproc.cvtColor(imgi, imgi, COLOR_RGB2GRAY);//灰度图
 
@@ -99,12 +99,14 @@ public class Main {
 
         Mat imgu=Skeletonize(imgi);
 
-        int[][] arr=pattern(imgu,8);
+        int[][] arr=pattern(imgu,7);
+        int[][] arr1 = Cropper.crop(Utils.convertMat(imgu), 1);
 
-        Utils.printMatrix(pattern(imgu, 8));
+        Utils.printMatrix(pattern(imgu, 7));
 
         System.out.println("---------------");
-        PrintDouble(div_square(arr,4));
+        int num=(arr1.length/7)*7==arr1.length?arr1.length/7:arr1.length/7+1;
+        PrintDouble(div_square(arr1,num,7));
         System.out.println("---------------");
         double[] darr=div_contour(arr);
         for(int i=0;i<darr.length;i++){

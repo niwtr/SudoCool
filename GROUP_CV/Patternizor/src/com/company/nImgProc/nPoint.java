@@ -1,4 +1,4 @@
-package com.company.ImgProc;
+package com.company.nImgProc;
 
 /**
  * Created by Heranort on 16/11/5.

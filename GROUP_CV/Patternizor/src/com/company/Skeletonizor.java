@@ -1,11 +1,10 @@
 package com.company;
 
-import com.company.ImgProc.nPoint;
-import com.company.ImgProc.Utils;
+import com.company.nImgProc.nPoint;
+import com.company.nImgProc.Utils;
 import org.opencv.core.*;
 
 
-import static org.opencv.core.CvType.*;
 import static org.opencv.core.Mat.zeros;
 
 import java.util.LinkedList;

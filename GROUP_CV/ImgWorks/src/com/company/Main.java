@@ -56,7 +56,7 @@ public class Main {
                     of.write("\n".getBytes());
                     of.close();
                 } catch (IOException e){
-                    System.out.printf("IO Exception: %d", f.getName());
+                    System.out.printf("IO Exception: %s", f.getName());
                 }
             }
             catch (FileNotFoundException e){
@@ -85,9 +85,11 @@ public class Main {
 
         Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
 
-        List<MatOfPoint> rst=SquareExtractor.Extract(img, 20000,30000);
+        List<MatOfPoint> rst=SquareExtractor.Extract(img, 23000,30000);
 
         Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.cutSquares(img, rst));
+
+        List<List<MatOfPoint>> matrix=SquareExtractor.arrangeSquare(rst);
 
 
     }

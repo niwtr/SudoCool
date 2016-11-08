@@ -86,36 +86,40 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Mat imgi= Highgui.imread("F:/number/8.jpg");//low
+        Mat imgi= Highgui.imread("F:/number/7_4.bmp");//low
         //Imgproc.resize(imgi, imgi,new Size(50,50));
         Imgproc.cvtColor(imgi, imgi, COLOR_RGB2GRAY);//灰度图
 
         //这里默许了数独棋盘它是白色的。
 
-        Imgproc.threshold(imgi, imgi, 127,255, THRESH_BINARY_INV+THRESH_OTSU);//二值化
+        Imgproc.threshold(imgi, imgi, 127,255, THRESH_BINARY+THRESH_OTSU);//二值化
 
 
-        Highgui.imwrite("F:/.jpg", Skeletonize(imgi));//骨架
+        Highgui.imwrite("F:/2.jpg", Skeletonize(imgi));//骨架
 
         Mat imgu=Skeletonize(imgi);
+        Mat imgu1=Skeletonize(imgu);
+
 
         int[][] arr=pattern(imgu,7);
         int[][] arr1 = Cropper.crop(Utils.convertMat(imgu), 1);
+        int[][] arr2 = Cropper.crop(Utils.convertMat(imgu1), 1);
 
         Utils.printMatrix(pattern(imgu, 7));
 
-        System.out.println("---------------");
+
+       // System.out.println(CornerHarris_demo(imgi));
         int num=(arr1.length/7)*7==arr1.length?arr1.length/7:arr1.length/7+1;
-        PrintDouble(div_square(arr1,num,7));
+       // PrintDouble(div_square(arr1,num,7));
         System.out.println("---------------");
-        double[] darr=div_contour(arr);
+        double[] darr=div_contour(arr1);
         for(int i=0;i<darr.length;i++){
             System.out.print(darr[i]);
             System.out.print(" ");
         }
         System.out.println();
         System.out.println("---------------");
-        int[][] iarr=div_stroke(arr,4);
+        int[][] iarr=div_stroke(arr1,4);
         for(int j=0;j<iarr.length;j++){
             for(int k=0;k<iarr[0].length;k++){
                 System.out.print(iarr[j][k]);
@@ -125,5 +129,8 @@ public class Main {
         }
         System.out.println("---------------");
         System.out.println(CheckCircle(arr));
+        System.out.println("---------------");
+        //CornerHarris_demo(imgi);
+        CheckCorner(arr2);
     }
 }

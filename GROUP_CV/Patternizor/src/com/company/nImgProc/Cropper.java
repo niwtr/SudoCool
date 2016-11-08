@@ -1,4 +1,4 @@
-package com.company.ImgProc;
+package com.company.nImgProc;
 
 /**
  * Created by Heranort on 16/11/5.
@@ -82,4 +82,19 @@ public class Cropper {
         }
         return o;
     }
+
+    public static int [][]nomalize(int [][]mat, int xmin, int ymin){
+        int rows=mat.length,cols=mat[0].length;
+        int [][]rst=new int [ymin>rows?ymin:rows][xmin>cols?xmin:cols];
+        int dx=((int)((xmin-cols)/2)>0)?((int)((xmin-cols)/2)):0,
+                dy=((int)((ymin-rows)/2))>0?((int)((ymin-rows)/2)):0;
+        for(int y=0;y<rows;y++){
+            //平移
+            for(int x=0;x<cols;x++){
+                rst[y+dy][x+dx]=mat[y][x];
+            }
+        }
+        return rst;
+    }
+
 }

@@ -33,6 +33,8 @@ public class Main {
 
         for (int x = 0; x < lines.cols(); x++)
         {
+
+          System.out.println("hello");
             double[] vec = lines.get(0, x);
             double x1 = vec[0],
                     y1 = vec[1],

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Patternizor.iml" filepath="$PROJECT_DIR$/Patternizor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImgWorks.iml" filepath="$PROJECT_DIR$/ImgWorks.iml" />
     </modules>
   </component>
 </project>

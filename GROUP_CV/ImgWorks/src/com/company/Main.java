@@ -3,9 +3,12 @@ package com.company;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import com.company.nImgProc.Utils;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 public class Main {
@@ -62,11 +65,8 @@ public class Main {
         }
     }
 
-
-
-    public static void main(String[] args) {
-
-        /* 有史以来写得最烂的一堆代码，我自己都嫌弃。  */
+    private static void do_run(int __x){
+                /* 有史以来写得最烂的一堆代码，我自己都嫌弃。  */
         String filePath="/Users/Heranort/Desktop/t10k-images/";
 
         List<String>patternFiles=new ArrayList<>();
@@ -78,6 +78,17 @@ public class Main {
         for(int i=0;i<filelist.size();i++){
             doPatternize(filelist.get(i), types[i]);
         }
+    }
+
+
+    public static void main(String[] args) {
+
+        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
+
+        List<MatOfPoint> rst=SquareExtractor.Extract(img, 20000,30000);
+
+        Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.cutSquares(img, rst));
+
 
     }
 }

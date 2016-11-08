@@ -20,7 +20,7 @@ import static org.opencv.core.CvType.CV_8U;
 public class Utils {
 
 
-    private static void showResult(Mat img) {
+    public static void showResult(Mat img) {
         double ratio=img.cols()/img.rows();
         Imgproc.resize(img, img, new Size(640, 640*ratio));
         MatOfByte matOfByte = new MatOfByte();

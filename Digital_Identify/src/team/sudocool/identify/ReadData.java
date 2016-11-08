@@ -13,7 +13,7 @@ public class ReadData {
     {
         String path = "D:/patterns/" + String.valueOf(n) + ".pat";
 
-        double[][] ans = new double[1005][size*size];
+        double[][] ans = new double[2000][size*size];
         int i = 0, j = 0;
 
         FileReader in = new FileReader(path);

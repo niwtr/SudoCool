@@ -1,5 +1,7 @@
 package team.sudocool.identify;
 
+import java.util.Arrays;
+
 /**
  * @author L.Laddie
  * @version 1.0
@@ -12,16 +14,18 @@ public class MainActivity {
     public static void main(String args[]) {
         //construct bp network
         int[] layer_num = new int[3];
-        layer_num[0] = 28*28;
+        layer_num[0] = 8*8;
         layer_num[2] = 10;
-        layer_num[1] = (int) (Math.sqrt(layer_num[0] + layer_num[2]) + 3);
-        BP bp_image = new BP(layer_num, 0.8);
+        layer_num[1] = (int) (Math.sqrt(layer_num[0] + layer_num[2]) + 5);
+        BP bp_image = new BP(layer_num, 0.5, 0.8);
         bp_image.loadWeight();
+
+        int num = 5;    //the number to identify
 
         ReadData file = new ReadData();
         double[][] in = null;
         try{
-            in = file.readFile(0, 8);
+            in = file.readFile(num, 8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,17 +33,20 @@ public class MainActivity {
         assert in != null;
 
         double[] out = new double[10];
-        out[0] = 1;
+        out[num] = 0.99;
 
-        for(int i = 0; i < 10; i++)         //max data is 979
+        for(int j = 0; j < 20; j++)
         {
-            System.out.println("Training data " + i);
-            bp_image.trainNet(in[i], out, 0.5);
+            for(int i = 0; i < 979; i++)         //max data is 979
+            {
+                System.out.println("Training data " + i);
+                bp_image.trainNet(in[i], out, 10);
+            }
         }
 
         bp_image.saveWeight();
 
-        double[] temp = bp_image.forwardProp(in[1]);
+        double[] temp = bp_image.forwardProp(in[100]);
         System.out.print(getMax(temp));
     }
 

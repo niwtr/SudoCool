@@ -15,138 +15,20 @@ import static org.opencv.core.CvType.CV_8UC3;
 import static org.opencv.imgproc.Imgproc.MORPH_CLOSE;
 
 
-class cell<A, B> {
-    public  Rect rect;
-    public  MatOfPoint mat;
-    public int y;
-    public int x;
-    public int width;
-    public cell(Rect a, MatOfPoint b) {
-        rect = a;
-        mat = b;
-        y=a.y;
-        x=a.x;
-        width=a.width;
-    }
-}
-
 
 
 public class SquareExtractor {
 
-    private static final int SUDOKU_SIZE=9;
-
-    private static List<List<cell>> _arrange_last(List<List<cell>> matrix, double dist){
-        List<cell> lastRow = matrix.get(matrix.size()-1);//last row.
-        matrix.remove(matrix.size()-1);
-        List<cell>lst=matrix.get(matrix.size()-2);
-        for (cell x : lst) {
-
-            if (lastRow.stream().filter((y) ->
-                    Math.abs(y.x - x.x) < dist / 2).count() == 0)// found exact position
-            {
-                int index = 0;
-
-                for (; index < lastRow.size(); index++) {
-                    if (lastRow.get(index).x > x.x) {
-                        lastRow.add(index, new cell(new Rect(x.x, x.y, 0, 0), new MatOfPoint()));
-                        break;
-                    }
-                }
-
-            }
-        }
-        matrix.add(lastRow);
-        return matrix;
-    }
-
-    private static List<List<cell>> _arrange (List<List<cell>> matrix, double dist){
-        List<List<cell>> rmatrix=new ArrayList<>();
-        List<cell> lastRow = matrix.get(0);
-        matrix.remove(0);
-        for (List<cell> lst : matrix) {
-
-            for (cell x : lst) {
-
-                if (lastRow.stream().filter((y) ->
-                        Math.abs(y.x - x.x) < dist / 2).count() == 0)// found exact position
-                {
-                    int index = 0;
-
-                    for (; index < lastRow.size(); index++) {
-                        if (lastRow.get(index).x > x.x) {
-                            lastRow.add(index, new cell(new Rect(x.x, x.y, 0, 0), new MatOfPoint()));
-                            break;
-                        }
-                    }
-
-                }
-            }
-            rmatrix.add(lastRow);
-            lastRow=lst;
-        }
-        rmatrix.add(lastRow);
-        return rmatrix;
-    }
-
-
-    public static List<List<MatOfPoint>> arrangeSquares(List<MatOfPoint> pl){
-        List<cell> rl=pl.stream()
-                .map((x)->new cell(Imgproc.boundingRect(x), x))
-                .sorted((m1, m2)->(m1.y>m2.y?1:-1))
-                .collect(Collectors.toList());
-        List<List<cell>> matrix=new ArrayList<>();
-        while(rl.size()>0) {
-
-            int y = rl.get(0).y,
-                    wid = rl.get(0).width;
-            matrix.add(
-                    rl.stream().filter((x) ->
-                            (Math.abs(x.y - y) < wid / 2))
-                            .sorted((a,b)->
-                                    (a.x>b.x?1:-1))
-                            .collect(Collectors.toList())
-            );
-            rl = rl.stream()
-                    .filter((x) ->
-                            (Math.abs(x.y - y) > wid / 2))
-                    .collect(Collectors.toList());
-        }
-
-        //do not handle when exsist one row that
-        //the number of elements is larger than SUDOKU_SIZE.
-        for(List<cell> lst : matrix)
-            if(lst.size()>SUDOKU_SIZE)return new ArrayList<>();
-
-
-
-        int width=matrix.get(0).get(0).width;
-        for(int i=0;i<SUDOKU_SIZE-1;i++)
-            matrix=_arrange(matrix,width);//first n-1 rows
-
-        if(matrix.get(matrix.size()-1).size()!=SUDOKU_SIZE)
-            //the last row does not satisfy.
-        _arrange_last(matrix, width);
-
-
-
-
-        if(matrix.stream().filter((x)->x.size()!=SUDOKU_SIZE).count()!=0)
-            return new ArrayList<>();
-        return matrix.stream().map(
-                (lst)->
-                        lst.stream().map(
-                                (x) -> x.mat)
-                                .collect(Collectors.toList()))
-                .collect(Collectors.toList());
-    }
-
 
     private static  boolean isSquare (MatOfPoint mp, double lb, double ub){
         double area= Imgproc.contourArea(mp);
-        return (area<=ub && area>=lb);
+        return isSquare2(mp)&&(area<=ub && area>=lb);
     }
 
+    private static boolean isSquare2(MatOfPoint mp){
+        Rect r=Imgproc.boundingRect(mp);
+        return Math.abs(r.height-r.width)<((r.height+r.width)/2)*0.3;
+    }
 
     private static Mat prepare_findSquares(Mat oimg){
         Mat img2=new Mat();
@@ -191,7 +73,20 @@ public class SquareExtractor {
         img.copyTo(rest, res);
         return rest;
     }
+
+    public static Mat showSquares (Mat img,  List<MatOfPoint> polys){
+        Mat newM=img.clone();
+        for(MatOfPoint mp : polys){
+            Rect rt=Imgproc.boundingRect(mp);
+            Core.rectangle(newM, new Point(rt.x, rt.y), new Point (rt.x+ rt.width, rt.y+rt.height), new Scalar(0,255,0),3);
+        }
+        return newM;
+    }
+
+
+
     public static List<List<Mat>> squareCutter (Mat img, List<List<MatOfPoint>> polys){
+
         return polys.stream().map(
                 (lst)->
                         lst.stream().map(

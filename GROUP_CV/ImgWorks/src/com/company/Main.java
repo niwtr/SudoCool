@@ -85,20 +85,21 @@ public class Main {
 
         List<MatOfPoint> rst=SquareExtractor.Extract(img, 5000,12000);
 
-        Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.cutSquares(img, rst));
+        Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.showSquares(img, rst));
 
+        Patternizor P=new Patternizor(8, Patternizor.WHITE_BACKGROUND);
+        SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_COPY);
         boolean ok=true;
         if(ok) {
             List<List<int[][]>> result =
                 /* get the patterns from a sudoku image. */
-                    SquareExtractor.squareCutter(img, SquareExtractor.arrangeSquares(rst))
+                    SquareExtractor.squareCutter(img, A.Arrange(rst))
                         /* arrangeSquare may return an empth Matrix list if
                          *  it fails to arrange. */
                             .stream()
                             .map((lst) ->
                                     lst.stream()
-                                            .map((x) -> Patternizor
-                                                    .Patternize(x, 7, Patternizor.WHITE_BACKGROUND))
+                                            .map(P::Patternize)
                                             .collect(Collectors.toList()))
                             .collect(Collectors.toList());
 
@@ -106,6 +107,9 @@ public class Main {
                 Utils.printMatrix(x);
                 System.out.println();
             }));
+
+
+
         }
     }
 }

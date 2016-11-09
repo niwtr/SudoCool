@@ -18,6 +18,14 @@ public class Patternizor {
     public static final int BLACK_BACKGROUND=THRESH_BINARY;
     public static final int WHITE_BACKGROUND=THRESH_BINARY_INV;
 
+
+    private int COLOR;
+    private int size;
+
+    public Patternizor(int size, int COLOR){
+        this.COLOR=COLOR;
+        this.size=size;
+    }
     public static int [][] Patternize(Mat img, int size, int color){
 
         //Utils.showResult(img);
@@ -26,6 +34,20 @@ public class Patternizor {
 
         //这里默许了数独棋盘它是黑色的。
         Imgproc.threshold(img, img, 127,255, color+THRESH_OTSU);
+
+
+        return pattern(Skeletonizor.Skeletonize(img), size);
+
+    }
+
+    public int [][] Patternize(Mat img){
+
+        //Utils.showResult(img);
+        if(img.empty())return new int[size][size];
+        Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
+
+        //这里默许了数独棋盘它是黑色的。
+        Imgproc.threshold(img, img, 127,255, COLOR+THRESH_OTSU);
 
 
         return pattern(Skeletonizor.Skeletonize(img), size);

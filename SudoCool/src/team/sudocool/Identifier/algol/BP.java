@@ -1,4 +1,4 @@
-package team.sudocool.identify;
+package team.sudocool.Identifier.algol;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;

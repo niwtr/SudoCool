@@ -1,7 +1,7 @@
-package team.sudocool;
+package team.sudocool.Identifier;
 
-import team.sudocool.identify.BP;
-import team.sudocool.identify.ReadData;
+import team.sudocool.Identifier.algol.BP;
+import team.sudocool.Identifier.algol.ReadData;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 2016/11/9
  */
-public class Identify {
+public class Identifier {
     private BP bp_image = null;
     private int size = 7;               //input matrix of data size
     private double allow_error = 0.01;   //when training allow error
@@ -18,7 +18,7 @@ public class Identify {
     /**
      * Initial the digit_identify network
      */
-    public Identify() {
+    public Identifier() {
         double rate = 0.001;      //study rate
         double mo_rate = 0.8;   //momentum rate
 

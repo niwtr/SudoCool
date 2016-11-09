@@ -1,4 +1,4 @@
-package com.company.nImgProc;
+package team.sudocool.ImgWorks.nImgProc;
 
 /**
  * Created by Heranort on 16/11/5.

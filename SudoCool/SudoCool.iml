@@ -21,11 +21,13 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/cljwork/work/clj-opencv/target/clj-opencv-0.1.0-SNAPSHOT-standalone.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/gson-2.8.0.jar!/" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/gson-2.8.0-javadoc.jar!/" />
+        </JAVADOC>
         <SOURCES>
-          <root url="jar://$USER_HOME$/cljwork/work/clj-opencv/target/clj-opencv-0.1.0-SNAPSHOT-standalone.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/gson-2.8.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

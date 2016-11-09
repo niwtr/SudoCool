@@ -1,7 +1,7 @@
-package com.company;
+package team.sudocool.ImgWorks;
 
-import com.company.nImgProc.nPoint;
-import com.company.nImgProc.Utils;
+import team.sudocool.ImgWorks.nImgProc.nPoint;
+import team.sudocool.ImgWorks.nImgProc.Utils;
 import org.opencv.core.*;
 
 

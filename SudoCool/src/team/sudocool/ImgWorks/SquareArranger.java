@@ -1,4 +1,4 @@
-package com.company;
+package team.sudocool.ImgWorks;
 
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;

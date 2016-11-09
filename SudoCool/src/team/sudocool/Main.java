@@ -1,8 +1,12 @@
-package com.company;
+package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
-import com.company.nImgProc.Utils;
+import team.sudocool.Identifier.Identifier;
+import team.sudocool.ImgWorks.Patternizor;
+import team.sudocool.ImgWorks.SquareArranger;
+import team.sudocool.ImgWorks.SquareExtractor;
+import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -79,37 +83,46 @@ public class Main {
         }
     }
 
+
+
+    /* please ignore the sick code above. */
+
+
     public static void main(String[] args) {
 
 
-        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
+        Mat img=Highgui.imread("./test/trim.jpg");
 
-        List<MatOfPoint> rst=SquareExtractor.Extract(img, 20000,26000);
+        List<MatOfPoint> rst= SquareExtractor.Extract(img, 2000,2300);
+        //20000,26000 for sudo.jpg
 
-        Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.showSquares(img, rst));
+        System.out.println(rst.size());//show the number of blocks scanned in.
 
-        Patternizor P=new Patternizor(8, Patternizor.WHITE_BACKGROUND);
-        SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_COPY);
+        Utils.showResult(SquareExtractor.drawSquares(img, rst));
+
+        SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
+        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
+        Identifier I=new Identifier();
         boolean ok=true;
         if(ok) {
-            List<List<int[][]>> result =
+           // List<List<Integer>> result =
                 /* get the patterns from a sudoku image. */
                     SquareExtractor.squareCutter(img, A.Arrange(rst))
-                        /* arrangeSquare may return an empth Matrix list if
+                        /* arrangeSquare returns an empth Matrix list if
                          *  it fails to arrange. */
                             .stream()
                             .map((lst) ->
                                     lst.stream()
                                             .map(P::Patternize)
+                                            .map(I::toDigit)
                                             .collect(Collectors.toList()))
-                            .collect(Collectors.toList());
-
-            result.forEach((lst) -> lst.forEach((x) -> {
-                Utils.printMatrix(x);
-                System.out.println();
-            }));
-
-
+                            .collect(Collectors.toList())
+                            .forEach(lst->
+                                    {
+                                        lst.forEach(x->
+                                                System.out.printf("%d ", x.intValue()==-1?0:x.intValue()));
+                                        System.out.println();
+                                    });
 
         }
 

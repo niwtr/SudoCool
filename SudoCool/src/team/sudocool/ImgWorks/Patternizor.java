@@ -1,7 +1,7 @@
-package com.company;
+package team.sudocool.ImgWorks;
 
-import com.company.nImgProc.Cropper;
-import com.company.nImgProc.Utils;
+import team.sudocool.ImgWorks.nImgProc.Cropper;
+import team.sudocool.ImgWorks.nImgProc.Utils;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 

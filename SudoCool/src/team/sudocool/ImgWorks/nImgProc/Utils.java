@@ -1,11 +1,10 @@
-package com.company.nImgProc;
+package team.sudocool.ImgWorks.nImgProc;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
-import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-
+import org.opencv.core.Size;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -22,8 +21,6 @@ public class Utils {
 
     public static void showResult(Mat img) {
         if(img.empty())return;
-        //double ratio=img.cols()/img.rows();
-        //Imgproc.resize(img, img, new Size(640, 640*ratio));
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);
         byte[] byteArray = matOfByte.toArray();

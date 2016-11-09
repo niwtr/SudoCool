@@ -1,4 +1,4 @@
-package com.company;
+package team.sudocool.ImgWorks;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
@@ -74,7 +74,7 @@ public class SquareExtractor {
         return rest;
     }
 
-    public static Mat showSquares (Mat img,  List<MatOfPoint> polys){
+    public static Mat drawSquares(Mat img, List<MatOfPoint> polys){
         Mat newM=img.clone();
         for(MatOfPoint mp : polys){
             Rect rt=Imgproc.boundingRect(mp);

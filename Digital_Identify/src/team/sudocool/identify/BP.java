@@ -1,8 +1,19 @@
 package team.sudocool.identify;
 
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import jdk.nashorn.api.scripting.JSObject;
+import jdk.nashorn.internal.codegen.types.Type;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -64,21 +75,80 @@ public class BP {
      * Try to load weight from file "net_weight.txt"
      */
     public void loadWeight() throws Exception {
+        FileInputStream file = null;
+        try {
+            file = new FileInputStream("./resources/bp_net.data");
+            JsonReader json = new JsonReader(new InputStreamReader(file, "UTF-8"));
 
+            json.beginObject();
+
+            while(json.hasNext()) {
+                if(json.nextName().equals("time")){
+                    String temp = json.nextString();
+                }
+
+                if(json.nextName().equals("weight")) {
+                    String weight_str = json.nextString();
+
+                    Gson gs = new Gson();
+                    double[][][] temp_weight = gs.fromJson(weight_str, double[][][].class);
+
+                    //Judge size error
+                    if(layer_weight.length == temp_weight.length){
+                        for(int i = 0; i < temp_weight.length; i++)
+
+                            if (layer_weight[i].length == temp_weight[i].length) {
+                                for (int j = 0; j < temp_weight[i].length; j++)
+
+                                    if(layer_weight[i][j].length != temp_weight[i][j].length)
+                                        throw new Exception("Weight Size Error!\n");
+                            }
+                            else
+                                throw new Exception("Weight Size Error!\n");
+                    }
+                    else
+                        throw new Exception("Weight Size Error!\n");
+
+                    //shallow copy
+//                    System.arraycopy(temp_weight, 0, layer_weight, 0, temp_weight.length);
+
+                    //deep copy
+                    for(int i = 0; i < layer_weight.length; i++)
+                        for(int j = 0; j < layer_weight[i].length; j++)
+                            System.arraycopy(temp_weight[i][j], 0, layer_weight[i][j], 0, temp_weight[i][j].length);
+                }
+            }
+
+            json.endObject();
+
+            json.close();
+        } finally {
+            if(file != null)
+                file.close();
+        }
     }
 
     /**
      * Try to conserve the weight to file "net_weight.txt"
      */
     public void saveWeight() throws Exception {
-        FileWriter file = null;
+        FileOutputStream file = null;
         try {
-            file = new FileWriter("D:/bp_net.data");
+            Date date = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = format.format(date);
 
-            file.write(Arrays.deepToString(layer_weight));
+            file = new FileOutputStream("./resources/bp_net.data");
+            JsonWriter json = new JsonWriter(new OutputStreamWriter(file, "UTF-8"));
 
-            file.flush();
-            file.close();
+            json.beginObject();
+            json.name("time").value(time);
+
+            Gson gs = new Gson();
+            json.name("weight").value(gs.toJson(layer_weight));
+            json.endObject();
+
+            json.close();
         } finally {
             if(file != null)
                 file.close();

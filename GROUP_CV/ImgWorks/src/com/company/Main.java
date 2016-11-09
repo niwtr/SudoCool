@@ -3,12 +3,12 @@ package com.company;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import com.company.nImgProc.Utils;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -44,7 +44,7 @@ public class Main {
         FileOutputStream of;
         if(f.exists()){
             try {
-               of = new FileOutputStream(f, true);
+                of = new FileOutputStream(f, true);
                 try {
                     of.write(Utils.dumpMatrix(
                             Patternizor.Patternize(
@@ -80,7 +80,6 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
         Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
@@ -89,8 +88,20 @@ public class Main {
 
         Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.cutSquares(img, rst));
 
-        List<List<MatOfPoint>> matrix=SquareExtractor.arrangeSquare(rst);
+        List<List<int[][]>> result=
+                /* get the patterns from a sudoku image. */
+                SquareExtractor.squareCutter(img, SquareExtractor.arrangeSquare(rst))
+                        /* arrangeSquare may return an empth Matrix list if
+                         *  it fails to arrange. */
+                        .stream()
+                        .map((lst)->
+                                lst.stream()
+                                        .map((x)->Patternizor
+                                                .Patternize(x, 7, Patternizor.WHITE_BACKGROUND))
+                                        .collect(Collectors.toList()))
+                        .collect(Collectors.toList());
 
+        result.forEach((lst)->lst.forEach((x)->{Utils.printMatrix(x);System.out.println();}));
 
     }
 }

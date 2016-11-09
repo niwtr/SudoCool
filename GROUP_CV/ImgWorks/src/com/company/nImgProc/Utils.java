@@ -21,8 +21,9 @@ public class Utils {
 
 
     public static void showResult(Mat img) {
-        double ratio=img.cols()/img.rows();
-        Imgproc.resize(img, img, new Size(640, 640*ratio));
+        if(img.empty())return;
+        //double ratio=img.cols()/img.rows();
+        //Imgproc.resize(img, img, new Size(640, 640*ratio));
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);
         byte[] byteArray = matOfByte.toArray();

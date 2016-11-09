@@ -84,6 +84,7 @@ public class Cropper {
     }
 
     public static int [][]nomalize(int [][]mat, int xmin, int ymin){
+
         int rows=mat.length,cols=mat[0].length;
         int [][]rst=new int [ymin>rows?ymin:rows][xmin>cols?xmin:cols];
         int dx=((int)((xmin-cols)/2)>0)?((int)((xmin-cols)/2)):0,

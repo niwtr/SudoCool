@@ -15,6 +15,7 @@ public class Skeletonizor {
 
 
     public static Mat Skeletonize(final Mat givenImage) {
+        //Utils.showResult(givenImage);
         int[][] binaryImage=Utils.convertMat(givenImage);
 
         int a, b;

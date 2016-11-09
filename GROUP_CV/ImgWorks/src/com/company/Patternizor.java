@@ -20,10 +20,13 @@ public class Patternizor {
 
     public static int [][] Patternize(Mat img, int size, int color){
 
+        Utils.showResult(img);
+        if(img.empty())return new int[size][size];
         Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
 
         //这里默许了数独棋盘它是黑色的。
         Imgproc.threshold(img, img, 127,255, color+THRESH_OTSU);
+
 
         return pattern(Skeletonizor.Skeletonize(img), size);
 
@@ -31,6 +34,7 @@ public class Patternizor {
 
     private static int[][] pattern (Mat img, int size) {
         int[][] bimg = Cropper.crop(Utils.convertMat(img), 1);
+        if(bimg.length==0)return new int[size][size];//all empty matrix.
         return divPattern(Cropper.nomalize(bimg, size, size), size);
     }
 

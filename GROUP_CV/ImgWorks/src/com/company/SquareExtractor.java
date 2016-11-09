@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 import static org.opencv.core.CvType.CV_8U;
 import static org.opencv.core.CvType.CV_8UC3;
 import static org.opencv.imgproc.Imgproc.MORPH_CLOSE;
-
-
+import static org.opencv.imgproc.Imgproc.boundingRect;
 
 
 class cell<A, B> {
@@ -48,7 +47,8 @@ public class SquareExtractor {
 
             for (cell x : lst) {
 
-                if (lastRow.stream().filter((y) -> Math.abs(y.x - x.x) < dist / 2).count() == 0)// found exact position
+                if (lastRow.stream().filter((y) ->
+                        Math.abs(y.x - x.x) < dist / 2).count() == 0)// found exact position
                 {
                     int index = 0;
 
@@ -80,12 +80,15 @@ public class SquareExtractor {
             int y = rl.get(0).y,
                     wid = rl.get(0).width;
             matrix.add(
-                    rl.stream().filter((x) -> (Math.abs(x.y - y) < wid / 2))
-                            .sorted((a,b)->(a.x>b.x?1:-1))
+                    rl.stream().filter((x) ->
+                            (Math.abs(x.y - y) < wid / 2))
+                            .sorted((a,b)->
+                                    (a.x>b.x?1:-1))
                             .collect(Collectors.toList())
             );
             rl = rl.stream()
-                    .filter((x) -> (Math.abs(x.y - y) > wid / 2))
+                    .filter((x) ->
+                            (Math.abs(x.y - y) > wid / 2))
                     .collect(Collectors.toList());
         }
 
@@ -153,5 +156,25 @@ public class SquareExtractor {
         img.copyTo(rest, res);
         return rest;
     }
+    public static List<List<Mat>> squareCutter (Mat img, List<List<MatOfPoint>> polys){
+        return polys.stream().map(
+                (lst)->
+                        lst.stream().map(
+                                (x)->{
+                                    if(x.empty())
+                                        return new Mat();
+                                    /* warning: could be show! */
+                                    Mat res=new Mat(img.size(), CV_8U, new Scalar(0));
+                                    Core.fillConvexPoly(res, x, new Scalar(255));
+                                    Mat rest=new Mat(img.size(), CV_8UC3, new Scalar(0, 0, 0));
+                                    //black background will be removed by the cropper.
+                                    //really?
+                                    img.copyTo(rest, res);
+                                    return new Mat(rest, Imgproc.boundingRect(x));
+                                })
+                                .collect(Collectors.toList()))
+                .collect(Collectors.toList());
+    }
+
 
 }

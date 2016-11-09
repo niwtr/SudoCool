@@ -12,21 +12,25 @@ import java.io.IOException;
  */
 public class Identify {
     private BP bp_image = null;
-    private int size = 8;               //input matrix of data size
+    private int size = 7;               //input matrix of data size
     private double allow_error = 0.01;   //when training allow error
 
     /**
      * Initial the digit_identify network
      */
     public Identify() {
-        double rate = 0.5;      //study rate
+        double rate = 0.001;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
         layer_num[2] = 10;
-        layer_num[1] = (int) (Math.sqrt(layer_num[0] + layer_num[2]) + 5);
+        layer_num[1] = 50;
+
+//        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
+//                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
+
         bp_image = new BP(layer_num, rate, mo_rate);
 
         try {

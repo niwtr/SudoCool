@@ -1,5 +1,7 @@
 package team.sudocool.identify;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -28,7 +30,7 @@ public class BP {
         this.layer_num = Arrays.copyOf(layer_num, len);
         this.layer_out = new double[len][];
         this.layer_grad = new double[len][];
-        this.layer_weight = new double[len][][];
+        this.layer_weight = new double[len-1][][];
         this.layer_weight_delta = new double[len][][];
         this.rate = rate;
         this.mo_rate = mo_rate;
@@ -61,15 +63,26 @@ public class BP {
     /**
      * Try to load weight from file "net_weight.txt"
      */
-    public void loadWeight() {
+    public void loadWeight() throws Exception {
 
     }
 
     /**
      * Try to conserve the weight to file "net_weight.txt"
      */
-    public void saveWeight() {
+    public void saveWeight() throws Exception {
+        FileWriter file = null;
+        try {
+            file = new FileWriter("D:/bp_net.data");
 
+            file.write(Arrays.deepToString(layer_weight));
+
+            file.flush();
+            file.close();
+        } finally {
+            if(file != null)
+                file.close();
+        }
     }
 
     /**
@@ -162,7 +175,7 @@ public class BP {
             for(int i = 0; i < ans.length; i++)
                 out_error += (out[i] - ans[i]) * (out[i] - ans[i]) / 2;
 
-            System.out.println("Error: " + out_error);
+//            System.out.println("Error: " + out_error);
 
             if(Math.abs(last_error-out_error) < allow_err)
                 break;

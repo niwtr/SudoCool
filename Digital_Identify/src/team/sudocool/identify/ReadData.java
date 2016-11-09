@@ -9,29 +9,37 @@ import java.io.*;
  * @since 2016/11/7
  */
 public class ReadData {
-    public double[][] readFile(int n, int size) throws Exception
+    /**
+     * read from learning file
+     * @param size
+     * @return
+     * @throws IOException
+     */
+    public double[][] readFile(String path, int size) throws IOException
     {
-        String path = "D:/patterns/" + String.valueOf(n) + ".pat";
-
         double[][] ans = new double[2000][size*size];
         int i = 0, j = 0;
+        FileReader in = null;
 
-        FileReader in = new FileReader(path);
-        int temp;
+        try {
+            in = new FileReader(path);
+            int temp;
 
-        while((temp = in.read()) != -1) {
-            if(temp == 48 || temp == 49)
-            {
-                ans[i][j++] = temp-48;
+            while((temp = in.read()) != -1) {
+                if(temp == 48 || temp == 49)
+                {
+                    ans[i][j++] = temp-48;
+                }
+
+                if(j == size*size){
+                    j = 0;
+                    i++;
+                }
             }
-
-            if(j == size*size){
-                j = 0;
-                i++;
-            }
+        } finally {
+            if (in != null)
+                in.close();
         }
-
-        in.close();
 
         return ans;
     }

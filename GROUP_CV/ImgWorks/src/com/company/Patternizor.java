@@ -20,7 +20,7 @@ public class Patternizor {
 
     public static int [][] Patternize(Mat img, int size, int color){
 
-        Utils.showResult(img);
+        //Utils.showResult(img);
         if(img.empty())return new int[size][size];
         Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
 

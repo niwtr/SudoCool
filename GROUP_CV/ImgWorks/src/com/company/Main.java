@@ -3,7 +3,6 @@ package com.company;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import com.company.nImgProc.Utils;
-import org.opencv.imgproc.Imgproc;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -82,26 +81,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
+        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo5.jpg");
 
-        List<MatOfPoint> rst=SquareExtractor.Extract(img, 23000,30000);
+        List<MatOfPoint> rst=SquareExtractor.Extract(img, 5000,12000);
 
         Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.cutSquares(img, rst));
 
-        List<List<int[][]>> result=
+        boolean ok=true;
+        if(ok) {
+            List<List<int[][]>> result =
                 /* get the patterns from a sudoku image. */
-                SquareExtractor.squareCutter(img, SquareExtractor.arrangeSquare(rst))
+                    SquareExtractor.squareCutter(img, SquareExtractor.arrangeSquares(rst))
                         /* arrangeSquare may return an empth Matrix list if
                          *  it fails to arrange. */
-                        .stream()
-                        .map((lst)->
-                                lst.stream()
-                                        .map((x)->Patternizor
-                                                .Patternize(x, 7, Patternizor.WHITE_BACKGROUND))
-                                        .collect(Collectors.toList()))
-                        .collect(Collectors.toList());
+                            .stream()
+                            .map((lst) ->
+                                    lst.stream()
+                                            .map((x) -> Patternizor
+                                                    .Patternize(x, 7, Patternizor.WHITE_BACKGROUND))
+                                            .collect(Collectors.toList()))
+                            .collect(Collectors.toList());
 
-        result.forEach((lst)->lst.forEach((x)->{Utils.printMatrix(x);System.out.println();}));
-
+            result.forEach((lst) -> lst.forEach((x) -> {
+                Utils.printMatrix(x);
+                System.out.println();
+            }));
+        }
     }
 }

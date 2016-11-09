@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import static org.opencv.core.CvType.CV_8U;
 import static org.opencv.core.CvType.CV_8UC3;
 import static org.opencv.imgproc.Imgproc.MORPH_CLOSE;
-import static org.opencv.imgproc.Imgproc.boundingRect;
 
 
 class cell<A, B> {
@@ -29,9 +28,6 @@ class cell<A, B> {
         x=a.x;
         width=a.width;
     }
-
-
-
 }
 
 
@@ -39,6 +35,31 @@ class cell<A, B> {
 public class SquareExtractor {
 
     private static final int SUDOKU_SIZE=9;
+
+    private static List<List<cell>> _arrange_last(List<List<cell>> matrix, double dist){
+        List<cell> lastRow = matrix.get(matrix.size()-1);//last row.
+        matrix.remove(matrix.size()-1);
+        List<cell>lst=matrix.get(matrix.size()-2);
+        for (cell x : lst) {
+
+            if (lastRow.stream().filter((y) ->
+                    Math.abs(y.x - x.x) < dist / 2).count() == 0)// found exact position
+            {
+                int index = 0;
+
+                for (; index < lastRow.size(); index++) {
+                    if (lastRow.get(index).x > x.x) {
+                        lastRow.add(index, new cell(new Rect(x.x, x.y, 0, 0), new MatOfPoint()));
+                        break;
+                    }
+                }
+
+            }
+        }
+        matrix.add(lastRow);
+        return matrix;
+    }
+
     private static List<List<cell>> _arrange (List<List<cell>> matrix, double dist){
         List<List<cell>> rmatrix=new ArrayList<>();
         List<cell> lastRow = matrix.get(0);
@@ -69,7 +90,7 @@ public class SquareExtractor {
     }
 
 
-    public static List<List<MatOfPoint>> arrangeSquare(List<MatOfPoint> pl){
+    public static List<List<MatOfPoint>> arrangeSquares(List<MatOfPoint> pl){
         List<cell> rl=pl.stream()
                 .map((x)->new cell(Imgproc.boundingRect(x), x))
                 .sorted((m1, m2)->(m1.y>m2.y?1:-1))
@@ -92,9 +113,23 @@ public class SquareExtractor {
                     .collect(Collectors.toList());
         }
 
+        //do not handle when exsist one row that
+        //the number of elements is larger than SUDOKU_SIZE.
+        for(List<cell> lst : matrix)
+            if(lst.size()>SUDOKU_SIZE)return new ArrayList<>();
+
+
+
         int width=matrix.get(0).get(0).width;
         for(int i=0;i<SUDOKU_SIZE-1;i++)
-            matrix=_arrange(matrix,width);
+            matrix=_arrange(matrix,width);//first n-1 rows
+
+        if(matrix.get(matrix.size()-1).size()!=SUDOKU_SIZE)
+            //the last row does not satisfy.
+        _arrange_last(matrix, width);
+
+
+
 
         if(matrix.stream().filter((x)->x.size()!=SUDOKU_SIZE).count()!=0)
             return new ArrayList<>();

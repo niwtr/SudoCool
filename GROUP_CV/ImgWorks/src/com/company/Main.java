@@ -81,9 +81,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo5.jpg");
 
-        List<MatOfPoint> rst=SquareExtractor.Extract(img, 5000,12000);
+        Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
+
+        List<MatOfPoint> rst=SquareExtractor.Extract(img, 20000,26000);
 
         Highgui.imwrite("/Users/Heranort/Desktop/sq.jpg",SquareExtractor.showSquares(img, rst));
 
@@ -111,5 +112,7 @@ public class Main {
 
 
         }
+
+
     }
 }

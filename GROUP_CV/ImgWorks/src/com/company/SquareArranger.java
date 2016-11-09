@@ -7,7 +7,10 @@ import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 /**
@@ -58,18 +61,6 @@ public class SquareArranger {
     }
 
 
-    public static void printM(List<List<cell>> polys){
-        polys.forEach((lst)-> {
-                    lst.forEach((x) -> {
-                        System.out.print(x.x);
-                        System.out.print(" ");
-
-                    });
-                    System.out.println();
-                }
-        );
-
-    }
     private cell copyUp(cell c){
         List<Point> pl;
         if(fillMethod==FILL_COPY)
@@ -142,6 +133,9 @@ public class SquareArranger {
 
 
     public List<List<MatOfPoint>> Arrange(List<MatOfPoint> pl){
+
+
+
         List<cell> rl=pl.stream()
                 .map((x)->new cell(Imgproc.boundingRect(x), x))
                 .sorted((m1, m2)->(m1.y>m2.y?1:-1))
@@ -175,6 +169,10 @@ public class SquareArranger {
         for(int i=0;i<sudokuSize-1;i++)
             matrix=_arrange(matrix,width);//first n-1 rows
 
+
+
+
+
         if(matrix.get(matrix.size()-1).size()!=sudokuSize)
             //the last row does not satisfy.
             _arrange_last(matrix, width);
@@ -182,10 +180,17 @@ public class SquareArranger {
         if(matrix.stream().filter((x)->x.size()!=sudokuSize).count()!=0)
             return new ArrayList<>();
         return matrix.stream().map(
-                (lst)->
+                lst->
                         lst.stream().map(
-                                (x) -> x.mat)
+                                x -> x.mat)
                                 .collect(Collectors.toList()))
                 .collect(Collectors.toList());
+    }
+    public static void printM(List<List<cell>> polys){
+        polys.forEach((lst)-> {
+                    lst.forEach(x ->
+                        System.out.printf("%d ",x.x));
+                    System.out.println();
+                });
     }
 }

@@ -13,13 +13,13 @@ import java.io.IOException;
 public class Identify {
     private BP bp_image = null;
     private int size = 8;               //input matrix of data size
-    private double allow_error = 0.1;   //when training allow error
+    private double allow_error = 0.01;   //when training allow error
 
     /**
      * Initial the digit_identify network
      */
     public Identify() {
-        double rate = 0.2;      //study rate
+        double rate = 0.5;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
@@ -76,15 +76,7 @@ public class Identify {
     public void Learn(String ppath, int times) {
         ReadData file = new ReadData();
 
-        double[][][] in = new double[10][][];
-        for (int i = 0; i < 10; i++) {
-            String path = ppath + String.valueOf(i) + ".pat";
-            try{
-                in[i] = file.readFile(path, size);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        double[][][] in = file.getData(ppath, size);
 
         System.out.println("Training data...");
 
@@ -104,6 +96,30 @@ public class Identify {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Try to test the bp network performance
+     * @param ppath
+     * @param num
+     * @return
+     */
+    public double testData(String ppath, int num) {
+        ReadData file = new ReadData();
+
+        double[][][] in = file.getData(ppath, size);
+        int rtn = 0;
+
+        for(int i = 0; i < 979; i++)
+        {
+            double[] out = bp_image.forwardProp(in[num][i]);
+            int ans = getMax(out);
+
+            if(ans != num)
+                rtn++;
+        }
+
+        return rtn/979d;
     }
 
     /**

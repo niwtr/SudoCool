@@ -43,4 +43,18 @@ public class ReadData {
 
         return ans;
     }
+
+    public double[][][] getData(String ppath, int size) {
+        double[][][] ans = new double[10][][];
+        for (int i = 0; i < 10; i++) {
+            String path = ppath + String.valueOf(i) + ".pat";
+            try{
+                ans[i] = readFile(path, size);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ans;
+    }
 }

@@ -102,18 +102,19 @@ public class Main {
         //Mat uu=Highgui.imread("/Users/Heranort/Desktop/fo.jpg");//
 
         //Mat img=Highgui.imread("./test/sudo.jpg");
-        Mat img=Highgui.imread("/Users/Heranort/Downloads/ugi.jpg");
+        Mat img=Highgui.imread("/Users/Heranort/Downloads/ez.jpg");
 
 
 
         //这里默许了数独棋盘它是黑色的。
 
 
-        List<MatOfPoint> rst= SquareExtractor.Extract(img, 500,1500); //20000,26000);//2000,2300);
+        List<MatOfPoint> rst= SquareExtractor.Extract(img,2000,5000); //20000,26000);//2000,2300);
         //20000,26000 for sudo.jpg
 
         System.out.println(rst.size());//show the number of blocks scanned in.
 
+        Utils.showResult(SquareExtractor.drawSquares(img, rst));
         SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
         Patternizor Pb=new Patternizor(7, Patternizor.BLACK_BACKGROUND);

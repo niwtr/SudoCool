@@ -1,6 +1,7 @@
 package team.sudocool.ImgWorks;
 
 import com.sun.tools.corba.se.idl.toJavaPortable.Skeleton;
+import com.sun.tools.corba.se.idl.toJavaPortable.Util;
 import org.opencv.core.*;
 import team.sudocool.ImgWorks.nImgProc.Cropper;
 import team.sudocool.ImgWorks.nImgProc.Utils;
@@ -56,6 +57,9 @@ public class Patternizor {
         //这里默许了数独棋盘它是黑色的。
         Imgproc.threshold(img, img, 127,255, COLOR+THRESH_OTSU);
 
+        Utils.printMatrix(pattern(iimg, Skeletonizor.Skeletonize(img), size));
+        System.out.println();
+
         return pattern(iimg, Skeletonizor.Skeletonize(img), size);
 
 
@@ -66,7 +70,7 @@ public class Patternizor {
 
         List<MatOfPoint> contours=new ArrayList<>();
 
-
+/*
         Mat workingImg=img.clone();
 
         Mat hierarchy=new Mat();
@@ -115,7 +119,7 @@ public class Patternizor {
             Utils.showResult(rest2);
         }
 
-
+*/
         int[][] bimg = Cropper.crop(Utils.convertMat(img), 1);
 
 

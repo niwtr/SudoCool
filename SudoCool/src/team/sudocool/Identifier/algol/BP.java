@@ -245,14 +245,31 @@ public class BP {
             for(int i = 0; i < ans.length; i++)
                 out_error += (out[i] - ans[i]) * (out[i] - ans[i]) / 2;
 
-//            System.out.println("Error: " + out_error);
-
             if(Math.abs(last_error-out_error) < allow_err)
                 break;
 
 //            if(out_error < allow_err)
 //                break;
         }
+    }
+
+    /**
+     * Adjust rate with learning of error
+     * @param error_n
+     * @param error_l
+     */
+    public void adjustRate(double error_n, double error_l) {
+        if(error_l == 0d || error_n == 0d)
+            return;
+
+        if(error_n > 1.5*error_l)
+            rate = 0.5*rate;
+        else if(error_n > 0.5*error_l)
+                rate = 0.95*rate;
+        else
+            rate = 1.2*rate;
+
+        System.out.println("Rate: " + rate);
     }
 
     /**

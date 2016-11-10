@@ -4,6 +4,7 @@ import team.sudocool.Identifier.algol.BP;
 import team.sudocool.Identifier.algol.ReadData;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  * @author L.Laddie
@@ -12,24 +13,27 @@ import java.io.IOException;
  */
 public class Identifier {
     private BP bp_image = null;
-    private int size = 7;               //input matrix of data size
-    private double allow_error = 0.01;   //when training allow error
+    private int size = 8;                //input matrix of data size
+    private double allow_error = 0.01;   //when training once allow error
+    private int data_num = 979;          //training data number
 
     /**
      * Initial the digit_identify network
      */
     public Identifier() {
-        double rate = 0.001;      //study rate
+        double rate = 0.005;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
         layer_num[2] = 10;
-        layer_num[1] = 50;
+        layer_num[1] = 22;
 
 //        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
+
+//        System.out.println(layer_num[1]);
 
         bp_image = new BP(layer_num, rate, mo_rate);
 
@@ -77,7 +81,7 @@ public class Identifier {
      * @param ppath
      * @param times
      */
-    public void Learn(String ppath, int times) {
+    private void Learn(String ppath, int times) {
         ReadData file = new ReadData();
 
         double[][][] in = file.getData(ppath, size);
@@ -85,7 +89,7 @@ public class Identifier {
         System.out.println("Training data...");
 
         for(int i = 0; i < times; i++)
-            for(int j = 0; j < 979; j++)         //max data is 979
+            for(int j = 0; j < data_num; j++)         //max data is 979
                 for(int k = 0; k < 10; k++)
                 {
                     double[] out = new double[10];
@@ -114,7 +118,7 @@ public class Identifier {
         double[][][] in = file.getData(ppath, size);
         int rtn = 0;
 
-        for(int i = 0; i < 979; i++)
+        for(int i = 0; i < data_num; i++)
         {
             double[] out = bp_image.forwardProp(in[num][i]);
             int ans = getMax(out);
@@ -123,7 +127,34 @@ public class Identifier {
                 rtn++;
         }
 
-        return rtn/979d;
+        return rtn/(double)data_num;
+    }
+
+    /**
+     * Learn once by once, and output every error times
+     * @param ppath
+     * @param error
+     */
+    public void learnAndTest(String ppath, double error) {
+        double last_error = 0d;
+        double out_error = 0d;
+        while(true){
+            last_error = out_error;
+            out_error = 0d;
+
+            Learn(ppath, 1);
+
+            for (int i = 0; i < 10; i++)
+                out_error += testData(ppath, i);
+
+            out_error = out_error / 10;
+
+            bp_image.adjustRate(out_error, last_error);
+
+            System.out.println("Error: " + new DecimalFormat("##.##").format(out_error*100) + "%\n");
+            if(out_error < error)
+                break;
+        }
     }
 
     /**

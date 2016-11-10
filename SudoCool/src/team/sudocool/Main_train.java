@@ -15,25 +15,12 @@ public class Main_train {
      */
     public static void main(String args[]) {
         Identifier iden = new Identifier();
-//        iden.Learn("D:/patterns/", 5000);
+        iden.learnAndTest("D:/patterns/", 0.01);
 
-        for (int i = 0; i < 10; i++)
-        {
-            double ans = iden.testData("D:/patterns/", i);
-            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
-        }
-
-//        while(true){
-//            iden.Learn("D:/patterns/", 1);
-//
-//            double ans = 0d;
-//            for (int i = 0; i < 10; i++)
-//                ans += iden.testData("D:/patterns/", i);
-//
-//            ans = ans / 10;
-//            System.out.println("Error: " + new DecimalFormat("##.##").format(ans*100) + "%");
-//            if(ans < 0.01)
-//                break;
+//        for (int i = 0; i < 10; i++)
+//        {
+//            double ans = iden.testData("D:/patterns/", i);
+//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
 //        }
 
 //        int[][] test1 = {{0,1,1,1,1,1,1,1},

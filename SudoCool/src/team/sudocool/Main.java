@@ -91,9 +91,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Mat img=Highgui.imread("./test/trim.jpg");
+        Mat img=Highgui.imread("./test/sudo.jpg");
 
-        List<MatOfPoint> rst= SquareExtractor.Extract(img, 2000,2300);
+        List<MatOfPoint> rst= SquareExtractor.Extract(img, 20000,26000);
         //20000,26000 for sudo.jpg
 
         System.out.println(rst.size());//show the number of blocks scanned in.
@@ -102,7 +102,7 @@ public class Main {
 
         SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-        Identifier I=new Identifier();
+        Identifier I=new Identifier(8, 21, 0.005);
         boolean ok=true;
         if(ok) {
            // List<List<Integer>> result =

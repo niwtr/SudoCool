@@ -13,27 +13,28 @@ import java.text.DecimalFormat;
  */
 public class Identifier {
     private BP bp_image = null;
-    private int size = 8;                //input matrix of data size
+    private int size = 0;                //input matrix of data size
     private double allow_error = 0.01;   //when training once allow error
     private int data_num = 979;          //training data number
 
     /**
      * Initial the digit_identify network
+     * (Three important parameters)
      */
-    public Identifier() {
-        double rate = 0.005;      //study rate
+    public Identifier(int size, int hidden_num, double rate) {
+        this.size = size;
+
+//        double rate = 0.005;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
         layer_num[2] = 10;
-        layer_num[1] = 22;
+        layer_num[1] = hidden_num;
 
 //        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
-
-//        System.out.println(layer_num[1]);
 
         bp_image = new BP(layer_num, rate, mo_rate);
 

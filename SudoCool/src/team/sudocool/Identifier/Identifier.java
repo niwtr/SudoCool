@@ -3,7 +3,6 @@ package team.sudocool.Identifier;
 import team.sudocool.Identifier.algol.BP;
 import team.sudocool.Identifier.algol.ReadData;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
@@ -13,7 +12,7 @@ import java.text.DecimalFormat;
  */
 public class Identifier {
     private BP bp_image = null;
-    private int size = 0;                //input matrix of data size
+    private int size = 7;                //input matrix of data size
     private double allow_error = 0.01;   //when training once allow error
     private int data_num = 979;          //training data number
 
@@ -21,17 +20,16 @@ public class Identifier {
      * Initial the digit_identify network
      * (Three important parameters)
      */
-    public Identifier(int size, int hidden_num, double rate) {
-        this.size = size;
+    public Identifier() {
 
-//        double rate = 0.005;      //study rate
+        double rate = 0.001;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
         layer_num[2] = 10;
-        layer_num[1] = hidden_num;
+        layer_num[1] = 40;      //hidden number
 
 //        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
@@ -47,8 +45,8 @@ public class Identifier {
 
     /**
      * Use bp network to identify digits
-     * @param in
-     * @return
+     * @param in data to identify
+     * @return it`s number
      */
     public int toDigit(int[][] in) {
         if(isNull(in))      //input data is null
@@ -60,8 +58,8 @@ public class Identifier {
 
     /**
      * Incremental learning for data that wrong identify
-     * @param in
-     * @param num
+     * @param in the wrong data
+     * @param num true output number
      */
     public void increLearn(int[][] in, int num) {
         double[] out = new double[10];
@@ -79,8 +77,8 @@ public class Identifier {
 
     /**
      * Let the network to learn
-     * @param ppath
-     * @param times
+     * @param ppath data path
+     * @param times learn times
      */
     private void Learn(String ppath, int times) {
         ReadData file = new ReadData();
@@ -109,9 +107,9 @@ public class Identifier {
 
     /**
      * Try to test the bp network performance
-     * @param ppath
-     * @param num
-     * @return
+     * @param ppath data path
+     * @param num needed number
+     * @return test error
      */
     public double testData(String ppath, int num) {
         ReadData file = new ReadData();
@@ -133,8 +131,8 @@ public class Identifier {
 
     /**
      * Learn once by once, and output every error times
-     * @param ppath
-     * @param error
+     * @param ppath data path
+     * @param error expected error
      */
     public void learnAndTest(String ppath, double error) {
         double last_error = 0d;
@@ -150,7 +148,7 @@ public class Identifier {
 
             out_error = out_error / 10;
 
-            bp_image.adjustRate(out_error, last_error);
+//            bp_image.adjustRate(out_error, last_error);
 
             System.out.println("Error: " + new DecimalFormat("##.##").format(out_error*100) + "%\n");
             if(out_error < error)
@@ -160,8 +158,8 @@ public class Identifier {
 
     /**
      * Judge the input data whether null
-     * @param in
-     * @return
+     * @param in matrix
+     * @return whether null
      */
     private boolean isNull(int[][] in) {
         for(int[] i : in)
@@ -175,8 +173,8 @@ public class Identifier {
     /**
      * Convert Two-dimensional to One-dimensional
      * and also int to double
-     * @param in
-     * @return
+     * @param in two-dimension matrix
+     * @return one-dimension matrix
      */
     private double[] convertOne(int[][] in)
     {

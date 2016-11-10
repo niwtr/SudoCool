@@ -11,11 +11,11 @@ import java.io.*;
 public class ReadData {
     /**
      * read from learning file
-     * @param size
-     * @return
-     * @throws IOException
+     * @param size matrix size
+     * @return all the one-dimension matrix
+     * @throws IOException read error
      */
-    public double[][] readFile(String path, int size) throws IOException
+    private double[][] readFile(String path, int size) throws IOException
     {
         double[][] ans = new double[2000][size*size];
         int i = 0, j = 0;
@@ -44,6 +44,12 @@ public class ReadData {
         return ans;
     }
 
+    /**
+     * get all the ten digit data
+     * @param ppath data path
+     * @param size matrix size
+     * @return all the ten digit data
+     */
     public double[][][] getData(String ppath, int size) {
         double[][][] ans = new double[10][][];
         for (int i = 0; i < 10; i++) {

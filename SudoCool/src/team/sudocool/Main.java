@@ -102,7 +102,7 @@ public class Main {
 
         SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-        Identifier I=new Identifier(8, 21, 0.005);
+        Identifier I=new Identifier();
         boolean ok=true;
         if(ok) {
            // List<List<Integer>> result =

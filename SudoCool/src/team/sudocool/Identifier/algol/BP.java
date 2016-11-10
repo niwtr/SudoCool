@@ -32,8 +32,9 @@ public class BP {
 
     /**
      * Initial BP network
-     * @param layer_num
-     * @param rate
+     * @param layer_num network struct
+     * @param rate network learn rate
+     * @param mo_rate Momentum coefficient
      */
     public BP(int[] layer_num, double rate, double mo_rate) {
         int len = layer_num.length;
@@ -77,7 +78,7 @@ public class BP {
     public void loadWeight() throws Exception {
         FileInputStream file = null;
         try {
-            file = new FileInputStream("./resources/bp_net.data");
+            file = new FileInputStream("./resources/bp_net.json");
             JsonReader json = new JsonReader(new InputStreamReader(file, "UTF-8"));
 
             json.beginObject();
@@ -138,7 +139,7 @@ public class BP {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time = format.format(date);
 
-            file = new FileOutputStream("./resources/bp_net.data");
+            file = new FileOutputStream("./resources/bp_net.json");
             JsonWriter json = new JsonWriter(new OutputStreamWriter(file, "UTF-8"));
 
             json.beginObject();
@@ -157,8 +158,8 @@ public class BP {
 
     /**
      * Forward propagation: calculate the output
-     * @param in
-     * @return layer_out[this.layer_num.length-1]
+     * @param in network input
+     * @return network output
      */
     public double[] forwardProp(double[] in) {
         int len = layer_num.length;
@@ -194,9 +195,9 @@ public class BP {
 
     /**
      * Backward propagation: calculate error and update weight
-     * @param sample_out
+     * @param sample_out expected out
      */
-    public void backProp(double[] sample_out) {
+    private void backProp(double[] sample_out) {
         int len = layer_num.length;
 
         //calculate the output layer local gradient
@@ -229,8 +230,8 @@ public class BP {
 
     /**
      * Training the network
-     * @param in
-     * @param out
+     * @param in training data
+     * @param out expect output
      */
     public void trainNet(double[] in, double[] out, double allow_err) {
         double last_error = 0d;
@@ -255,8 +256,8 @@ public class BP {
 
     /**
      * Adjust rate with learning of error
-     * @param error_n
-     * @param error_l
+     * @param error_n error of now
+     * @param error_l error of last
      */
     public void adjustRate(double error_n, double error_l) {
         if(error_l == 0d || error_n == 0d)
@@ -274,7 +275,7 @@ public class BP {
 
     /**
      * Sigmoid function
-     * @param val
+     * @param val input value
      */
     private double sigMoid(double val) {
         return 1d / (1d + Math.exp(-val));

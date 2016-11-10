@@ -21,6 +21,9 @@ public class Utils {
 
     public static void showResult(Mat img) {
         if(img.empty())return;
+
+        //Imgproc.resize(img,img,new Size(500,500));
+
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);
         byte[] byteArray = matOfByte.toArray();
@@ -112,6 +115,9 @@ public static void printMatrixNonZeros(int [][]bimg){
         return rst;
     }
 
+    public static void showMatrix(int[][]bimg){
+        showResult(convertByteM(bimg));
+    }
     public static void writeMatrix(String pathname, int [][]bimg){
         Highgui.imwrite(pathname, convertByteM(bimg));
     }

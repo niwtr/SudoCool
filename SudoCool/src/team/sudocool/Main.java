@@ -101,27 +101,27 @@ public class Main {
 
         //Mat uu=Highgui.imread("/Users/Heranort/Desktop/fo.jpg");//
 
-
-
-        Mat img=Highgui.imread("./test/sudo.jpg");
+        //Mat img=Highgui.imread("./test/sudo.jpg");
+        Mat img=Highgui.imread("/Users/Heranort/Downloads/ugi.jpg");
 
 
 
         //这里默许了数独棋盘它是黑色的。
 
 
-        List<MatOfPoint> rst= SquareExtractor.Extract(img, 20000,26000);//2000,2300);
+        List<MatOfPoint> rst= SquareExtractor.Extract(img, 500,1500); //20000,26000);//2000,2300);
         //20000,26000 for sudo.jpg
 
         System.out.println(rst.size());//show the number of blocks scanned in.
 
         SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-
-        //P.Patternize(uu);
-
-
+        Patternizor Pb=new Patternizor(7, Patternizor.BLACK_BACKGROUND);
         Identifier I=new Identifier();
+
+
+
+
         boolean ok=true;
         if(ok) {
                 /* get the patterns from a sudoku image. */

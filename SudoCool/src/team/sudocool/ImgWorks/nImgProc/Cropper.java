@@ -1,5 +1,8 @@
 package team.sudocool.ImgWorks.nImgProc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Heranort on 16/11/5.
  */
@@ -24,6 +27,9 @@ public class Cropper {
         }
         return rst;
     }
+
+
+
     private static int scan_up(int [][] mat, int threshold){
         int rst=0;
         for(int i=mat.length-1;i>2;i--){
@@ -56,19 +62,28 @@ public class Cropper {
     }
 
     //erase the outer contour of the matrix. (_->0)
-    private static void pre_crop(int [][]mat){
+    private static int[][] pre_crop(int [][]mat, int thickness){
         for(int j=0;j<mat[0].length;j++){
-            mat[0][j]=0;
-            mat[mat.length-1][j]=0;
+
+            for(int i=0;i<thickness;i++) {
+                mat[i][j] = 0;
+                mat[mat.length - 1 -i][j] = 0;
+            }
         }
         for(int i=0;i<mat.length;i++){
-            mat[i][0]=0;
-            mat[i][mat[0].length-1]=0;
+            for(int j=0;j<thickness;j++) {
+                mat[i][j] = 0;
+                mat[i][mat[0].length - 1 - j] = 0;
+            }
         }
+        return mat;
     }
 
     public static int[][] crop(int [][] mat, int threshold){
-        pre_crop(mat);
+
+//        System.out.printf("%d %d \n", mat.length, mat[0].length);
+        mat=pre_crop(mat, 2);
+
         int
                 ub=scan_down(mat, threshold),
                 db=scan_up(mat, threshold),
@@ -80,6 +95,8 @@ public class Cropper {
                 o[i][j]=mat[i+ub][j+lb];
             }
         }
+        //Utils.showMatrix(o);
+
         return o;
     }
 

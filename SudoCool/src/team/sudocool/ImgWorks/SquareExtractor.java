@@ -3,6 +3,7 @@ package team.sudocool.ImgWorks;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
+import team.sudocool.ImgWorks.nImgProc.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

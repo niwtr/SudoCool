@@ -116,8 +116,8 @@ public class SquareArranger {
 
                     for (; index < lastRow.size(); index++) {
                         if (lastRow.get(index).x > x.x) {//find next to .
-                            lastRow.add(index, new cell(new Rect(x.x, x.y, 0, 0), new MatOfPoint()));
-                            //lastRow.add(index, copyLeft(lastRow.get(index)));
+                            lastRow.add(index, copyUp(x));
+                            //lastRow.add(index, new cell(new Rect(x.x, x.y, 0, 0), new MatOfPoint()));
                             break;
                         }
                     }

@@ -68,6 +68,15 @@ public class Utils {
         return bm;
     }
 
+public static void printMatrixNonZeros(int [][]bimg){
+    boolean flag=false;
+    for (int i=0;i<bimg.length&&!flag;i++){
+        for(int j=0;j<bimg[i].length;j++){
+            if(bimg[i][j]==1)flag=true;break;
+        }
+    }
+    if(flag)printMatrix(bimg);
+}
 
     public static void printMatrix(int [][]bimg){
         for(int i=0;i<bimg.length;i++){

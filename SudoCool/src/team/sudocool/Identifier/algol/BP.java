@@ -263,12 +263,10 @@ public class BP {
         if(error_l == 0d || error_n == 0d)
             return;
 
-        if(error_n > 1.5*error_l)
-            rate = 0.5*rate;
-        else if(error_n > 0.5*error_l)
-                rate = 0.95*rate;
-        else
-            rate = 1.2*rate;
+        if(error_n < error_l)
+            rate = 1.05*rate;
+        else if(error_n > 1.04*error_l)
+                rate = 0.7*rate;
 
         System.out.println("Rate: " + rate);
     }

@@ -2,7 +2,10 @@ package team.sudocool;
 
 import team.sudocool.Identifier.Identifier;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 /**
  * @author L.Laddie
@@ -15,45 +18,70 @@ public class Main_train {
      */
     public static void main(String args[]) {
         Identifier iden = new Identifier();
-        iden.learnAndTest("D:/patterns7neo/", 0.01);
+//        iden.learnAndTest("D:/patterns7neo/", 0.01);
 
-//        for (int i = 0; i < 10; i++)
-//        {
-//            double ans = iden.testData("D:/patterns/", i);
-//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
+        for (int i = 0; i < 10; i++)
+        {
+            double ans = iden.testData("D:/patterns7neo/", i);
+            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
+        }
+
+//        int[][][] test = null;
+//        try {
+//            test = readMatrix("D:/test.pat", 7);
+//        } catch (IOException e) {
+//            e.printStackTrace();
 //        }
+//
+//        while(true) {
+//            for (int i = 0; i < test.length; i++) {
+//                iden.increLearn(test[i], i);
+//                System.out.print(i + ":" + iden.toDigit(test[i]) + " ");
+//            }
+//            System.out.println();
+//        }
+    }
 
-//        int[][] test1 = {{0,1,1,1,1,1,1,1},
-//                        {0,1,0,0,0,0,0,0},
-//                        {0,1,0,0,0,0,0,0},
-//                        {1,1,1,1,1,1,1,1},
-//                        {1,0,0,0,0,0,0,1},
-//                        {0,0,0,0,0,0,0,1},
-//                        {0,0,0,0,0,0,0,1},
-//                        {1,1,1,1,1,1,1,1}};
-//
-//        int [][] test2 = {{0,0,0,0,0,1,1,0},
-//                        {0,0,0,1,1,1,1,0},
-//                        {0,0,1,1,0,0,1,0},
-//                        {0,1,1,0,0,0,1,0},
-//                        {1,1,0,0,0,0,0,1},
-//                        {1,0,0,0,0,0,1,0},
-//                        {1,1,1,1,1,1,1,1},
-//                        {0,0,0,0,0,0,1,0}};
-//
-//        int [][] test3 = {{1,1,1,1,1,1,1,1},
-//                        {0,0,0,0,0,0,1,1},
-//                        {0,0,0,0,0,1,1,0},
-//                        {0,0,0,0,1,1,0,0},
-//                        {0,0,0,1,1,0,0,0},
-//                        {0,0,0,1,0,0,0,0},
-//                        {0,0,0,1,0,0,0,0},
-//                        {0,0,1,1,0,0,0,0}};
-//
-//        int[][] test = new int[8][8];      //null test
-//
-//        System.out.println(iden.toDigit(test1));
-//        System.out.println(iden.toDigit(test2));
-//        System.out.println(iden.toDigit(test3));
+    private static int[][][] readMatrix(String path, int size) throws IOException
+    {
+        int[][][] ans = new int[2000][size][size];
+        int i = 0, j = 0, k = 0;
+        FileReader in = null;
+
+        try {
+            in = new FileReader(path);
+            int temp;
+
+            while((temp = in.read()) != -1) {
+                if(temp == 48 || temp == 49)
+                {
+                    ans[k][i][j++] = temp-48;
+                }
+
+                if(j == size) {
+                    j = 0;
+                    i++;
+                }
+
+                if(i == size) {
+                    i = 0;
+                    k++;
+                }
+            }
+        } finally {
+            if (in != null)
+                in.close();
+        }
+
+        int[][][] rtn = new int[k][size][size];
+        for(int w = 0; w < k; w++)
+        {
+            for(int q = 0; q < size; q++)
+            {
+                System.arraycopy(ans[w][q], 0, rtn[w][q], 0, size);
+            }
+        }
+
+        return rtn;
     }
 }

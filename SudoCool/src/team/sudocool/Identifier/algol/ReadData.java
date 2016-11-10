@@ -41,7 +41,11 @@ public class ReadData {
                 in.close();
         }
 
-        return ans;
+        double[][] rtn = new double[i][size*size];
+        for(int w = 0; w < i; w++)
+            System.arraycopy(ans[w], 0, rtn[w], 0, size*size);
+
+        return rtn;
     }
 
     /**

@@ -17,18 +17,21 @@ public class Main_train {
      * This is the main function
      */
     public static void main(String args[]) {
-        Identifier iden = new Identifier();
-//        iden.learnAndTest("D:/patterns7neo/", 0.01);
+        Identifier iden = new Identifier("D:/patterns7neo/");
+
+        //手写体
+        iden.learnAndTest(0.01);
 
         for (int i = 0; i < 10; i++)
         {
-            double ans = iden.testData("D:/patterns7neo/", i);
+            double ans = iden.testData(i);
             System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
         }
 
+        //印刷体
 //        int[][][] test = null;
 //        try {
-//            test = readMatrix("D:/test.pat", 7);
+//            test = readMatrixFile("D:/test.pat", 7);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -42,7 +45,14 @@ public class Main_train {
 //        }
     }
 
-    private static int[][][] readMatrix(String path, int size) throws IOException
+    /**
+     * Read some matrix from file
+     * @param path file_path
+     * @param size matrix_size
+     * @return  matrix
+     * @throws IOException  file can`t read
+     */
+    public static int[][][] readMatrixFile(String path, int size) throws IOException
     {
         int[][][] ans = new int[2000][size][size];
         int i = 0, j = 0, k = 0;

@@ -1,6 +1,7 @@
 package team.sudocool.Identifier;
 
 import team.sudocool.Identifier.algol.BP;
+import team.sudocool.Identifier.algol.BasisFunc;
 import team.sudocool.Identifier.algol.ReadData;
 
 import java.text.DecimalFormat;
@@ -12,9 +13,12 @@ import java.text.DecimalFormat;
  */
 public class Identifier {
     private BP bp_image = null;
+    private double[][][] train_data;
+
     private int size = 7;                //input matrix of data size
     private double allow_error = 0.01;   //when training once allow error
     private int data_num = 892;          //training data number
+
 
     /**
      * Initial the digit_identify network
@@ -22,7 +26,7 @@ public class Identifier {
      */
     public Identifier() {
 
-        double rate = 0.1;      //study rate
+        double rate = 0.005;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network
@@ -44,16 +48,27 @@ public class Identifier {
     }
 
     /**
+     * Construct function for trainer
+     * @param train_path train data path
+     */
+    public Identifier(String train_path) {
+        this();
+
+        ReadData file = new ReadData();
+        train_data = file.getData(train_path, size);
+    }
+
+    /**
      * Use bp network to identify digits
      * @param in data to identify
      * @return it`s number
      */
     public int toDigit(int[][] in) {
-        if(isNull(in))      //input data is null
+        if(BasisFunc.isNull(in))      //input data is null
             return -1;
 
-        double[] out = bp_image.forwardProp(convertOne(in));
-        return getMax(out);
+        double[] out = bp_image.forwardProp(BasisFunc.convertOne(in));
+        return BasisFunc.getMax(out);
     }
 
     /**
@@ -65,7 +80,7 @@ public class Identifier {
         double[] out = new double[10];
         out[num] = 1d;
 
-        bp_image.trainNet(convertOne(in), out, allow_error);
+        bp_image.trainNet(BasisFunc.convertOne(in), out, allow_error);
 
         //save the network weight
         try {
@@ -77,13 +92,11 @@ public class Identifier {
 
     /**
      * Let the network to learn
-     * @param ppath data path
      * @param times learn times
      */
-    private void Learn(String ppath, int times) {
-        ReadData file = new ReadData();
-
-        double[][][] in = file.getData(ppath, size);
+    private void Learn(int times) {
+        if (train_data == null)
+            throw new AssertionError();
 
         System.out.println("Training data...");
 
@@ -94,7 +107,7 @@ public class Identifier {
                     double[] out = new double[10];
                     out[k] = 1;
 
-                    bp_image.trainNet(in[k][j], out, allow_error);
+                    bp_image.trainNet(train_data[k][j], out, allow_error);
                 }
 
         //save the network weight
@@ -107,20 +120,19 @@ public class Identifier {
 
     /**
      * Try to test the bp network performance
-     * @param ppath data path
      * @param num needed number
      * @return test error
      */
-    public double testData(String ppath, int num) {
-        ReadData file = new ReadData();
+    public double testData(int num) {
+        if (train_data == null)
+            throw new AssertionError();
 
-        double[][][] in = file.getData(ppath, size);
         int rtn = 0;
 
         for(int i = 0; i < data_num; i++)
         {
-            double[] out = bp_image.forwardProp(in[num][i]);
-            int ans = getMax(out);
+            double[] out = bp_image.forwardProp(train_data[num][i]);
+            int ans = BasisFunc.getMax(out);
 
             if(ans != num)
                 rtn++;
@@ -131,20 +143,19 @@ public class Identifier {
 
     /**
      * Learn once by once, and output every error times
-     * @param ppath data path
      * @param error expected error
      */
-    public void learnAndTest(String ppath, double error) {
+    public void learnAndTest(double error) {
         double last_error = 0d;
         double out_error = 0d;
         while(true){
             last_error = out_error;
             out_error = 0d;
 
-            Learn(ppath, 1);
+            Learn(1);
 
             for (int i = 0; i < 10; i++)
-                out_error += testData(ppath, i);
+                out_error += testData(i);
 
             out_error = out_error / 10;
 
@@ -154,58 +165,5 @@ public class Identifier {
             if(out_error < error)
                 break;
         }
-    }
-
-    /**
-     * Judge the input data whether null
-     * @param in matrix
-     * @return whether null
-     */
-    private boolean isNull(int[][] in) {
-        for(int[] i : in)
-            for(int ele : i)
-                if(ele != 0) {
-                    return false;
-                }
-        return true;
-    }
-
-    /**
-     * Convert Two-dimensional to One-dimensional
-     * and also int to double
-     * @param in two-dimension matrix
-     * @return one-dimension matrix
-     */
-    private double[] convertOne(int[][] in)
-    {
-        int n = in.length;
-        double[] ans = new double[n*n];
-        for(int i = 0; i < n; i++)
-        {
-            for(int j = 0; j < n; j++)
-            {
-                ans[i*n+j] = in[i][j];
-            }
-        }
-
-        return ans;
-    }
-
-    /**
-     * Calculate the max
-     */
-    private int getMax(double[] in) {
-        double max_val = in[0];
-        int ans = 0;
-
-        for(int i = 1; i < in.length; i++)
-        {
-            if(in[i] > max_val){
-                ans = i;
-                max_val = in[i];
-            }
-        }
-
-        return ans;
     }
 }

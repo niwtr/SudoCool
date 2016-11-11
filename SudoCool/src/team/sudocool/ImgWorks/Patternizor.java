@@ -1,7 +1,7 @@
 package team.sudocool.ImgWorks;
 
-import com.sun.tools.corba.se.idl.toJavaPortable.Skeleton;
-import com.sun.tools.corba.se.idl.toJavaPortable.Util;
+//import com.sun.tools.corba.se.idl.toJavaPortable.Skeleton;
+//import com.sun.tools.corba.se.idl.toJavaPortable.Util;
 import org.opencv.core.*;
 import team.sudocool.ImgWorks.nImgProc.Cropper;
 import team.sudocool.ImgWorks.nImgProc.Utils;

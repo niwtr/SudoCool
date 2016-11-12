@@ -54,11 +54,11 @@ public class Patternizor {
 
         if(img.empty())return new int[size][size];
         Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
-        //这里默许了数独棋盘它是黑色的。
+
         Imgproc.threshold(img, img, 127,255, COLOR+THRESH_OTSU);
 
-        Utils.printMatrix(pattern(iimg, Skeletonizor.Skeletonize(img), size));
-        System.out.println();
+        //Utils.printMatrix(pattern(iimg, Skeletonizor.Skeletonize(img), size));
+        //System.out.println();
 
         return pattern(iimg, Skeletonizor.Skeletonize(img), size);
 
@@ -152,7 +152,9 @@ public class Patternizor {
         Imgproc.resize(_1,_1,new Size(140,140));
         bimg=Utils.convertMat(Skeletonizor.Skeletonize(_1));
 
-        return divPattern(bimg, size);
+
+        //Utils.showMatrix(bimg);
+                return divPattern(bimg, size);
 
     }
 

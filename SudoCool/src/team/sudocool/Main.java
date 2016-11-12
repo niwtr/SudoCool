@@ -1,5 +1,6 @@
 package team.sudocool;
 
+import com.sun.tools.corba.se.idl.toJavaPortable.Util;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.opencv.imgproc.Imgproc.COLOR_RGB2GRAY;
-import static org.opencv.imgproc.Imgproc.THRESH_OTSU;
+import static org.opencv.imgproc.Imgproc.*;
 
 
 public class Main {
@@ -99,57 +99,23 @@ public class Main {
     public static void main(String[] args) {
 
 
-        //Mat uu=Highgui.imread("/Users/Heranort/Desktop/fo.jpg");//
-
-        //Mat img=Highgui.imread("./test/sudo.jpg");
-        Mat img=Highgui.imread("/Users/Heranort/Downloads/ez.jpg");
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/nine.jpg");//
 
 
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
+        Mat img=Highgui.imread("./test/sdk.jpg");
 
-        //这里默许了数独棋盘它是黑色的。
 
 
-        List<MatOfPoint> rst= SquareExtractor.Extract(img,2000,5000); //20000,26000);//2000,2300);
-        //20000,26000 for sudo.jpg
-
-        System.out.println(rst.size());//show the number of blocks scanned in.
-
-        Utils.showResult(SquareExtractor.drawSquares(img, rst));
-        SquareArranger A=new SquareArranger(SquareArranger.STANDARD_SUDOKU_SIZE, SquareArranger.FILL_EMPTY);
-        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-        Patternizor Pb=new Patternizor(7, Patternizor.BLACK_BACKGROUND);
-        Identifier I=new Identifier();
+        SquareExtractor.Extract(img);
 
 
 
 
-        boolean ok=true;
-        if(ok) {
-                /* get the patterns from a sudoku image. */
-                    SquareExtractor.squareCutter(img, A.Arrange(rst))
-                        /* arrangeSquare returns an empth Matrix list if
-                         *  it fails to arrange. */
-                            .stream()
-                            .map((lst) ->
-                                    lst.stream()
-                                            .map(P::Patternize)
-                                            .map(I::toDigit)
-                                            .collect(Collectors.toList()))
-                            .collect(Collectors.toList())
-
-                            .forEach(lst->
-                                    {
-                                        lst.forEach(x->{
-                                            System.out.printf("%d ", x.intValue());
-                                            //Utils.printMatrixNonZeros(x);
-                                            //System.out.println();
-                                        });
-
-                                        System.out.println();
-                                    });
 
 
-        }
+
+
 
 
     }

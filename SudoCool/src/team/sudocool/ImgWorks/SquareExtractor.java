@@ -17,8 +17,7 @@ import java.util.stream.IntStream;
 
 import org.opencv.utils.Converters;
 
-import static org.opencv.core.Core.FILLED;
-import static org.opencv.core.Core.NORM_MINMAX;
+import static org.opencv.core.Core.*;
 import static org.opencv.core.CvType.*;
 import static org.opencv.imgproc.Imgproc.*;
 
@@ -27,6 +26,27 @@ public class SquareExtractor {
 
 
     private static final double SUDOKU_SIZE=9;
+
+
+    private static Mat preProcessing(Mat img){
+
+        GaussianBlur(img,img,new Size(5,5),0);
+        cvtColor(img,img, COLOR_BGR2GRAY);
+        Mat mask=Mat.zeros(img.size(), CV_8UC1);
+
+        Mat kernel1=getStructuringElement(MORPH_ELLIPSE,new Size(11,11));
+
+        Mat close=new Mat();
+        morphologyEx(img,close,MORPH_CLOSE,kernel1);
+        Mat div=new Mat();
+        Core.divide(img,close,div);
+
+        Core.normalize(div,div,0,255,NORM_MINMAX);
+
+        cvtColor(div,div,COLOR_GRAY2BGR);
+        return div;
+    }
+
 
     private static Mat extractOuterBound(Mat img){
 
@@ -43,7 +63,13 @@ public class SquareExtractor {
         Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
 
         contours.sort((mp1,mp2)->
-                Imgproc.contourArea(mp1)>=Imgproc.contourArea(mp2)?-1:1);
+                {
+                    double amp1=Imgproc.contourArea(mp1),amp2=Imgproc.contourArea(mp2);
+                    if(amp1>amp2)return -1;
+                    else if(amp1==amp2)return 0;
+                    else return 1;
+                });
+
         MatOfPoint bound=contours.get(0);
 
         System.out.println(Imgproc.contourArea(bound));
@@ -141,6 +167,7 @@ public class SquareExtractor {
             centroids.add(new Point(x,y));
         }
 
+        Highgui.imwrite("/Users/Heranort/Desktop/an.jpg", grids);
 
 
         List<Point> rl=centroids
@@ -199,7 +226,7 @@ public class SquareExtractor {
             }
         }
 
-        matrix.forEach(x->System.out.println(x.size()));
+//        matrix.forEach(x->System.out.println(x.size()));
 
         List<List<Point>> matrixr=new ArrayList<>();
         for(int j=0;j<10;j++){
@@ -260,6 +287,7 @@ public class SquareExtractor {
 
         //outseq.forEach(Utils::showResult);
         Utils.showResult(outall);
+
         Patternizor p=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
         Identifier i=new Identifier();
         List<Integer> x=outseq.stream().map(p::Patternize).map(i::toDigit).collect(Collectors.toList());
@@ -284,15 +312,52 @@ public class SquareExtractor {
         return outseq;
 
     }
+
+    private static Mat whiteBalance(Mat img){
+        List<Mat> g_vChannels=new ArrayList<>();
+        Core.split(img, g_vChannels);
+        Mat imageBlueChannel = g_vChannels.get(0);
+        Mat imageGreenChannel = g_vChannels.get(1);
+        Mat imageRedChannel = g_vChannels.get(2);
+        double imageBlueChannelAvg=0;
+        double imageGreenChannelAvg=0;
+        double imageRedChannelAvg=0;
+        imageBlueChannelAvg = Core.mean(imageBlueChannel).val[0];
+        imageGreenChannelAvg = Core.mean(imageGreenChannel).val[0];
+        imageRedChannelAvg = Core.mean(imageRedChannel).val[0];
+        double K = (imageRedChannelAvg+imageGreenChannelAvg+imageRedChannelAvg)/3;
+        double Kb = K/imageBlueChannelAvg;
+        double Kg = K/imageGreenChannelAvg;
+        double Kr = K/imageRedChannelAvg;
+
+        addWeighted(imageBlueChannel,0,new Mat(imageBlueChannel.size(), imageBlueChannel.type(), new Scalar(Kb))
+                ,0,0,imageBlueChannel);
+        addWeighted(imageGreenChannel,0, new Mat(imageGreenChannel.size(),imageGreenChannel.type(),new Scalar(Kg))
+                ,0,0,imageGreenChannel);
+        addWeighted(imageRedChannel,0, new Mat(imageRedChannel.size(),imageRedChannel.type(), new Scalar(Kr))
+                ,0,0,imageRedChannel);
+        List<Mat> newL=new ArrayList<>();newL.add(imageBlueChannel);
+        newL.add(imageGreenChannel);newL.add(imageRedChannel);
+        Mat dst=new Mat();
+        merge(newL,dst);
+
+        return dst;
+    }
+
     public static List<Mat> Extract(Mat img){
 
 
 
 
-        Imgproc.resize(img,img,new Size(img.rows()/2,img.cols()/2));//resize.
+
+        Imgproc.resize(img,img,new Size(img.size().width/2,img.size().height/2));//resize.
+
+
         Mat extracted=extractOuterBound(img.clone());
 
+
                 Mat exx=verticalLines(extracted.clone());
+
 
                 Mat exy=horizonalLines(extracted.clone());
                 Mat grids=gridPoints(exx,exy);
@@ -329,7 +394,7 @@ return arranged;
 
         Mat elem10=new Mat(27,27, CV_8U, new Scalar(255));
         Imgproc.morphologyEx(img2, img2, MORPH_CLOSE, elem10);//morph close
-        Highgui.imwrite("/Users/Heranort/Desktop/an.jpg", img2);
+
 
         return img2;
     }

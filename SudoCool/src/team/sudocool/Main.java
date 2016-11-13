@@ -99,11 +99,11 @@ public class Main {
     public static void main(String[] args) {
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/nine.jpg");//
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/numb/sudo2.jpg");//
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sudo.jpg");
-        Mat img=Highgui.imread("./test/sdk.jpg");
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk2.jpg");
+        Mat img=Highgui.imread("./test/sudo.jpg");
 
 
 

@@ -1,30 +1,18 @@
 package team.sudocool;
 
-import com.sun.tools.corba.se.idl.toJavaPortable.Util;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
-import team.sudocool.Identifier.Identifier;
 import team.sudocool.ImgWorks.Patternizor;
-import team.sudocool.ImgWorks.Skeletonizor;
-import team.sudocool.ImgWorks.SquareArranger;
 import team.sudocool.ImgWorks.SquareExtractor;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
-import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.opencv.imgproc.Imgproc.*;
 
 
 public class Main {
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
-
-
-
 
     static ArrayList<String> filelist = new ArrayList<>();
 
@@ -64,7 +52,7 @@ public class Main {
                     );
                     of.write("\n".getBytes());
                     of.close();
-                } catch (IOException e){
+                }catch (IOException e){
                     System.out.printf("IO Exception: %s", f.getName());
                 }
             }
@@ -99,22 +87,16 @@ public class Main {
     public static void main(String[] args) {
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/numb/sudo2.jpg");//
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/snap1.jpg");//
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk2.jpg");
-        Mat img=Highgui.imread("./test/sudo.jpg");
+        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
+        Mat img=Highgui.imread("./test/sdk4.jpg");
 
+        Eye e=new Eye();
+        e.Watch(null);
 
-
-        SquareExtractor.Extract(img);
-
-
-
-
-
-
-
+       SquareExtractor.Extract(img);
 
 
 

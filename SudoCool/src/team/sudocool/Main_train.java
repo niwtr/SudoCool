@@ -26,20 +26,6 @@ public class Main_train {
             System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
         }
 
-//        int[][][] test = null;
-//        try {
-//            test = readMatrix("D:/test.pat", 7);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        while(true) {
-//            for (int i = 0; i < test.length; i++) {
-//                iden.increLearn(test[i], i);
-//                System.out.print(i + ":" + iden.toDigit(test[i]) + " ");
-//            }
-//            System.out.println();
-//        }
     }
 
     private static int[][][] readMatrix(String path, int size) throws IOException

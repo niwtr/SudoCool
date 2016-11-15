@@ -52,12 +52,18 @@ public class SquareExtractor {
 
         Mat img2=new Mat();
         Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
-        Imgproc.threshold(img2,img2,127,155,THRESH_BINARY_INV+THRESH_OTSU);
+
+        //Imgproc.threshold(img2,img2,127,255,THRESH_BINARY_INV+THRESH_OTSU);
+
+        Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 5,1);
+
         Imgproc.Laplacian(img2,img2,img2.depth());
+
 
         List<MatOfPoint> squares=new ArrayList<>();
 
         List<MatOfPoint> contours=new ArrayList<>();
+
 
         Mat hierarchy=new Mat();
         Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
@@ -72,11 +78,12 @@ public class SquareExtractor {
 
         MatOfPoint bound=contours.get(0);
 
-        System.out.println(Imgproc.contourArea(bound));
+        //System.out.println(Imgproc.contourArea(bound));
         Mat res=new Mat(img.size(), CV_8U, new Scalar(0));
         Core.fillConvexPoly(res, bound, new Scalar(255));
         Mat rest=new Mat(img.size(), CV_8UC3, new Scalar(0, 0, 0));
         Imgproc.cvtColor(img,img,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
+        //equalizeHist(img,img);//cowsay
         img.copyTo(rest, res);
 
 
@@ -85,14 +92,21 @@ public class SquareExtractor {
     }
 
     private static Mat verticalLines(Mat extracted){
+
+
         Mat kernelx = Imgproc.getStructuringElement(Imgproc.MORPH_RECT,new Size(2,10));
+
 
         Imgproc.Sobel(extracted,extracted, CV_16S,1,0);
         Core.convertScaleAbs(extracted,extracted);
         Core.normalize(extracted,extracted,0,255,NORM_MINMAX);
+
         Imgproc.threshold(extracted, extracted ,0,255,Imgproc.THRESH_BINARY+Imgproc.THRESH_OTSU);
+
+
         Imgproc.morphologyEx(extracted,extracted,MORPH_DILATE,kernelx);
 
+        Utils.showResult(extracted);
         List<MatOfPoint> contour=new ArrayList<>();
         Mat H=new Mat();
         Imgproc.findContours(extracted,contour,H,RETR_EXTERNAL,CHAIN_APPROX_SIMPLE);
@@ -286,6 +300,7 @@ public class SquareExtractor {
         }
 
         //outseq.forEach(Utils::showResult);
+        //Utils.showResult(outall);
         Utils.showResult(outall);
 
         Patternizor p=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
@@ -312,7 +327,7 @@ public class SquareExtractor {
         return outseq;
 
     }
-
+/* unusable */
     private static Mat whiteBalance(Mat img){
         List<Mat> g_vChannels=new ArrayList<>();
         Core.split(img, g_vChannels);
@@ -349,12 +364,19 @@ public class SquareExtractor {
 
 
 
+        double rate=img.size().width/img.size().height;
 
-        Imgproc.resize(img,img,new Size(img.size().width/2,img.size().height/2));//resize.
+        //Imgproc.resize(img,img,new Size(img.size().width/2,img.size().height/2));//resize.
+        Imgproc.resize(img,img, new Size(800, 800/rate));
+
+
+
+
 
 
         Mat extracted=extractOuterBound(img.clone());
 
+        Utils.showResult(extracted);
 
                 Mat exx=verticalLines(extracted.clone());
 
@@ -362,6 +384,7 @@ public class SquareExtractor {
                 Mat exy=horizonalLines(extracted.clone());
                 Mat grids=gridPoints(exx,exy);
 
+        Utils.showResult(grids);
                 List<Mat>arranged=arrange(img, grids);
 
 

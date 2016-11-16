@@ -9,9 +9,12 @@ import team.sudocool.Identifier.Identifier;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.toList;
 import static org.opencv.core.Core.FILLED;
 import static org.opencv.core.Core.NORM_MINMAX;
 import static org.opencv.core.CvType.*;
@@ -34,8 +37,8 @@ public class GridSquareExtractor {
         Imgproc.resize(img,img, new Size(800, 800/rate));
 
         Mat extracted=extractOuterBound(img.clone());
+        Utils.showResult(extracted);
 
-        //Utils.showResult(extracted);
         Mat exx=verticalLines(extracted.clone());
         Mat exy=horizonalLines(extracted.clone());
         Mat grids=gridPoints(exx,exy);
@@ -71,6 +74,18 @@ public class GridSquareExtractor {
 
         Mat hierarchy=new Mat();
         Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
+
+        contours=contours.stream().filter(mp ->
+        {
+            MatOfPoint2f m2f=new MatOfPoint2f(),
+                    apr=new MatOfPoint2f();
+            m2f.fromList(mp.toList());
+            double peri=Imgproc.arcLength(m2f, true);
+
+            Imgproc.approxPolyDP(m2f, apr, 0.02*peri,true);
+            return apr.size().height==4;
+        }).collect(toList());
+
 
         contours.sort((mp1,mp2)->
         {
@@ -172,6 +187,7 @@ public class GridSquareExtractor {
     }
 
 
+
     private static List<Mat> arrange(Mat oimg, Mat grids){
 
         List<MatOfPoint> contour=new ArrayList<>();
@@ -201,7 +217,7 @@ public class GridSquareExtractor {
                     else if (p1.y==p2.y)return 0;
                     else return -1;
                 })
-                .collect(Collectors.toList());
+                .collect(toList());
 
 
         //rl.forEach(x->System.out.printf("%f %f\n",x.x, x.y));
@@ -214,12 +230,12 @@ public class GridSquareExtractor {
                             (Math.abs(x.y - y) < wid / 2))
                             .sorted((a,b)->
                                     (a.x>b.x?1:-1))
-                            .collect(Collectors.toList())
+                            .collect(toList())
             );
             rl = rl.stream()
                     .filter((x) ->
                             (Math.abs(x.y - y) > wid / 2))
-                    .collect(Collectors.toList());
+                    .collect(toList());
         }
 
         for(int i=0;i<matrix.size();i++){

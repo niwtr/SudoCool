@@ -1,4 +1,4 @@
-package team.sudocool;
+package team.sudocool.Eye;
 
 /**
  * Created by Heranort on 16/11/15.

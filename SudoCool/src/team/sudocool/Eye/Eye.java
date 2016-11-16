@@ -1,10 +1,10 @@
-package team.sudocool;
+package team.sudocool.Eye;
 
 /**
  * Created by Heranort on 16/11/15.
  */
 import org.opencv.core.Mat;
-import team.sudocool.ImgWorks.SquareExtractor;
+import team.sudocool.ImgWorks.GridSquareExtractor;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
 import java.awt.*;
@@ -12,21 +12,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+
+
+
 
 public class Eye extends JFrame implements ActionListener {
     private JPanel contentPane;
+
+    public  Mat captured;
     private JButton snap;
+
   /*
      * Launch the application.
      */
-    public void Watch (String[] args) {
+    public void Watch() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     Eye frame = new Eye();
+                    SnapGUI();
                     frame.setVisible(true);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -45,13 +53,9 @@ public class Eye extends JFrame implements ActionListener {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-
-        SnapGUI();
-
-
         new eyeThread().start();
     }
+
 
     public void SnapGUI(){
         JFrame jf=new JFrame();
@@ -64,9 +68,9 @@ public class Eye extends JFrame implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
         if ("snap".equals(e.getActionCommand())) {
-            Mat u=getMat();
+            Mat u= snapAPhoto();
             Utils.showResult(u);
-            SquareExtractor.Extract(u);
+
         }
     }
 
@@ -78,15 +82,19 @@ public class Eye extends JFrame implements ActionListener {
         g.drawImage(bfi, 0, 0, this);
     }
 
-    public Mat getMat(){
-        System.out.println(videoCap.captured.size().height);
-        return videoCap.captured;}
+    public Mat snapAPhoto(){
+
+        this.captured=videoCap.captured;
+        return captured;
+    }
+
+
     private class eyeThread extends Thread{
         @Override
         public void run() {
             for (;;){
                  repaint();
-                //System.out.println("moving");
+
                 try { Thread.sleep(30);
                 } catch (InterruptedException e) {    }
             }

@@ -2,13 +2,17 @@ package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
+import team.sudocool.Eye.Eye;
+import team.sudocool.Eye.EyeFinder;
+import team.sudocool.Identifier.Identifier;
+import team.sudocool.ImgWorks.GridSquareExtractor;
 import team.sudocool.ImgWorks.Patternizor;
-import team.sudocool.ImgWorks.SquareExtractor;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -91,12 +95,22 @@ public class Main {
 
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
-        Mat img=Highgui.imread("./test/sdk4.jpg");
+        Mat img=Highgui.imread("./test/sudo5.jpg");
+        //EyeFinder ef=new EyeFinder();
+        //ef.Start();
 
-        Eye e=new Eye();
-        e.Watch(null);
+        List<Mat> outseq=GridSquareExtractor.GridExtract(img);
 
-       SquareExtractor.Extract(img);
+
+        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
+        Identifier I=new Identifier();
+        List<Integer> x=outseq.stream().map(P::Patternize).map(I::toDigit).collect(Collectors.toList());
+
+        for(int u=0;u<x.size();u++)
+        {
+            System.out.printf("%d ", x.get(u));
+            if((u+1)%9==0)System.out.println();
+        }
 
 
 

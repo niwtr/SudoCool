@@ -5,6 +5,7 @@ import org.opencv.highgui.Highgui;
 import team.sudocool.Eye.Eye;
 import team.sudocool.Eye.EyeFinder;
 import team.sudocool.Identifier.Identifier;
+import team.sudocool.ImgWorks.EzGridSquareExtractor;
 import team.sudocool.ImgWorks.GridSquareExtractor;
 import team.sudocool.ImgWorks.Patternizor;
 import team.sudocool.ImgWorks.nImgProc.*;
@@ -95,7 +96,7 @@ public class Main {
 
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
-        Mat img=Highgui.imread("./test/sudo5.jpg");
+        Mat img=Highgui.imread("./test/sdk4.jpg");
         //EyeFinder ef=new EyeFinder();
         //ef.Start();
 
@@ -111,6 +112,9 @@ public class Main {
             System.out.printf("%d ", x.get(u));
             if((u+1)%9==0)System.out.println();
         }
+
+        EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
+        ege.Extract(img);
 
 
 

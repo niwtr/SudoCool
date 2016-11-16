@@ -26,7 +26,7 @@ public class Identifier {
      */
     public Identifier() {
 
-        double rate = 0.005;      //study rate
+        double rate = 0.01;      //study rate
         double mo_rate = 0.8;   //momentum rate
 
         //construct bp network

@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BasisFunc.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SudoCool.iml" afterPath="$PROJECT_DIR$/SudoCool.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/bp_net.json" afterPath="$PROJECT_DIR$/resources/bp_net.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Main_train.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
     </list>
     <ignored path="testOpenCV.iws" />
@@ -33,8 +29,8 @@
       <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="320">
+              <caret line="46" column="0" selection-start-line="46" selection-start-column="2" selection-end-line="54" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#readMatrixFile#0;class#Main_train#0" expanded="false" />
@@ -46,8 +42,8 @@
       <file leaf-file-name="Identifier.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+            <state relative-caret-position="300">
+              <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -100,8 +96,8 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/Main.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BasisFunc.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
       </list>
     </option>
   </component>
@@ -153,6 +149,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -211,35 +208,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SudoCool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SudoCool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sudocool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Identifier" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="algol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -721,11 +691,12 @@
       <workItem from="1478850564717" duration="348000" />
       <workItem from="1478850945528" duration="1019000" />
       <workItem from="1478854078885" duration="2555000" />
+      <workItem from="1479020753648" duration="1237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17596000" />
+    <option name="totallyTimeSpent" value="18833000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -747,7 +718,6 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19515885" sideWeight="0.49295774" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cabal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276923" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -760,6 +730,7 @@
       <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3276923" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1118,16 +1089,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+        <state relative-caret-position="300">
+          <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="320">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="2" selection-end-line="54" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#readMatrixFile#0;class#Main_train#0" expanded="false" />

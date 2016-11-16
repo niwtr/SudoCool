@@ -20,27 +20,37 @@ public class Main_train {
         Identifier iden = new Identifier("D:/patterns7neo/");
 
         //手写体
-        iden.learnAndTest(0.01);
-
-        for (int i = 0; i < 10; i++)
-        {
-            double ans = iden.testData(i);
-            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
-        }
+//        iden.learnAndTest(0.01);
+//
+//        for (int i = 0; i < 10; i++)
+//        {
+//            double ans = iden.testData(i);
+//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
+//        }
 
         //印刷体
-//        int[][][] test = null;
-//        try {
-//            test = readMatrixFile("D:/test.pat", 7);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
+        int[][][] test = null;
+        try {
+            test = readMatrixFile("D:/test2.pat", 7);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 //        while(true) {
 //            for (int i = 0; i < test.length; i++) {
 //                iden.increLearn(test[i], i);
 //                System.out.print(i + ":" + iden.toDigit(test[i]) + " ");
 //            }
+//            System.out.println();
+//        }
+
+//        while(true) {
+//            iden.increLearn(test[0], 6);
+//            iden.increLearn(test[1], 9);
+//
+//            System.out.print(6 + ":" + iden.toDigit(test[0]) + " ");
+//            System.out.print(9 + ":" + iden.toDigit(test[1]) + " ");
+//
 //            System.out.println();
 //        }
     }

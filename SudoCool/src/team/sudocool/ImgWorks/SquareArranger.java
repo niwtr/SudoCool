@@ -161,6 +161,9 @@ public class SquareArranger {
         //do not handle when exsist one row that
         //the number of elements is larger than SUDOKU_SIZE.
 
+        //matrix.stream().forEach(x->System.out.println(x.size()));
+
+
 
         for(List<cell> lst : matrix)
             if(lst.size()>sudokuSize)return new ArrayList<>();
@@ -176,6 +179,9 @@ public class SquareArranger {
         if(matrix.get(matrix.size()-1).size()!=sudokuSize)
             //the last row does not satisfy.
             _arrange_last(matrix, width);
+
+
+
 
         if(matrix.stream().filter((x)->x.size()!=sudokuSize).count()!=0)
             return new ArrayList<>();

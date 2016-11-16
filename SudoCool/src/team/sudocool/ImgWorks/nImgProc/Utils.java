@@ -39,6 +39,23 @@ public class Utils {
             e.printStackTrace();
         }
     }
+    public static BufferedImage Mat2BufferedImg(Mat img){
+        if(img.empty())return null;
+
+        Imgproc.resize(img,img,new Size(800,800/(img.size().width/img.size().height)));
+
+        MatOfByte matOfByte = new MatOfByte();
+        Highgui.imencode(".jpg", img, matOfByte);
+        byte[] byteArray = matOfByte.toArray();
+        BufferedImage bufImage = null;
+        try {
+            InputStream in = new ByteArrayInputStream(byteArray);
+            bufImage = ImageIO.read(in);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bufImage;
+    }
 
 
     public static int[][]convertMat(Mat bm){

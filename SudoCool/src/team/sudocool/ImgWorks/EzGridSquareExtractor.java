@@ -49,7 +49,7 @@ public class EzGridSquareExtractor {
         Mat hierarchy=new Mat();
         Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
 
-        contours=contours.stream().filter(mp ->
+        MatOfPoint bound=contours.stream().filter(mp ->
         {
             MatOfPoint2f m2f=new MatOfPoint2f(),
                     apr=new MatOfPoint2f();
@@ -58,18 +58,13 @@ public class EzGridSquareExtractor {
 
             Imgproc.approxPolyDP(m2f, apr, 0.02*peri,true);
             return apr.size().height==4;
-        }).collect(toList());
-
-
-        contours.sort((mp1,mp2)->
+        }).min((mp1,mp2)->
         {
             double amp1=Imgproc.contourArea(mp1),amp2=Imgproc.contourArea(mp2);
             if(amp1>amp2)return -1;
             else if(amp1==amp2)return 0;
             else return 1;
-        });
-
-        MatOfPoint bound=contours.get(0);
+        }).get();
 
         MatOfPoint2f boundf=new MatOfPoint2f(), abound=new MatOfPoint2f();
         boundf.fromList(bound.toList());

@@ -40,6 +40,7 @@ public class Utils {
         }
     }
     public static BufferedImage Mat2BufferedImg(Mat img){
+        //if(img==null){System.out.println("hello");return null;}
         if(img.empty())return null;
 
         Imgproc.resize(img,img,new Size(800,800/(img.size().width/img.size().height)));

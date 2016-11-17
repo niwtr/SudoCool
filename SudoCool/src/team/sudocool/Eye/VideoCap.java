@@ -6,7 +6,10 @@ package team.sudocool.Eye;
 import java.awt.image.BufferedImage;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Size;
 import org.opencv.highgui.VideoCapture;
+import org.opencv.imgproc.Imgproc;
+import team.sudocool.ImgWorks.EzGridSquareExtractor;
 import team.sudocool.ImgWorks.nImgProc.Mat2Image;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
@@ -24,11 +27,23 @@ public class VideoCap {
         cap.open(0);
     }
 
-    Mat getMat(){return captured;}
+    Mat getMat(){
+        getOneFrame();
+        return captured;}
+    BufferedImage getRectedFrame(){
+        Mat mn=new Mat();
+        cap.read(mn);
+        captured=mn;
+        double rate=captured.size().width/captured.size().height;
+        Imgproc.resize(captured,captured, new Size(600, 600/rate));
+        return Utils.Mat2BufferedImg(EzGridSquareExtractor.DrawOuterBound(captured.clone()));
+    }
     BufferedImage getOneFrame() {
-        //Mat mn=new Mat();
-        cap.read(captured);
-
+        Mat mn=new Mat();
+        cap.read(mn);
+        captured=mn;
+        double rate=captured.size().width/captured.size().height;
+        Imgproc.resize(captured,captured, new Size(600, 600/rate));
         return Utils.Mat2BufferedImg(captured.clone()); //mat2Img.getImage(mat2Img.mat);
     }
 }

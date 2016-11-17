@@ -18,11 +18,11 @@ import javax.swing.border.EmptyBorder;
 
 
 
-public class Eye extends JFrame implements ActionListener {
+public class Eye extends JFrame {
     private JPanel contentPane;
 
     public  Mat captured;
-    private JButton snap;
+    private VideoCap videoCap;// = new VideoCap();
 
   /*
      * Launch the application.
@@ -32,7 +32,7 @@ public class Eye extends JFrame implements ActionListener {
             public void run() {
                 try {
                     Eye frame = new Eye();
-                    SnapGUI();
+
                     frame.setVisible(true);
 
                 } catch (Exception e) {
@@ -53,39 +53,23 @@ public class Eye extends JFrame implements ActionListener {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        videoCap=new VideoCap();
         new eyeThread().start();
     }
 
 
-    public void SnapGUI(){
-        JFrame jf=new JFrame();
-        JButton jb=new JButton("Snap!");
-        jf.add(jb);
-        jf.pack();
-        jb.addActionListener(this);
-        jb.setActionCommand("snap");
-        jf.setVisible(true);
-    }
-    public void actionPerformed(ActionEvent e) {
-        if ("snap".equals(e.getActionCommand())) {
-            Mat u= snapAPhoto();
-            Utils.showResult(u);
 
-        }
-    }
-
-    VideoCap videoCap = new VideoCap();
 
     public void paint(Graphics g){
         g = contentPane.getGraphics();
-        BufferedImage bfi=videoCap.getOneFrame();
+        BufferedImage bfi=videoCap.getRectedFrame();
         g.drawImage(bfi, 0, 0, this);
     }
 
     public Mat snapAPhoto(){
 
-        this.captured=videoCap.captured;
-        return captured;
+        this.captured=videoCap.getMat();//videoCap.captured;
+        return this.captured;
     }
 
 
@@ -95,7 +79,7 @@ public class Eye extends JFrame implements ActionListener {
             for (;;){
                  repaint();
 
-                try { Thread.sleep(30);
+                try { Thread.sleep(3);
                 } catch (InterruptedException e) {    }
             }
         }

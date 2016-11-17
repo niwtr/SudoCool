@@ -2,6 +2,7 @@ package team.sudocool.ImgWorks;
 
 import com.sun.tools.corba.se.idl.toJavaPortable.Skeleton;
 import com.sun.tools.corba.se.idl.toJavaPortable.Util;
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import org.opencv.core.*;
 import team.sudocool.ImgWorks.nImgProc.Cropper;
 import team.sudocool.ImgWorks.nImgProc.Utils;
@@ -70,10 +71,33 @@ public class Patternizor {
 
     }
 
+    public int[][] Patternize28x28(Mat img){
+        Mat iimg=img.clone();
+
+
+        if(img.empty())return new int[size][size];
+        Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
+        Imgproc.adaptiveThreshold(img,img,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY_INV, 151,1);
+        //Imgproc.threshold(img, img, 127,255, COLOR);//+THRESH_OTSU);
+        return pattern28x28(iimg, img, size);
+    }
+
+    private static int[][] pattern28x28(Mat oimg, Mat img, int size){
+        int[][] bimg = Cropper.crop(Utils.convertMat(img), 1);
+        if(bimg.length==0)return new int[size][size];//all empty matrix.
+
+        Mat _1=Utils.convertByteM(Cropper.nomalize(bimg,size,size));
+        Imgproc.resize(_1,_1,new Size(28,28));
+
+
+        return Utils.convertMat(_1);
+    }
+
     private static int[][] pattern (Mat oimg, Mat img, int size) {
 
 
         List<MatOfPoint> contours=new ArrayList<>();
+
 
 /*
         Mat workingImg=img.clone();
@@ -197,6 +221,8 @@ public class Patternizor {
         else{
             //error: img is not normalized.
         }
+        //Utils.printMatrix(rst);
+        //System.out.println();
         return rst;
     }
 }

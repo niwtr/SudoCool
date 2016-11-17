@@ -19,6 +19,7 @@ public class VideoCap {
     }
 
     VideoCapture cap;
+    EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
     public Mat captured;
 
     VideoCap(){
@@ -36,7 +37,7 @@ public class VideoCap {
         captured=mn;
         double rate=captured.size().width/captured.size().height;
         Imgproc.resize(captured,captured, new Size(600, 600/rate));
-        return Utils.Mat2BufferedImg(EzGridSquareExtractor.DrawOuterBound(captured.clone()));
+        return Utils.Mat2BufferedImg(ege.DrawOuterBound(captured.clone()), 600);
     }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();
@@ -44,6 +45,6 @@ public class VideoCap {
         captured=mn;
         double rate=captured.size().width/captured.size().height;
         Imgproc.resize(captured,captured, new Size(600, 600/rate));
-        return Utils.Mat2BufferedImg(captured.clone()); //mat2Img.getImage(mat2Img.mat);
+        return Utils.Mat2BufferedImg(captured.clone(), 600); //mat2Img.getImage(mat2Img.mat);
     }
 }

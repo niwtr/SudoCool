@@ -2,6 +2,7 @@ package team.sudocool.ImgWorks.nImgProc;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
+import org.opencv.core.Point;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Size;
@@ -18,6 +19,10 @@ import static org.opencv.core.CvType.CV_8U;
  */
 public class Utils {
 
+
+    public static double pointDist(Point p1, Point p2){
+        return (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+    }
 
     public static void showResult(Mat img) {
         if(img.empty())return;
@@ -39,11 +44,11 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    public static BufferedImage Mat2BufferedImg(Mat img){
+    public static BufferedImage Mat2BufferedImg(Mat img, double width){
         //if(img==null){System.out.println("hello");return null;}
         if(img.empty())return null;
 
-        Imgproc.resize(img,img,new Size(800,800/(img.size().width/img.size().height)));
+        Imgproc.resize(img,img,new Size(width,width/(img.size().width/img.size().height)));
 
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);

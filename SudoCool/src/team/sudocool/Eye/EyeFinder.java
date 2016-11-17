@@ -25,9 +25,9 @@ public class EyeFinder extends Thread {
     private Finder f;
     public EyeFinder() {
         e = new Eye();
-        //f = new Finder();
+
         e.setVisible(true);
-       // e.Watch();
+        //f = new Finder();
         //f.setVisible(true);
         //new EFThread().start();
         this.start();
@@ -52,7 +52,7 @@ public class EyeFinder extends Thread {
         public void run() {
             for (; ; ) {
 
-
+/*
                 Mat em = e.snapAPhoto();
                 if (em.size().height > 0 && em.channels() >= 3) {
 
@@ -63,7 +63,9 @@ public class EyeFinder extends Thread {
                     Thread.sleep(3);
                 } catch (InterruptedException e) {
                 }
+                */
             }
+
         }
    //}
 }

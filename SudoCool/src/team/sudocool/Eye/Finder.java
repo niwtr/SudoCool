@@ -3,9 +3,8 @@ package team.sudocool.Eye;
 /**
  * Created by Heranort on 16/11/17.
  */
-
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
+import static org.opencv.core.CvType.CV_8UC1;
+import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import team.sudocool.ImgWorks.EzGridSquareExtractor;
 
@@ -15,7 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import org.opencv.core.Core;
+
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.highgui.Highgui;
@@ -54,7 +53,7 @@ public class Finder extends JFrame {
     private JPanel contentPane;
 
     public Mat captured=new Mat();
-
+    public Mat _emptyM=new Mat(450,450,CV_8UC1 , new Scalar(0,0,0));
     private EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
     public void setMat(Mat s){
 
@@ -107,9 +106,16 @@ public class Finder extends JFrame {
     public void paint(Graphics g){
         g = contentPane.getGraphics();
 
-
-
-        BufferedImage bfi=Utils.Mat2BufferedImg(ege.transform4(getMat()));
+        Mat m=getMat();
+        BufferedImage bfi;
+        MatOfPoint bound=ege.getOuterBoundContour(m);
+        if(bound!=null) {
+            Mat tr = ege.transform4(m, bound);
+             bfi=Utils.Mat2BufferedImg(tr, 450);
+        }else
+        {
+            bfi=Utils.Mat2BufferedImg(_emptyM, 450);
+        }
 
 
         g.drawImage(bfi, 0, 0, this);

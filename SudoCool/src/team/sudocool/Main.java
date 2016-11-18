@@ -92,7 +92,8 @@ public class Main {
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
         Mat img=Highgui.imread("./test/sdk2.jpg");
-        EyeFinder ef=new EyeFinder();
+        Eye e=new Eye();
+        e.Watch();
 
 
         //List<Mat> outseq=GridSquareExtractor.GridExtract(img);

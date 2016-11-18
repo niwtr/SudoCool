@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Main.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Main.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +31,7 @@
       <file leaf-file-name="EyeFinder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
+            <state relative-caret-position="622">
               <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -45,21 +43,20 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+            <state relative-caret-position="128">
+              <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
               <folding>
-                <element signature="e#553#554#0" expanded="true" />
-                <element signature="e#623#624#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EzGridSquareExtractor.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EzGridSquareExtractor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-271">
-              <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+            <state relative-caret-position="-515">
+              <caret line="143" column="21" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,45 +64,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Finder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java">
+      <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Patternizor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nPoint.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/nPoint.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="390">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Eye.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GridSquareExtractor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/GridSquareExtractor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3480">
+              <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="36" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Eye.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+            <state relative-caret-position="112">
+              <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,8 +101,8 @@
       <file leaf-file-name="VideoCap.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+            <state relative-caret-position="104">
+              <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -138,8 +123,18 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="106" selection-end-column="38" />
+            <state relative-caret-position="217">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mat2Image.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Mat2Image.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12">
+              <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -198,13 +193,13 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/EyeFinder.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Main.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/GridSquareExtractor.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Main.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" />
       </list>
     </option>
@@ -226,9 +221,8 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="773" />
+    <option name="height" value="796" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -255,6 +249,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -391,9 +388,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -645,7 +639,7 @@
     <option name="totallyTimeSpent" value="13674000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -656,7 +650,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6387665" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6363636" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -731,7 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2775">
           <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -753,7 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2775">
           <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -775,7 +767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2775">
           <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -797,7 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2775">
           <caret line="194" column="20" selection-start-line="194" selection-start-column="20" selection-end-line="194" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,13 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -937,56 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20310">
           <caret line="1450" column="0" selection-start-line="1450" selection-start-column="0" selection-end-line="1450" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#57783#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3445#3446#0" expanded="false" />
-            <element signature="e#3507#3508#0" expanded="false" />
-            <element signature="e#3918#3919#0" expanded="false" />
-            <element signature="e#3957#3958#0" expanded="false" />
-            <element signature="e#4010#4011#0" expanded="false" />
-            <element signature="e#4058#4059#0" expanded="false" />
-            <element signature="e#4101#4102#0" expanded="false" />
-            <element signature="e#4146#4147#0" expanded="false" />
-            <element signature="e#4208#4209#0" expanded="false" />
-            <element signature="e#4268#4269#0" expanded="false" />
-            <element signature="e#4313#4314#0" expanded="false" />
-            <element signature="e#4357#4358#0" expanded="false" />
-            <element signature="e#4420#4421#0" expanded="false" />
-            <element signature="e#4478#4479#0" expanded="false" />
-            <element signature="e#8429#8430#0" expanded="false" />
-            <element signature="e#8481#8482#0" expanded="false" />
-            <element signature="e#8851#8852#0" expanded="false" />
-            <element signature="e#8902#8903#0" expanded="false" />
-            <element signature="e#10370#10371#0" expanded="false" />
-            <element signature="e#10427#10428#0" expanded="false" />
-            <element signature="e#15256#15257#0" expanded="false" />
-            <element signature="e#15315#15316#0" expanded="false" />
-            <element signature="e#15423#15424#0" expanded="false" />
-            <element signature="e#15480#15481#0" expanded="false" />
-            <element signature="e#15591#15592#0" expanded="false" />
-            <element signature="e#15651#15652#0" expanded="false" />
-            <element signature="e#17791#17792#0" expanded="false" />
-            <element signature="e#17831#17832#0" expanded="false" />
-            <element signature="e#17867#17868#0" expanded="false" />
-            <element signature="e#17912#17913#0" expanded="false" />
-            <element signature="e#18410#18411#0" expanded="false" />
-            <element signature="e#18475#18476#0" expanded="false" />
-            <element signature="e#18640#18641#0" expanded="false" />
-            <element signature="e#18682#18683#0" expanded="false" />
-            <element signature="e#28454#28455#0" expanded="false" />
-            <element signature="e#28494#28495#0" expanded="false" />
-            <element signature="e#28530#28531#0" expanded="false" />
-            <element signature="e#28575#28576#0" expanded="false" />
-            <element signature="e#29048#29049#0" expanded="false" />
-            <element signature="e#29113#29114#0" expanded="false" />
-            <element signature="e#41473#41474#0" expanded="false" />
-            <element signature="e#41513#41514#0" expanded="false" />
-            <element signature="e#41549#41550#0" expanded="false" />
-            <element signature="e#41594#41595#0" expanded="false" />
-            <element signature="e#41822#41823#0" expanded="false" />
-            <element signature="e#41887#41888#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -994,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1545">
           <caret line="111" column="7" selection-start-line="111" selection-start-column="7" selection-end-line="111" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1002,24 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/GridSquareExtractor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="36" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Mat2Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1034,7 +948,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
+        <state relative-caret-position="1230">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1042,31 +956,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java">
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
+        <state relative-caret-position="135">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/GridSquareExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
-          <folding>
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="-3480">
+          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="36" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1083,10 +986,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="64" column="40" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+        <state relative-caret-position="622">
+          <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1095,24 +998,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+        <state relative-caret-position="104">
+          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Mat2Image.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="106" selection-end-column="38" />
+        <state relative-caret-position="217">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="37" column="75" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271">
-          <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+        <state relative-caret-position="-515">
+          <caret line="143" column="21" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -37,7 +37,8 @@ public class VideoCap {
         captured=mn;
         double rate=captured.size().width/captured.size().height;
         Imgproc.resize(captured,captured, new Size(600, 600/rate));
-        return Utils.Mat2BufferedImg(ege.DrawOuterBound(captured.clone()), 600);
+
+        return Utils.Mat2BufferedImg(ege.DrawRecognizedNumbers(captured.clone()), 600);
     }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();

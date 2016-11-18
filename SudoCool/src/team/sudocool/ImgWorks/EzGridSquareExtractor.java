@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Exchanger;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -35,7 +37,7 @@ public class EzGridSquareExtractor {
 
     Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);//cowsay
     Identifier I=new Identifier();
-    public   MatOfPoint getOuterBoundContour(Mat img){
+    public  MatOfPoint getOuterBoundContour(Mat img){
         Mat img2=new Mat();
         Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
 
@@ -85,21 +87,92 @@ public class EzGridSquareExtractor {
         List<MatOfPoint> mp=new ArrayList<>();
         mp.add(bound);
         Core.polylines(img, mp, true, new Scalar(0,255,0), 5);
-
-        List<Mat> outseq2=Extract(iimg);
-        List<Integer> x=outseq2.stream().map(P::Patternize28x28).map(I::toDigit).collect(Collectors.toList());
-
-        for(int u=0;u<x.size();u++)
-        {
-            System.out.printf("%d ", x.get(u));
-            if((u+1)%9==0)System.out.println();
-        }
-
-        System.out.println();
-
-
         return img;
     }
+
+    //3 -> 0~3
+
+    @FunctionalInterface
+    interface Function3 <A, B, C, R> {
+        //R is like Return, but doesn't have to be last in the list nor named R.
+        public R apply (A a, B b, C c);
+    }
+
+
+    public Mat DrawRecognizedNumbers(Mat img){
+
+        Mat iimg=img.clone();
+        MatOfPoint bound=getOuterBoundContour(img);
+        if (bound==null)return img;
+        List<MatOfPoint> mp=new ArrayList<>();
+        mp.add(bound);
+        Core.polylines(img, mp, true, new Scalar(0,0,255), 3);
+
+        List<Mat> outseq2=Extract(iimg);
+        List<Integer> numList=outseq2.stream().map(P::Patternize28x28).map(I::toDigit).collect(Collectors.toList());
+
+        MatOfPoint2f boundf=new MatOfPoint2f(),
+                abound=new MatOfPoint2f();
+        boundf.fromList(bound.toList());
+        double peri=Imgproc.arcLength(boundf, true);
+        approxPolyDP(boundf, abound, 0.02*peri, true);
+        List<Point> clockwised=Utils.clockwise(abound.toList());
+
+
+        Function <Integer, Point>
+                l1=Utils.lineDivPointFunc(clockwised.get(0), clockwised.get(1), SUDOKU_SIZE),
+                l2=Utils.lineDivPointFunc(clockwised.get(0), clockwised.get(3), SUDOKU_SIZE); //really 9?
+
+        Function3<Integer, Integer, Integer, Point> __=(zero, x, y)->
+        {
+            Point pO=l1.apply(0), pE=l1.apply(x), pW=l2.apply(y);
+            double
+                    deltay1=pW.y-pO.y,
+                    deltay2=pE.y-pO.y,
+                    deltax1=pW.x-pO.x,
+                    deltax2=pE.x-pO.x,
+                    px=pO.x+deltax1+deltax2,
+                    py=pO.y+deltay1+deltay2;
+            return new Point(px, py);
+        };
+
+
+        Point p=new Point();
+        for(int y=0; y<9; y++){
+            for(int x=0; x<9; x++){
+
+                Point
+                        p0=__.apply(0, x, y),
+                        p1=__.apply(0, x+1, y),
+                        p3=__.apply(0, x, y+1);
+
+                double
+                        p0x=p0.x,
+                        p1x=p1.x,
+                        p0y=p0.y,
+                        p3y=p3.y,
+                        width=Math.abs(p1x-p0x);
+
+                p.x=p0x;
+                p.y=p3y;
+                Core.putText
+                        (img,
+                        ""+numList.get(y*SUDOKU_SIZE+x),
+                        p,
+                        Core.FONT_HERSHEY_PLAIN,
+                        width/(SUDOKU_SIZE+4),
+                        new Scalar(0,255,0),
+                        2);
+            }
+        }
+        return img;
+    }
+
+
+
+
+
+
     public Mat transform4(Mat img, MatOfPoint bound){
 
 
@@ -127,50 +200,15 @@ public class EzGridSquareExtractor {
                 };
 
 
-        MatOfPoint bbound=new MatOfPoint();
-        bbound.fromList(abound.toList());
-        Rect br=Imgproc.boundingRect(bbound);
-        List<Point> standardl=new ArrayList<>();
-        standardl.add(new Point(br.x, br.y));
-        standardl.add(new Point(br.x+br.width, br.y));
-        standardl.add(new Point(br.x+br.width, br.y+br.height));
-        standardl.add(new Point(br.x, br.y+br.height));
-
-        List <Point> clockwised=standardl.stream().map(p ->
-                lp.stream().min((p1, p2) ->
-                {
-                    double v1=Utils.pointDist(p,p1),
-                            v2=Utils.pointDist(p,p2);
-                    if(v1>v2)return 1;
-                    else if (v1==v2)return 0;
-                    else return -1;
-                }).get()).collect(Collectors.toList());
+        List<Point> clockwised=Utils.clockwise(lp);
 
 
-
-
-
-//        lp.sort(_x);
-//        lp.subList(0,1).sort(_y.reversed());
-//        lp.subList(2,3).sort(_y);
-
-        /*
-        p1=lp.get(1);
-        p3=lp.get(0);
-        p2=lp.get(2);
-        p4=lp.get(3);
-        */
-        /* 1 2
-           3 4 */
-
+        //add points clockwisely.
         List<Point> dstl=new ArrayList<>();
         dstl.add(new Point(0,0));
         dstl.add(new Point(sizex,0));
         dstl.add(new Point(sizex,sizey));//cowsay, move to 4
         dstl.add(new Point(0,sizey));
-
-
-
 
 
 
@@ -180,6 +218,8 @@ public class EzGridSquareExtractor {
         Imgproc.warpPerspective(img, rst, perspectiveTransform, new Size(sizex,sizey));
         return rst;
     }
+
+
 
 
     public List<Mat> Extract(Mat img){

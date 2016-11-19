@@ -5,6 +5,7 @@ import team.sudocool.Identifier.algol.BasisFunc;
 import team.sudocool.Identifier.algol.ReadData;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 
 /**
  * @author L.Laddie
@@ -15,9 +16,12 @@ public class Identifier {
     private BP bp_image = null;
     private double[][][] train_data;
 
-    private int size = 28;                //input matrix of data size
-    private double allow_error = 0.01;   //when training once allow error
-    private int data_num = 892;          //training data number
+    private static final int size = 28;                 //input matrix of data size
+    private static final double allow_error = 0.01;     //when training once allow error
+    private static final int data_num = 892;            //training data number
+    private static final int layer_num_hidden = 300;     //hidden number
+    private static final double rate = 0.04;            //study rate
+    private static final double mo_rate = 0.8;          //momentum rate
 
 
     /**
@@ -25,15 +29,10 @@ public class Identifier {
      * (Three important parameters)
      */
     public Identifier() {
-
-        double rate = 0.01;      //study rate
-        double mo_rate = 0.8;   //momentum rate
-
-        //construct bp network
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
         layer_num[2] = 10;
-        layer_num[1] = 70;      //hidden number
+        layer_num[1] = layer_num_hidden;
 
 //        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
@@ -101,7 +100,7 @@ public class Identifier {
         System.out.println("Training data...");
 
         for(int i = 0; i < times; i++)
-            for(int j = 0; j < data_num; j++)         //max data is 979
+            for(int j = 0; j < data_num; j++)
                 for(int k = 0; k < 10; k++)
                 {
                     double[] out = new double[10];

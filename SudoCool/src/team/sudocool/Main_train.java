@@ -21,17 +21,20 @@ public class Main_train {
 
         String path_test = "D:/patterns28/";
         String path_train = "D:/patterns28_60/";
-        
+
         Identifier iden = new Identifier(path_test);
 
         //手写体
-//        iden_train.learnAndTest(0.001);
+//        iden.learnAndTest(0.001);
 
+        double ave = 0d;
         for (int i = 0; i < 10; i++)
         {
             double ans = iden.testData(i);
+            ave += ans;
             System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
         }
+        System.out.println("Average: " + new DecimalFormat("##.##").format(ave*10) + "%");
 
         //印刷体
 //        int[][][] test = null;

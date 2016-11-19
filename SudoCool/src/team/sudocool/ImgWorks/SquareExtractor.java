@@ -1,21 +1,12 @@
 package team.sudocool.ImgWorks;
 
-import com.sun.tools.corba.se.idl.toJavaPortable.Util;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.opencv.core.*;
-import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.imgproc.Moments;
-import team.sudocool.Identifier.Identifier;
-import team.sudocool.ImgWorks.nImgProc.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import org.opencv.utils.Converters;
 
 import static org.opencv.core.Core.*;
 import static org.opencv.core.CvType.*;

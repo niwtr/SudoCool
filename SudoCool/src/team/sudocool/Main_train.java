@@ -17,18 +17,52 @@ public class Main_train {
      * This is the main function
      */
     public static void main(String args[]) {
-        Identifier iden = new Identifier();
-//        iden.learnAndTest("D:/patterns7neo/", 0.01);
+        Identifier iden = new Identifier("D:/patterns28/");
 
-        for (int i = 0; i < 10; i++)
-        {
-            double ans = iden.testData("D:/patterns7neo/", i);
-            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
-        }
+        //手写体
+        iden.learnAndTest(0.001);
 
+//        for (int i = 0; i < 10; i++)
+//        {
+//            double ans = iden.testData(i);
+//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
+//        }
+
+        //印刷体
+//        int[][][] test = null;
+//        try {
+//            test = readMatrixFile("D:/test2.pat", 7);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//        while(true) {
+//            for (int i = 0; i < test.length; i++) {
+//                iden.increLearn(test[i], i);
+//                System.out.print(i + ":" + iden.toDigit(test[i]) + " ");
+//            }
+//            System.out.println();
+//        }
+
+//        while(true) {
+//            iden.increLearn(test[0], 6);
+//            iden.increLearn(test[1], 9);
+//
+//            System.out.print(6 + ":" + iden.toDigit(test[0]) + " ");
+//            System.out.print(9 + ":" + iden.toDigit(test[1]) + " ");
+//
+//            System.out.println();
+//        }
     }
 
-    private static int[][][] readMatrix(String path, int size) throws IOException
+    /**
+     * Read some matrix from file
+     * @param path file_path
+     * @param size matrix_size
+     * @return  matrix
+     * @throws IOException  file can`t read
+     */
+    public static int[][][] readMatrixFile(String path, int size) throws IOException
     {
         int[][][] ans = new int[2000][size][size];
         int i = 0, j = 0, k = 0;

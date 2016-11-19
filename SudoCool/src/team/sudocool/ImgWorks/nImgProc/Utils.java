@@ -1,15 +1,18 @@
 package team.sudocool.ImgWorks.nImgProc;
 
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
+import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.core.Size;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.opencv.core.CvType.CV_8U;
 
@@ -17,6 +20,47 @@ import static org.opencv.core.CvType.CV_8U;
  * Created by Heranort on 16/11/5.
  */
 public class Utils {
+
+
+    public static double pointDist(Point p1, Point p2){
+        return (p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y);
+    }
+
+    public static Function<Integer , Point> lineDivPointFunc(Point p1, Point p2, int divNum){
+        double
+                x1=p1.x,
+                x2=p2.x,
+                y1=p1.y,
+                y2=p2.y,
+                dx=x2-x1,
+                dy=y2-y1;
+
+        return (Integer div)-> new Point(x1+div*dx/divNum, y1+div*dy/divNum);
+
+    }
+
+    public static List<Point> clockwise( List<Point> quatrePointList){
+
+        MatOfPoint bbound=new MatOfPoint();
+        bbound.fromList(quatrePointList);
+        Rect br=Imgproc.boundingRect(bbound);
+        List<Point> standardl=new ArrayList<>();
+        standardl.add(new Point(br.x, br.y));
+        standardl.add(new Point(br.x+br.width, br.y));
+        standardl.add(new Point(br.x+br.width, br.y+br.height));
+        standardl.add(new Point(br.x, br.y+br.height));
+
+        return standardl.stream().map(p ->
+                quatrePointList.stream().min((p1, p2) ->
+                {
+                    double v1=Utils.pointDist(p,p1),
+                            v2=Utils.pointDist(p,p2);
+                    if(v1>v2)return 1;
+                    else if (v1==v2)return 0;
+                    else return -1;
+                }).get()).collect(Collectors.toList());
+    }
+
 
 
     public static void showResult(Mat img) {
@@ -39,10 +83,11 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    public static BufferedImage Mat2BufferedImg(Mat img){
+    public static BufferedImage Mat2BufferedImg(Mat img, double width){
+        //if(img==null){System.out.println("hello");return null;}
         if(img.empty())return null;
 
-        Imgproc.resize(img,img,new Size(800,800/(img.size().width/img.size().height)));
+        Imgproc.resize(img,img,new Size(width,width/(img.size().width/img.size().height)));
 
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);

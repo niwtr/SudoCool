@@ -3,17 +3,12 @@ package team.sudocool;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import team.sudocool.Eye.Eye;
-import team.sudocool.Eye.EyeFinder;
-import team.sudocool.Identifier.Identifier;
-import team.sudocool.ImgWorks.EzGridSquareExtractor;
-import team.sudocool.ImgWorks.GridSquareExtractor;
 import team.sudocool.ImgWorks.Patternizor;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Main {
@@ -43,16 +38,18 @@ public class Main {
         Mat imgi= Highgui.imread(p);//low
         String path = "/Users/Heranort/Desktop/patterns/" + String.valueOf(type) + ".pat";
         File f = new File(path);
+        Patternizor P=new Patternizor(7, Patternizor.BLACK_BACKGROUND);
         FileOutputStream of;
         if(f.exists()){
             try {
                 of = new FileOutputStream(f, true);
                 try {
                     of.write(Utils.dumpMatrix(
-                            Patternizor.Patternize(
-                                    imgi,
-                                    7 ,
-                                    Patternizor.BLACK_BACKGROUND))
+                            P.Patternize28x28(imgi))
+                            //Patternizor.Patternize28x28(
+//                                    imgi,
+//                                   7 ,
+//                                    Patternizor.BLACK_BACKGROUND))
                             .getBytes()
                     );
                     of.write("\n".getBytes());
@@ -81,42 +78,38 @@ public class Main {
             doPatternize(filelist.get(i), types[i]);
         }
     }
-
-
-
-    /* please ignore the sick code above. */
-
-    private static void doAll(String[] args){
-
-    }
     public static void main(String[] args) {
+
 
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/snap1.jpg");//
 
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
-        Mat img=Highgui.imread("./test/sdk4.jpg");
-        //EyeFinder ef=new EyeFinder();
-        //ef.Start();
+        Mat img=Highgui.imread("./test/sdk2.jpg");
+        Eye e=new Eye();
+        e.Watch();
 
-        List<Mat> outseq=GridSquareExtractor.GridExtract(img);
 
+        //List<Mat> outseq=GridSquareExtractor.GridExtract(img);
+
+
+/*
+        EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
+
+        List<Mat> outseq2=ege.Extract(img);
 
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
         Identifier I=new Identifier();
-        List<Integer> x=outseq.stream().map(P::Patternize).map(I::toDigit).collect(Collectors.toList());
+
+        List<Integer> x=outseq2.stream().map(P::Patternize28x28).map(I::toDigit).collect(Collectors.toList());
 
         for(int u=0;u<x.size();u++)
         {
             System.out.printf("%d ", x.get(u));
             if((u+1)%9==0)System.out.println();
         }
-
-        EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
-        ege.Extract(img);
-
-
+*/
 
     }
 }

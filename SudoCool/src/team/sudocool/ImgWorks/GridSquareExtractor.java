@@ -31,6 +31,8 @@ public class GridSquareExtractor {
 
     private static final int SUDOKU_SIZE=9;
 
+
+
     public static List<Mat> GridExtract(Mat img){
 
         double rate=img.size().width/img.size().height;

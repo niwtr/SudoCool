@@ -7,6 +7,8 @@ import team.sudocool.ImgWorks.nImgProc.Utils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.opencv.imgproc.Imgproc.*;
 
@@ -15,22 +17,32 @@ import static org.opencv.imgproc.Imgproc.*;
  */
 public class EzGridSquareExtractor {
 
-    private static final int SUDOKU_SIZE=9;
-    private int sizex;
-    private int sizey;
-    private int scissor;
-    public EzGridSquareExtractor(int sizex, int sizey, int scissor){
-        this.sizex=sizex;
-        this.sizey=sizey;
-        this.scissor=scissor;
+    public int SUDOKU_SIZE;
+    private int outerBoundSizex;
+    private int outerBoundSizey;
+    private int scissorWidth;
+    private MatOfPoint Bound=new MatOfPoint();
+    private List<Mat> ExtractedCells = new ArrayList<>();
+    public MatOfPoint getBound(){return this.Bound;}//brings getOuterBoundContour() to passive.
+    public List<Mat> getExtractedCells(){return this.ExtractedCells;}
+
+
+    public EzGridSquareExtractor(int sudokuSize, int sizex, int sizey, int scissor){
+        this.SUDOKU_SIZE=sudokuSize;
+        this.outerBoundSizex =sizex;
+        this.outerBoundSizey =sizey;
+        this.scissorWidth =scissor;
     }
 
-    private static Mat transform4(Mat img){
+
+
+    public  MatOfPoint ExtractOuterBoundContour(Mat img){
         Mat img2=new Mat();
         Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
 
         //Imgproc.threshold(img2,img2,127,255,THRESH_BINARY_INV+THRESH_OTSU);
 
+        //now using adaptive threshold.
         Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
 
 
@@ -45,8 +57,11 @@ public class EzGridSquareExtractor {
         Mat hierarchy=new Mat();
         Imgproc.findContours(img2, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
 
-        MatOfPoint bound=contours.stream().filter(mp ->
+        List<MatOfPoint> bound=contours.stream().filter(mp ->
         {
+            if(Imgproc.contourArea(mp)<(outerBoundSizex * outerBoundSizey /9))
+                return false;
+
             MatOfPoint2f m2f=new MatOfPoint2f(),
                     apr=new MatOfPoint2f();
             m2f.fromList(mp.toList());
@@ -54,13 +69,23 @@ public class EzGridSquareExtractor {
 
             Imgproc.approxPolyDP(m2f, apr, 0.02*peri,true);
             return apr.size().height==4;
-        }).min((mp1,mp2)->
+        }).sorted((mp1,mp2)->
         {
             double amp1=Imgproc.contourArea(mp1),amp2=Imgproc.contourArea(mp2);
             if(amp1>amp2)return -1;
             else if(amp1==amp2)return 0;
             else return 1;
-        }).get();
+        }).collect(Collectors.toList());
+
+        this.Bound=bound.size()>=1?bound.get(0):null;
+        return this.Bound;
+    }
+
+
+    public Mat transform4(Mat img){
+
+        MatOfPoint bound=getBound();
+        if(bound==null)return img;
 
         MatOfPoint2f boundf=new MatOfPoint2f(), abound=new MatOfPoint2f();
         boundf.fromList(bound.toList());
@@ -84,47 +109,46 @@ public class EzGridSquareExtractor {
                     else if (_1.y == _2.y)return 0;
                     else return -1;
                 };
-        Point p1,p2,p3,p4;
-        lp.sort(_x);
-        lp.subList(0,1).sort(_y.reversed());
-        lp.subList(2,3).sort(_y);
-        /*
-        p1=lp.get(1);
-        p3=lp.get(0);
-        p2=lp.get(2);
-        p4=lp.get(3);
-        */
-        /* 1 2
-           3 4 */
 
+
+        List<Point> clockwised=Utils.clockwise(lp);
+
+
+        //add points clockwisely.
         List<Point> dstl=new ArrayList<>();
-        dstl.add(new Point(0,450));
         dstl.add(new Point(0,0));
-        dstl.add(new Point(450,0));
-        dstl.add(new Point(450,450));
+        dstl.add(new Point(outerBoundSizex,0));
+        dstl.add(new Point(outerBoundSizex, outerBoundSizey));
+        dstl.add(new Point(0, outerBoundSizey));
 
 
-        Mat perspectiveTransform = Imgproc.getPerspectiveTransform(Converters.vector_Point2f_to_Mat(lp),
+
+        Mat perspectiveTransform = Imgproc.getPerspectiveTransform(Converters.vector_Point2f_to_Mat(clockwised),
                 Converters.vector_Point2f_to_Mat(dstl));
         Mat rst=new Mat();
-        Imgproc.warpPerspective(img, rst, perspectiveTransform, new Size(450,450));
+        Imgproc.warpPerspective(img, rst, perspectiveTransform, new Size(outerBoundSizex, outerBoundSizey));
         return rst;
     }
 
 
-    public List<Mat> Extract(Mat img){
+
+
+    public boolean Extract(Mat img){
         List<Mat>rst=new ArrayList<>();
+        MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
+        if(bound==null)return false;
         Mat tr=transform4(img);
-        Utils.showResult(tr);
-        double dx=sizex/SUDOKU_SIZE,dy=sizey/SUDOKU_SIZE;
-        for(int x=0;x<SUDOKU_SIZE;x++){//0 to 8
-            for(int y=0;y<SUDOKU_SIZE;y++){
-                Rect r=new Rect((int)(x*dx+3), (int)(y*dy+3),(int)dx-2*scissor,(int)dy-2*scissor);
+        //Utils.showResult(tr);
+        double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
+        for(int y=0;y<SUDOKU_SIZE;y++){//0 to 8
+            for(int x=0;x<SUDOKU_SIZE;x++){
+                Rect r=new Rect((int)(x*dx+3), (int)(y*dy+3),(int)dx-2* scissorWidth,(int)dy-2* scissorWidth);
                 rst.add(new Mat(tr, r));
 
             }
         }
-        return rst;
+        this.ExtractedCells=rst;
+        return true;
     }
 
 }

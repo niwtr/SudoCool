@@ -18,13 +18,16 @@ import static org.opencv.imgproc.Imgproc.*;
 public class EzGridSquareExtractor {
 
     public int SUDOKU_SIZE;
+
     private int outerBoundSizex;
     private int outerBoundSizey;
-    private int scissorWidth;
+    public int scissorWidth;
     private MatOfPoint Bound=new MatOfPoint();
     private List<Mat> ExtractedCells = new ArrayList<>();
     public MatOfPoint getBound(){return this.Bound;}//brings getOuterBoundContour() to passive.
+
     public List<Mat> getExtractedCells(){return this.ExtractedCells;}
+
 
 
     public EzGridSquareExtractor(int sudokuSize, int sizex, int sizey, int scissor){
@@ -34,20 +37,10 @@ public class EzGridSquareExtractor {
         this.scissorWidth =scissor;
     }
 
-
-
     public  MatOfPoint ExtractOuterBoundContour(Mat img){
-        Mat img2=new Mat();
-        Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
-
-        //Imgproc.threshold(img2,img2,127,255,THRESH_BINARY_INV+THRESH_OTSU);
-
-        //now using adaptive threshold.
-        Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
-
-
+        //Mat img2=img.clone();
+        Mat img2=img.clone();
         Imgproc.Laplacian(img2,img2,img2.depth());
-
 
         List<MatOfPoint> squares=new ArrayList<>();
 
@@ -68,6 +61,9 @@ public class EzGridSquareExtractor {
             double peri=Imgproc.arcLength(m2f, true);
 
             Imgproc.approxPolyDP(m2f, apr, 0.02*peri,true);
+
+
+
             return apr.size().height==4;
         }).sorted((mp1,mp2)->
         {
@@ -85,7 +81,8 @@ public class EzGridSquareExtractor {
     public Mat transform4(Mat img){
 
         MatOfPoint bound=getBound();
-        if(bound==null)return img;
+        if(bound==null)//return new Mat();//cowsay, change to original
+            return img;
 
         MatOfPoint2f boundf=new MatOfPoint2f(), abound=new MatOfPoint2f();
         boundf.fromList(bound.toList());

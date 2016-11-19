@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.opencv.imgproc.Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C;
+import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
 import static org.opencv.imgproc.Imgproc.approxPolyDP;
 
 /**
@@ -24,34 +26,54 @@ public class Recognizer {
     public static final int BLACK_BACKGROUND=Patternizor.BLACK_BACKGROUND;
     public static final int STANDARD_OUTERBOUND_SIZEX=450;
     public static final int STANDARD_OUTERBOUND_SIZEY=450;
-    public static final int STANDARD_SCISSOR_SIZE=3;
+    public static final int STANDARD_SCISSOR_SIZE=5;//old: three
     public static final int STANDARD_SUDOKU_SIZE=9;
 
     private Patternizor P;
     private Identifier I;
     private EzGridSquareExtractor E;
     private Mat Img;
+    private Mat ThresholdImg;
+    private MatOfPoint Bound;
+
     private List<Integer> RecognizedNumbers;
     private int[][] ArrangedNumbers;
 
+
     public Recognizer(){
+
         P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);//default is white background.
         I=new Identifier();
         E=new EzGridSquareExtractor(STANDARD_SUDOKU_SIZE, STANDARD_OUTERBOUND_SIZEX,
                 STANDARD_OUTERBOUND_SIZEY, STANDARD_SCISSOR_SIZE);
 
+        this.Bound=new MatOfPoint();
+    }
+
+    public void setScissor(int scissorWidth){
+        this.E.scissorWidth=scissorWidth;
     }
 
     private Recognizer getImg(Mat img){
         this.Img=img;return this;
     }
 
+    private Recognizer preProcessImg(){
+        Mat img2=this.Img.clone();
+        Imgproc.cvtColor(Img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
+        Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
+        //the background should be in white.
+        this.ThresholdImg=img2;
+
+        return this;
+    }
+
     private Recognizer extractOuterBound(){
-        E.ExtractOuterBoundContour(this.Img);
+        E.ExtractOuterBoundContour(this.ThresholdImg);
         return this;
     }
     private Recognizer recognizeNumbers(){
-        if(E.Extract(this.Img)){
+        if(E.Extract(this.ThresholdImg)){
             this.RecognizedNumbers=E
                     .getExtractedCells()
                     .stream()
@@ -76,9 +98,18 @@ public class Recognizer {
     private Recognizer drawOuterBound (){
         MatOfPoint bound= E.getBound();
         if (bound==null)return this;
+
+        MatOfPoint2f boundf=new MatOfPoint2f(),
+                abound=new MatOfPoint2f();
+        boundf.fromList(bound.toList());
+        double peri= Imgproc.arcLength(boundf, true);
+        approxPolyDP(boundf, abound, 0.02*peri, true);
+        this.Bound.fromList(abound.toList());
         List<MatOfPoint> mp=new ArrayList<>();
-        mp.add(bound);
-        Core.polylines(Img, mp, true, new Scalar(0,255,0), 5);
+        mp.add(Bound);
+
+        //mp.add(bound);
+        Core.polylines(Img, mp, true, new Scalar(255,0,0), 5);
         return this;
     }
 
@@ -88,23 +119,19 @@ public class Recognizer {
 
     private Recognizer drawRecognizedNumbers(){
 
-        MatOfPoint bound= E.getBound(); //GetOuterBoundContour(img);
+        MatOfPoint bound= E.getBound();
         List<Integer> numList=this.RecognizedNumbers;
         if(bound==null || numList==null)return this;
 
-        MatOfPoint2f boundf=new MatOfPoint2f(),
-                abound=new MatOfPoint2f();
-        boundf.fromList(bound.toList());
-        double peri= Imgproc.arcLength(boundf, true);
-        approxPolyDP(boundf, abound, 0.02*peri, true);
-        List<Point> clockwised= Utils.clockwise(abound.toList());
+
+        List<Point> clockwised= Utils.clockwise(this.Bound.toList());
 
 
         Function<Integer, Point>
                 l1=Utils.lineDivPointFunc
                 (clockwised.get(0), clockwised.get(1), E.SUDOKU_SIZE),
                 l2=Utils.lineDivPointFunc
-                        (clockwised.get(0), clockwised.get(3), E.SUDOKU_SIZE); //really 9?
+                        (clockwised.get(0), clockwised.get(3), E.SUDOKU_SIZE);
 
         Function3<Integer, Integer, Integer, Point> __=(zero, x, y)->
         {
@@ -138,13 +165,14 @@ public class Recognizer {
 
                 p.x=p0x;
                 p.y=p3y;
+                int num=numList.get(y*E.SUDOKU_SIZE+x);
                 Core.putText
                         (Img,
-                                ""+numList.get(y*E.SUDOKU_SIZE+x),
+                                (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
                                 width/(E.SUDOKU_SIZE+4),
-                                new Scalar(0,255,0),
+                                new Scalar(0,0,255),
                                 2);
             }
         }
@@ -153,14 +181,17 @@ public class Recognizer {
 
 
 
+
     public Mat __getTransformedBound(Mat img){//will be removed in the future.
-        this.getImg(img).extractOuterBound();
-        return E.transform4(this.Img);
+        this.getImg(img).preProcessImg().extractOuterBound();
+        return E.transform4(this.ThresholdImg);
+
     }
 
     public Mat Recognize(Mat img){
         this
                 .getImg(img)
+                .preProcessImg()
                 .extractOuterBound()
                 .recognizeNumbers()
                 .arrangeNumbersMatrix()

@@ -32,6 +32,8 @@ public class VideoCap {
     Mat getMat(){
         getOneFrame();
         return captured;}
+
+
     BufferedImage getRectedFrame(){
         Mat mn=new Mat();
         cap.read(mn);

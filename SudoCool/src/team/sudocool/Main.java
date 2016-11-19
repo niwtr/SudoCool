@@ -38,7 +38,7 @@ public class Main {
         Mat imgi= Highgui.imread(p);//low
         String path = "/Users/Heranort/Desktop/patterns/" + String.valueOf(type) + ".pat";
         File f = new File(path);
-        Patternizor P=new Patternizor(7, Patternizor.BLACK_BACKGROUND);
+        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
         FileOutputStream of;
         if(f.exists()){
             try {
@@ -66,11 +66,11 @@ public class Main {
 
     private static void do_run(int __x){
                 /* 有史以来写得最烂的一堆代码，我自己都嫌弃。  */
-        String filePath="/Users/Heranort/Desktop/t10k-images/";
+        String filePath="/Users/Heranort/Desktop/train-images-60k/"; //"t10k-images/";
 
         List<String>patternFiles=new ArrayList<>();
 
-        int[] types=new int[200000];
+        int[] types=new int[600000];
 
         getFiles(filePath,types);
 
@@ -86,7 +86,7 @@ public class Main {
 
 
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
-        Mat img=Highgui.imread("./test/sdk2.jpg");
+        //Mat img=Highgui.imread("./test/sdk2.jpg");
         Eye e=new Eye();
         e.Watch();
 

@@ -41,7 +41,10 @@ public class Patternizor {
         if(img.empty())return new int[size][size];
         Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
         //这里默许了数独棋盘它是黑色的。
-        Imgproc.threshold(img, img, 127,255, color+THRESH_OTSU);
+//        Imgproc.threshold(img, img, 127,255, color+THRESH_OTSU);
+
+        Imgproc.adaptiveThreshold(img,img,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
+        //why we should do this again?
 
 
         return pattern(oimg, Skeletonizor.Skeletonize(img), size);
@@ -71,12 +74,10 @@ public class Patternizor {
 
     public int[][] Patternize28x28(Mat img){
         Mat iimg=img.clone();
-
-
         if(img.empty())return new int[size][size];
-        Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
-        Imgproc.adaptiveThreshold(img,img,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY_INV, 151,1);
-        //Imgproc.threshold(img, img, 127,255, COLOR);//+THRESH_OTSU);
+        //Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
+        //Imgproc.adaptiveThreshold(img,img,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY_INV, 151,1);
+        Imgproc.threshold(img, img, 127,255, COLOR);//+THRESH_OTSU);
         return pattern28x28(iimg, img, size);
     }
 

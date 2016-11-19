@@ -17,11 +17,11 @@ public class Main_train {
      * This is the main function
      */
     public static void main(String args[]) {
-        Identifier iden = new Identifier("D:/patterns7neo/");
+        Identifier iden = new Identifier("D:/patterns28/");
 
         //手写体
-//        iden.learnAndTest(0.01);
-//
+        iden.learnAndTest(0.001);
+
 //        for (int i = 0; i < 10; i++)
 //        {
 //            double ans = iden.testData(i);
@@ -29,12 +29,12 @@ public class Main_train {
 //        }
 
         //印刷体
-        int[][][] test = null;
-        try {
-            test = readMatrixFile("D:/test2.pat", 7);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        int[][][] test = null;
+//        try {
+//            test = readMatrixFile("D:/test2.pat", 7);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 //        while(true) {
 //            for (int i = 0; i < test.length; i++) {

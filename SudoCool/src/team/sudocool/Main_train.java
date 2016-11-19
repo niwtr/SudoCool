@@ -17,16 +17,21 @@ public class Main_train {
      * This is the main function
      */
     public static void main(String args[]) {
-        Identifier iden = new Identifier("D:/patterns28/");
+        System.out.println("Starting...");
+
+        String path_test = "D:/patterns28/";
+        String path_train = "D:/patterns28_60/";
+        
+        Identifier iden = new Identifier(path_test);
 
         //手写体
-        iden.learnAndTest(0.001);
+//        iden_train.learnAndTest(0.001);
 
-//        for (int i = 0; i < 10; i++)
-//        {
-//            double ans = iden.testData(i);
-//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
-//        }
+        for (int i = 0; i < 10; i++)
+        {
+            double ans = iden.testData(i);
+            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans*100) + "%");
+        }
 
         //印刷体
 //        int[][][] test = null;

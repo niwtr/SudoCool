@@ -1,6 +1,8 @@
 package team.sudocool.Identifier.algol;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This is for reading the training data
@@ -17,8 +19,10 @@ public class ReadData {
      */
     private double[][] readFile(String path, int size) throws IOException
     {
-        double[][] ans = new double[2000][size*size];
-        int i = 0, j = 0;
+        double[] ans_ele = new double[size*size];
+        ArrayList<double[]> ans = new ArrayList<double[]>();
+
+        int j = 0;
         FileReader in = null;
 
         try {
@@ -28,12 +32,12 @@ public class ReadData {
             while((temp = in.read()) != -1) {
                 if(temp == 48 || temp == 49)
                 {
-                    ans[i][j++] = temp-48;
+                    ans_ele[j++] = temp-48;         //'0' or '1'
                 }
 
                 if(j == size*size){
                     j = 0;
-                    i++;
+                    ans.add(ans_ele.clone());
                 }
             }
         } finally {
@@ -41,11 +45,7 @@ public class ReadData {
                 in.close();
         }
 
-        double[][] rtn = new double[i][size*size];
-        for(int w = 0; w < i; w++)
-            System.arraycopy(ans[w], 0, rtn[w], 0, size*size);
-
-        return rtn;
+        return ans.toArray(new double[0][0]);
     }
 
     /**

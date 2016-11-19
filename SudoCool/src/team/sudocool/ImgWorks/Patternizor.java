@@ -30,6 +30,7 @@ public class Patternizor {
     public static final int WHITE_BACKGROUND=THRESH_BINARY_INV;
 
 
+
     private int COLOR;
     private int size;
 

@@ -10,6 +10,7 @@ import org.opencv.core.Size;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import team.sudocool.ImgWorks.EzGridSquareExtractor;
+import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.Mat2Image;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
@@ -19,7 +20,7 @@ public class VideoCap {
     }
 
     VideoCapture cap;
-    EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
+    Recognizer R=new Recognizer();
     public Mat captured;
 
     VideoCap(){
@@ -38,7 +39,7 @@ public class VideoCap {
         double rate=captured.size().width/captured.size().height;
         Imgproc.resize(captured,captured, new Size(600, 600/rate));
 
-        return Utils.Mat2BufferedImg(ege.DrawRecognizedNumbers(captured.clone()), 600);
+        return Utils.Mat2BufferedImg(R.Recognize(captured), 600);
     }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();

@@ -3,17 +3,12 @@ package team.sudocool;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import team.sudocool.Eye.Eye;
-import team.sudocool.Eye.EyeFinder;
-import team.sudocool.Identifier.Identifier;
-import team.sudocool.ImgWorks.EzGridSquareExtractor;
-import team.sudocool.ImgWorks.GridSquareExtractor;
 import team.sudocool.ImgWorks.Patternizor;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Main {

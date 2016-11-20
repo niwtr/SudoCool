@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 public class Eye extends JFrame {
     private JPanel contentPane;
 
+    public static final int WIDTH=800;
     public  Mat captured;
     private VideoCap videoCap;// = new VideoCap();
 
@@ -48,12 +49,13 @@ public class Eye extends JFrame {
     public Eye() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, (int)(600*0.5625));
+        setBounds(100, 100, WIDTH, (int)(WIDTH*0.5625));
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         videoCap=new VideoCap();
+        setVisible(true);
         new eyeThread().start();
     }
 

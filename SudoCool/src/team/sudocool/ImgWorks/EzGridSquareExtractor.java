@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.opencv.core.CvType.CV_8UC1;
 import static org.opencv.imgproc.Imgproc.*;
 
 /**
@@ -24,6 +25,7 @@ public class EzGridSquareExtractor {
     public int scissorWidth;
     private MatOfPoint Bound=new MatOfPoint();
     private List<Mat> ExtractedCells = new ArrayList<>();
+    public Mat ExtractedCellsGraph=new Mat();
     public MatOfPoint getBound(){return this.Bound;}//brings getOuterBoundContour() to passive.
 
     public List<Mat> getExtractedCells(){return this.ExtractedCells;}
@@ -40,6 +42,10 @@ public class EzGridSquareExtractor {
     public  MatOfPoint ExtractOuterBoundContour(Mat img){
         //Mat img2=img.clone();
         Mat img2=img.clone();
+
+        double imgSizex=img.size().width,imgSizey=img.size().height;
+
+
         Imgproc.Laplacian(img2,img2,img2.depth());
 
         List<MatOfPoint> squares=new ArrayList<>();
@@ -52,19 +58,30 @@ public class EzGridSquareExtractor {
 
         List<MatOfPoint> bound=contours.stream().filter(mp ->
         {
-            if(Imgproc.contourArea(mp)<(outerBoundSizex * outerBoundSizey /9))
+            //first filter out small pieces.
+            if(Imgproc.contourArea(mp)<(imgSizex * imgSizey /35))//used: 9
                 return false;
 
+            //second, filter out non-rec things.
             MatOfPoint2f m2f=new MatOfPoint2f(),
                     apr=new MatOfPoint2f();
+
             m2f.fromList(mp.toList());
             double peri=Imgproc.arcLength(m2f, true);
 
             Imgproc.approxPolyDP(m2f, apr, 0.02*peri,true);
 
+            if (apr.size().height!=4) return false;
 
+            //third, filter out non-square things.
+            //@modify 11 20
+            List<Point>fourPoint=new ArrayList<Point>();
+            fourPoint.addAll(apr.toList());
+            fourPoint=Utils.clockwise(fourPoint);
+            double d1=Utils.pointDist(fourPoint.get(0), fourPoint.get(1));
+            double d2=Utils.pointDist(fourPoint.get(0), fourPoint.get(3));
 
-            return apr.size().height==4;
+            return  Math.abs(d2-d1)<0.2*d1;
         }).sorted((mp1,mp2)->
         {
             double amp1=Imgproc.contourArea(mp1),amp2=Imgproc.contourArea(mp2);
@@ -135,11 +152,11 @@ public class EzGridSquareExtractor {
         MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
         if(bound==null)return false;
         Mat tr=transform4(img);
-        //Utils.showResult(tr);
+
         double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
         for(int y=0;y<SUDOKU_SIZE;y++){//0 to 8
             for(int x=0;x<SUDOKU_SIZE;x++){
-                Rect r=new Rect((int)(x*dx+3), (int)(y*dy+3),(int)dx-2* scissorWidth,(int)dy-2* scissorWidth);
+                Rect r=new Rect((int)(x*dx+scissorWidth), (int)(y*dy+scissorWidth),(int)dx-2* scissorWidth,(int)dy-2* scissorWidth);
                 rst.add(new Mat(tr, r));
 
             }
@@ -147,5 +164,33 @@ public class EzGridSquareExtractor {
         this.ExtractedCells=rst;
         return true;
     }
+
+    public boolean Extract2(Mat img){
+        List<Mat>rst=new ArrayList<>();
+        MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
+        if(bound==null)return false;
+        Mat tr=transform4(img);
+
+        Mat Out=new Mat(tr.size(), CV_8UC1);
+
+
+
+        double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
+        for(int y=0;y<SUDOKU_SIZE;y++){//0 to 8
+            for(int x=0;x<SUDOKU_SIZE;x++){
+                Rect r=new Rect((int)(x*dx+scissorWidth), (int)(y*dy+scissorWidth),(int)dx-2* scissorWidth,(int)dy-2* scissorWidth);
+
+                Mat mask=new Mat(tr.size(), CV_8UC1, new Scalar(0));
+                Core.rectangle(mask, new Point(r.x,r.y), new Point(r.x+r.width, r.y+r.height), new Scalar(255), Core.FILLED);
+                tr.copyTo(Out, mask);
+                rst.add(new Mat(tr, r));
+
+            }
+        }
+        this.ExtractedCells=rst;
+        this.ExtractedCellsGraph=Out;
+        return true;
+    }
+
 
 }

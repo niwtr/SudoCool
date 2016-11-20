@@ -84,6 +84,7 @@ public class Recognizer {
         return this;
     }
 
+
     private Recognizer arrangeNumbersMatrix(){
         if(this.RecognizedNumbers==null)return this;
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
@@ -109,7 +110,7 @@ public class Recognizer {
         mp.add(Bound);
 
         //mp.add(bound);
-        Core.polylines(Img, mp, true, new Scalar(255,0,0), 5);
+        Core.polylines(Img, mp, true, new Scalar(255,255,0), 3);
         return this;
     }
 
@@ -165,6 +166,8 @@ public class Recognizer {
 
                 p.x=p0x;
                 p.y=p3y;
+
+
                 int num=numList.get(y*E.SUDOKU_SIZE+x);
                 Core.putText
                         (Img,
@@ -184,7 +187,8 @@ public class Recognizer {
 
     public Mat __getTransformedBound(Mat img){//will be removed in the future.
         this.getImg(img).preProcessImg().extractOuterBound();
-        return E.transform4(this.ThresholdImg);
+        E.Extract2(ThresholdImg);
+        return E.ExtractedCellsGraph;
 
     }
 

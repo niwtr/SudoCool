@@ -82,7 +82,7 @@ public class Cropper {
     public static int[][] crop(int [][] mat, int threshold){
 
 //        System.out.printf("%d %d \n", mat.length, mat[0].length);
-        mat=pre_crop(mat, 2);
+        mat=pre_crop(mat, 3);
 
         int
                 ub=scan_down(mat, threshold),

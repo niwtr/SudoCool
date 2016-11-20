@@ -14,6 +14,8 @@ import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.Mat2Image;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
+import static team.sudocool.Eye.Eye.WIDTH;
+
 public class VideoCap {
     static{
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -39,16 +41,16 @@ public class VideoCap {
         cap.read(mn);
         captured=mn;
         double rate=captured.size().width/captured.size().height;
-        Imgproc.resize(captured,captured, new Size(600, 600/rate));
+        Imgproc.resize(captured,captured, new Size(WIDTH, WIDTH/rate));
 
-        return Utils.Mat2BufferedImg(R.Recognize(captured), 600);
+        return Utils.Mat2BufferedImg(R.Recognize(captured), WIDTH);
     }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();
         cap.read(mn);
         captured=mn;
         double rate=captured.size().width/captured.size().height;
-        Imgproc.resize(captured,captured, new Size(600, 600/rate));
-        return Utils.Mat2BufferedImg(captured.clone(), 600); //mat2Img.getImage(mat2Img.mat);
+        Imgproc.resize(captured,captured, new Size(WIDTH, WIDTH/rate));
+        return Utils.Mat2BufferedImg(captured.clone(), WIDTH); //mat2Img.getImage(mat2Img.mat);
     }
 }

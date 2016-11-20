@@ -23,11 +23,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://D:/opencv/build/java/opencv-2413.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/opencv-2.4.13/bin/opencv-2413.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://D:/opencv/build/java/opencv-2413.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/opencv-2.4.13/bin/opencv-2413.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

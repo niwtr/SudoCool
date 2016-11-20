@@ -4,6 +4,7 @@ import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
+import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
@@ -85,10 +86,10 @@ public class Main {
         //Mat img=Highgui.imread("/Users/Heranort/Desktop/snap1.jpg");//
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/sdk4.jpg");
-        //Mat img=Highgui.imread("./test/sdk2.jpg");
+
+
         Eye e=new Eye();
-        e.Watch();
+        //e.Watch();
 
 
         //List<Mat> outseq=GridSquareExtractor.GridExtract(img);

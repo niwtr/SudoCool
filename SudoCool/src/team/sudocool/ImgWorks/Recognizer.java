@@ -161,6 +161,7 @@ public class Recognizer {
                         p0x=p0.x,
                         p1x=p1.x,
                         p0y=p0.y,
+                        p3x=p3.x,
                         p3y=p3.y,
                         width=Math.abs(p1x-p0x);
 
@@ -168,13 +169,15 @@ public class Recognizer {
                 p.y=p3y;
 
 
+                p.x=p0x;
+                p.y=p3y;
                 int num=numList.get(y*E.SUDOKU_SIZE+x);
                 Core.putText
                         (Img,
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
-                                width/(E.SUDOKU_SIZE+4),
+                                (width/(E.SUDOKU_SIZE))*0.7,
                                 new Scalar(0,0,255),
                                 2);
             }

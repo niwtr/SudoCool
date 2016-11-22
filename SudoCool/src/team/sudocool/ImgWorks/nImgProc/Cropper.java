@@ -1,7 +1,13 @@
 package team.sudocool.ImgWorks.nImgProc;
 
+import org.opencv.core.*;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.opencv.core.CvType.CV_8UC1;
 
 /**
  * Created by Heranort on 16/11/5.
@@ -82,7 +88,7 @@ public class Cropper {
     public static int[][] crop(int [][] mat, int threshold){
 
 //        System.out.printf("%d %d \n", mat.length, mat[0].length);
-        mat=pre_crop(mat, 3);
+        mat=pre_crop(mat, 3); //we need not pre_crop since we have ccrop
 
         int
                 ub=scan_down(mat, threshold),
@@ -98,6 +104,82 @@ public class Cropper {
         //Utils.showMatrix(o);
 
         return o;
+    }
+
+
+    private static int ezScanDown(int [][] mat){
+        int rst=0;
+        for(int i=0;i<mat.length-1;i++){
+            int
+                    count1=collectOnes(mat[i]);
+
+            if(count1>0){
+                rst=i;
+                break;
+            }
+        }
+        return rst;
+    }
+    private static int ezScanUp(int [][] mat){
+        int rst=0;
+        for(int i=mat.length-1;i>0;i--){
+            int
+                    count=collectOnes(mat[i]);
+            if(count>0){
+                rst=i;//cowsay: hmm..
+                break;
+            }
+        }
+        return rst;
+    }
+    private static int ezScanRight(int [][] mat){
+        return ezScanDown(transposeMat(mat));
+    }
+
+    private static int ezScanLeft(int [][]mat){ return ezScanUp(transposeMat(mat)); }
+
+
+    public static int[][] ezCrop(Mat m){
+
+        m=ccrop(m);
+
+        int[][]mtr=Utils.convertMat(m);
+        mtr=pre_crop(mtr, (int)(m.cols()*0.1-1));
+        int
+                ub=ezScanDown(mtr),
+                db=ezScanUp(mtr),
+                rb=ezScanLeft(mtr),
+                lb=ezScanRight(mtr);
+
+        int [][] o = new int[db-ub][rb-lb];
+        for(int i=0;i<o.length;i++){
+            for(int j=0;j<o[i].length;j++){
+                o[i][j]=mtr[i+ub][j+lb];
+            }
+        }
+        return o;
+    }
+    public static Mat ccrop(Mat m){
+        int xx=m.cols(),yy=m.rows();
+        Mat mm=m.clone();
+        List<MatOfPoint> lmp=new ArrayList<>();
+        Mat hierarchy=new Mat();
+        Imgproc.findContours(mm, lmp, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE,new Point(0,0));
+        for (MatOfPoint mp : lmp) {
+            Moments mom= Imgproc.moments(mp);
+            int x=(int)(mom.get_m10()/mom.get_m00()),
+                    y=(int)(mom.get_m01()/mom.get_m00());
+
+            double th=0.1;
+
+            if(x<xx*th || x>xx*(1-th) || y<yy*th || y>yy* (1-th)) {
+
+                Core.fillConvexPoly(m, mp, new Scalar(0));
+
+            }
+        }
+
+        return m;
     }
 
     public static int [][]nomalize(int [][]mat, int xmin, int ymin){

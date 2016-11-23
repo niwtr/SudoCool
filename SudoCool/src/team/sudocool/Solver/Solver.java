@@ -5,7 +5,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author L.Laddie
@@ -15,26 +15,38 @@ import java.util.Map;
 public class Solver {
     private static final int SIZE = 9;
 
-    private int[][] sudo;                   //current sodoku to solve
-    private ArrayList<int[][]> ansSudo;     //current ans for sodoku
-    private ArrayList<int[][]> sudoBuffer;
+    private boolean finish;
+    private int[][] curSudo;
+    private ArrayList<int[][]> ansSudo;
+    private HashMap<Pair<Integer, Integer>, ArrayList<Integer>> curSudoReadyNum;
+    private Stack<Pair<int[][], HashMap<Pair<Integer, Integer>, ArrayList<Integer>>>> sudoBuffer;
 
 
     /**
      * This is the function for solving the Sudoku
      */
     public ArrayList<int[][]> solveSudo(int[][] sudo) {
-        this.sudo = copyMatrix(sudo);
+        finish = false;
+        curSudo = copyMatrix(sudo);
         ansSudo = new ArrayList<>();
-        sudoBuffer = new ArrayList<>();
+        sudoBuffer = new Stack<>();
+        curSudoReadyNum = new HashMap<>();
 
         ArrayList<Pair<Integer, Integer>> nullPoint = isNullUnit();
         if(nullPoint.isEmpty())
-            ansSudo.add(this.sudo);
+        {
+            if(checkAnswer())
+                ansSudo.add(this.curSudo);
+        }
         else
         {
-            HashMap<Pair<Integer, Integer>, ArrayList<Integer>> sudoReadNumber = findAvaFill(nullPoint);
-            fillUnit(sudoReadNumber);
+            if(findAvaFill(nullPoint))
+            {
+                while(!finish) {
+                    fillUnit();
+                    updateSudoReadyNum();
+                }
+            }
         }
 
         return ansSudo;
@@ -45,13 +57,13 @@ public class Solver {
      * @return  the null unit point list
      */
     private ArrayList<Pair<Integer, Integer>> isNullUnit() {
-        if (sudo == null)
+        if (curSudo == null)
             throw new AssertionError();
 
         ArrayList<Pair<Integer, Integer>> nullPoint = new ArrayList<>();
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if(sudo[i][j] == 0)
+                if(curSudo[i][j] == 0)
                     nullPoint.add(new Pair<>(i, j));
             }
         }
@@ -60,13 +72,11 @@ public class Solver {
     }
 
     /**
-     *
+     * find every blank unit the possible number
      * @param point_list null unit point list
-     * @return answer
+     * @return false for existing some unit no answer
      */
-    private HashMap<Pair<Integer, Integer>, ArrayList<Integer>> findAvaFill(ArrayList<Pair<Integer, Integer>> point_list) {
-        HashMap<Pair<Integer, Integer>, ArrayList<Integer>> m = new HashMap<>();
-
+    private boolean findAvaFill(ArrayList<Pair<Integer, Integer>> point_list) {
         for(Pair<Integer, Integer> point : point_list)
         {
             int i = point.getKey();
@@ -80,23 +90,108 @@ public class Solver {
                 }
             }
 
-            m.put(point, readyNumber);
+            if(readyNumber.isEmpty())
+                return false;
+            else
+                curSudoReadyNum.put(point, readyNumber);
         }
-        return m;
+
+        return true;
     }
 
-    private void fillUnit(HashMap<Pair<Integer, Integer>, ArrayList<Integer>> sudoReadNumber) {
-        for (HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>> entry : sudoReadNumber.entrySet()) {
+    /**
+     * fill in the blank unit
+     */
+    private void fillUnit() {
+        boolean findUnique = false;
+        Iterator<HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>>> it;
+
+        it = curSudoReadyNum.entrySet().iterator();
+        while(it.hasNext()) {
+            HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>> entry = it.next();
             Pair<Integer, Integer> point = entry.getKey();
             ArrayList<Integer> readyNumber = entry.getValue();
 
+            //find the unique unit
             if(readyNumber.size() == 1)
             {
-                sudo[point.getKey()][point.getValue()] = readyNumber.get(0);
-                sudoReadNumber.remove(point);
+                findUnique = true;
+                curSudo[point.getKey()][point.getValue()] = readyNumber.get(0);
+                it.remove();
+            }
+        }
+
+        //didn`t find the unique unit
+        if(!findUnique) {
+
+            it = curSudoReadyNum.entrySet().iterator();
+            if(it.hasNext()) {
+                HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>> entry = it.next();
+                Pair<Integer, Integer> point = entry.getKey();
+                int i = point.getKey();
+                int j = point.getValue();
+                int value;
+
+                ArrayList<Integer> readyNumber = entry.getValue();
+                if(!readyNumber.isEmpty())
+                {
+                    int location = readyNumber.size()-1;
+                    value = readyNumber.get(location);
+                    readyNumber.remove(location);
+
+                    sudoBuffer.push(new Pair<>(copyMatrix(curSudo), copyHashMap(curSudoReadyNum)));
+
+                    it.remove();
+                    curSudo[i][j] = value;
+                }
+            }
+        }
+    }
+
+    /**
+     * After fill in a blank, check the other ready number whether ready now
+     */
+    private void updateSudoReadyNum() {
+
+        for (HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>> entry : curSudoReadyNum.entrySet()) {
+            int i = entry.getKey().getKey();
+            int j = entry.getKey().getValue();
+
+            ArrayList<Integer> readyNum = entry.getValue();
+            Iterator<Integer> it = readyNum.iterator();
+            while(it.hasNext()) {
+                int value = it.next();
+                if(!checkHorAndVer(i, j, value))
+                    it.remove();
             }
 
+            //existing some unit no answer
+            if(entry.getValue().isEmpty()) {
+                backState();
+                break;
+            }
         }
+
+        //check the answer
+        if(curSudoReadyNum.isEmpty())
+        {
+            ansSudo.add(copyMatrix(curSudo));
+            finish = true;
+        }
+    }
+
+    /**
+     * back to the nearest state
+     */
+    private void backState() {
+        if(sudoBuffer.isEmpty()) {
+            finish = true;
+            return;
+        }
+
+        Pair<int[][], HashMap<Pair<Integer, Integer>, ArrayList<Integer>>> bufferPair = sudoBuffer.pop();
+        curSudo = bufferPair.getKey();
+        curSudoReadyNum = bufferPair.getValue();
     }
 
     /**
@@ -107,16 +202,31 @@ public class Solver {
      * @return true or false
      */
     private boolean checkHorAndVer(int i, int j, int value) {
-        if (sudo == null)
+        if (curSudo == null)
             throw new AssertionError();
 
-        for(int k = 0; k < sudo[i].length; k++)
-            if(sudo[i][k] == value)
+        for(int k = 0; k < curSudo[i].length; k++)
+            if(k != j && curSudo[i][k] == value)
                 return false;
 
-        for (int[] aSudo : sudo)
-            if (aSudo[j] == value)
+        for (int k = 0; k < curSudo.length; k++)
+            if (k != i && curSudo[k][j] == value)
                 return false;
+
+        return true;
+    }
+
+    /**
+     * check whether current sudoku is the answer
+     * @return true or false
+     */
+    private boolean checkAnswer() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if(curSudo[i][j] == 0 || !checkHorAndVer(i, j, curSudo[i][j]))
+                    return false;
+            }
+        }
 
         return true;
     }
@@ -136,31 +246,18 @@ public class Solver {
     }
 
     /**
-     * This is for solving sodoku with recursion
-     * @param sudo sudoku matrix
+     * deep copy of hashmap
+     * @param in_hashmap input
+     * @return copy hashmap
      */
-    private void solveRecur(int[][] sudo) {
-        boolean finish = true;
+    private HashMap<Pair<Integer, Integer>, ArrayList<Integer>> copyHashMap(HashMap<Pair<Integer, Integer>, ArrayList<Integer>> in_hashmap) {
+        HashMap<Pair<Integer, Integer>, ArrayList<Integer>> newHashMap = new HashMap<>();
 
-        for(int i = 0; i < sudo.length; i++)
+        for(HashMap.Entry<Pair<Integer, Integer>, ArrayList<Integer>> entry : in_hashmap.entrySet())
         {
-            for(int j = 0; j < sudo[i].length; j++)
-            {
-                if(sudo[i][j] == 0) {
-                    finish = false;
-
-                    for(int ele = 1; ele < 10; ele++) {
-                        if(checkHorAndVer(i, j, ele)) {
-                            int[][] tempSudo = copyMatrix(sudo);
-                            tempSudo[i][j] = ele;
-                            solveRecur(tempSudo);
-                        }
-                    }
-                }
-            }
+            newHashMap.put(entry.getKey(), (ArrayList<Integer>) entry.getValue().clone());
         }
 
-        if(finish)
-            this.ansSudo.add(copyMatrix(sudo));
+        return newHashMap;
     }
 }

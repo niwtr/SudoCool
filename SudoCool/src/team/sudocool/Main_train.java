@@ -48,9 +48,9 @@ public class Main_train {
         assert sudoku != null;
 
         Solver solver = new Solver();
-        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
+        ArrayList<int[][]> ans = solver.solveSudo(sudoku[3]);
 
-        if(ans.isEmpty())
+        if(ans == null || ans.isEmpty())
             System.out.println("Null Answer");
         else
             for(int i = 0; i < ans.size(); i++)

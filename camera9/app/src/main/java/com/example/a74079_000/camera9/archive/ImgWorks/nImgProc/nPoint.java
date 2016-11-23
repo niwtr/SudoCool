@@ -1,0 +1,32 @@
+package com.example.a74079_000.camera9.archive.ImgWorks.nImgProc;
+
+/**
+ * Created by Heranort on 16/11/5.
+ */
+
+public class nPoint {
+    private int x;
+    private int y;
+
+    public nPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+}
+

@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/bp_net_28_120.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/bp_net_7_40.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/bp_net_7_60.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/bp_net.json" afterPath="$PROJECT_DIR$/resources/bp_net.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Main_train.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+            <state relative-caret-position="360">
+              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
               <folding>
                 <element signature="method#printSuduAns#0;class#Main_train#0" expanded="false" />
                 <element signature="docComment;method#readMatrixFile#0;class#Main_train#0" expanded="false" />
@@ -48,29 +54,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Solver.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+      <file leaf-file-name="Identifier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1800">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;method#solveSudo#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#isNullUnit#0;class#Solver#0" expanded="false" />
-                <element signature="method#isNullUnit#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#findAvaFill#0;class#Solver#0" expanded="false" />
-                <element signature="method#findAvaFill#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#fillUnit#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#updateSudoReadyNum#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#backState#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#checkHorAndVer#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#checkAnswer#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkAnswer#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#copyMatrix#0;class#Solver#0" expanded="false" />
-                <element signature="method#copyMatrix#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#copyHashMap#0;class#Solver#0" expanded="false" />
-                <element signature="method#copyHashMap#0;class#Solver#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="432">
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,7 +105,6 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/ReadData.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/Identify.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Main.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BasisFunc.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" />
@@ -124,10 +112,11 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Solver/Tuple.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
       </list>
     </option>
@@ -236,6 +225,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Solver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sudocool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Identifier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sudocool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Identifier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algol" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -658,15 +695,15 @@
       <workItem from="1479701648237" duration="136000" />
       <workItem from="1479802406338" duration="17063000" />
       <workItem from="1479882699711" duration="11087000" />
-      <workItem from="1479904653109" duration="4973000" />
+      <workItem from="1479904653109" duration="9074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73145000" />
+    <option name="totallyTimeSpent" value="77246000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -676,7 +713,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33846155" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36153847" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36923078" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="GhcMod" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -713,7 +750,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -976,6 +1013,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-548">
           <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -993,27 +1031,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1442">
-          <caret line="184" column="17" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="96" column="8" selection-start-line="96" selection-start-column="8" selection-end-line="97" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-319">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-873">
@@ -1022,22 +1039,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/ReadData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
+        <state relative-caret-position="-1">
+          <caret line="57" column="45" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
           <folding>
-            <element signature="method#printSuduAns#0;class#Main_train#0" expanded="false" />
-            <element signature="docComment;method#readMatrixFile#0;class#Main_train#0" expanded="false" />
-            <element signature="method#readMatrixFile#0;class#Main_train#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state relative-caret-position="67">
+          <caret line="179" column="27" selection-start-line="179" selection-start-column="27" selection-end-line="179" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#solveSudo#0;class#Solver#0" expanded="false" />
@@ -1046,15 +1061,51 @@
             <element signature="docComment;method#findAvaFill#0;class#Solver#0" expanded="false" />
             <element signature="method#findAvaFill#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#fillUnit#0;class#Solver#0" expanded="false" />
+            <element signature="method#fillUnit#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#updateSudoReadyNum#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#backState#0;class#Solver#0" expanded="false" />
+            <element signature="method#backState#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#checkHorAndVer#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkHorAndVer#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#checkAnswer#0;class#Solver#0" expanded="false" />
             <element signature="method#checkAnswer#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#copyMatrix#0;class#Solver#0" expanded="false" />
             <element signature="method#copyMatrix#0;class#Solver#0" expanded="false" />
             <element signature="docComment;method#copyHashMap#0;class#Solver#0" expanded="false" />
             <element signature="method#copyHashMap#0;class#Solver#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="283" column="32" selection-start-line="283" selection-start-column="32" selection-end-line="283" selection-end-column="32" />
+          <folding>
+            <element signature="e#8850#8851#0" expanded="true" />
+            <element signature="e#8899#8900#0" expanded="true" />
+            <element signature="e#9027#9028#0" expanded="true" />
+            <element signature="e#9078#9079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding>
+            <element signature="method#printSuduAns#0;class#Main_train#0" expanded="false" />
+            <element signature="docComment;method#readMatrixFile#0;class#Main_train#0" expanded="false" />
+            <element signature="method#readMatrixFile#0;class#Main_train#0" expanded="false" />
           </folding>
         </state>
       </provider>

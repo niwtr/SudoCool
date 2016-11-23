@@ -19,8 +19,8 @@ public class Identifier {
     private static final int size = 28;                 //input matrix of data size
     private static final double allow_error = 0.01;     //when training once allow error
     private static final int data_num = 892;            //training data number
-    private static final int layer_num_hidden = 300;     //hidden number
-    private static final double rate = 0.04;            //study rate
+    private static final int layer_num_hidden = 120;     //hidden number
+    private static final double rate = 0.05;            //study rate
     private static final double mo_rate = 0.8;          //momentum rate
 
 
@@ -31,10 +31,10 @@ public class Identifier {
     public Identifier() {
         int[] layer_num = new int[3];
         layer_num[0] = size*size;
-        layer_num[2] = 10;
+        layer_num[2] = 9;
         layer_num[1] = layer_num_hidden;
 
-//        layer_num[1] = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
+//        int test = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
 
         bp_image = new BP(layer_num, rate, mo_rate);
@@ -67,7 +67,7 @@ public class Identifier {
             return -1;
 
         double[] out = bp_image.forwardProp(BasisFunc.convertOne(in));
-        return BasisFunc.getMax(out);
+        return BasisFunc.getMax(out)+1;
     }
 
     /**
@@ -76,8 +76,8 @@ public class Identifier {
      * @param num true output number
      */
     public void increLearn(int[][] in, int num) {
-        double[] out = new double[10];
-        out[num] = 1d;
+        double[] out = new double[9];
+        out[num-1] = 1d;
 
         bp_image.trainNet(BasisFunc.convertOne(in), out, allow_error);
 
@@ -101,9 +101,9 @@ public class Identifier {
 
         for(int i = 0; i < times; i++)
             for(int j = 0; j < data_num; j++)
-                for(int k = 0; k < 10; k++)
+                for(int k = 0; k < 9; k++)
                 {
-                    double[] out = new double[10];
+                    double[] out = new double[9];
                     out[k] = 1;
 
                     bp_image.trainNet(train_data[k][j], out, allow_error);
@@ -130,8 +130,8 @@ public class Identifier {
 
         for(int i = 0; i < data_num; i++)
         {
-            double[] out = bp_image.forwardProp(train_data[num][i]);
-            int ans = BasisFunc.getMax(out);
+            double[] out = bp_image.forwardProp(train_data[num-1][i]);
+            int ans = BasisFunc.getMax(out)+1;
 
             if(ans != num)
                 rtn++;
@@ -153,10 +153,10 @@ public class Identifier {
 
             Learn(1);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i < 10; i++)
                 out_error += testData(i);
 
-            out_error = out_error / 10;
+            out_error = out_error / 9;
 
             bp_image.adjustRate(out_error, last_error);
 

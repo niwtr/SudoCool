@@ -25,35 +25,35 @@ public class Main_train {
         String path_test = "D:/patterns28/";
         String path_train = "D:/patterns28_60/";
 
-//        Identifier iden = new Identifier(path_test);
+        Identifier iden = new Identifier(path_train);
 
 //        iden.learnAndTest(0.001);
 
-//        double ave = 0d;
-//        for (int i = 0; i < 10; i++) {
-//            double ans = iden.testData(i);
-//            ave += ans;
-//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans * 100) + "%");
-//        }
-//        System.out.println("Average: " + new DecimalFormat("##.##").format(ave * 10) + "%");
-
-
-        int[][][] sudoku = null;
-        try {
-            sudoku = readMatrixFile("D:/sudoku.txt", 9);
-        } catch (IOException e) {
-            e.printStackTrace();
+        double ave = 0d;
+        for (int i = 1; i < 10; i++) {
+            double ans = iden.testData(i);
+            ave += ans;
+            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans * 100) + "%");
         }
+        System.out.println("Average: " + new DecimalFormat("##.##").format(ave * 100/9) + "%");
 
-        assert sudoku != null;
 
-        Solver solver = new Solver();
-
-        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
-        printSuduAns(ans);
-
-        ArrayList<int[][]> ans2 = solver.solveSudo(sudoku[1]);
-        printSuduAns(ans2);
+//        int[][][] sudoku = null;
+//        try {
+//            sudoku = readMatrixFile("D:/sudoku.txt", 9);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        assert sudoku != null;
+//
+//        Solver solver = new Solver();
+//
+//        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
+//        printSuduAns(ans);
+//
+//        ArrayList<int[][]> ans2 = solver.solveSudo(sudoku[1]);
+//        printSuduAns(ans2);
     }
 
     private static void printSuduAns(ArrayList<int[][]> ans) {

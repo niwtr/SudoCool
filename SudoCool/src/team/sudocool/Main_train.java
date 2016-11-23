@@ -48,8 +48,15 @@ public class Main_train {
         assert sudoku != null;
 
         Solver solver = new Solver();
-        ArrayList<int[][]> ans = solver.solveSudo(sudoku[3]);
 
+        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
+        printSuduAns(ans);
+
+        ArrayList<int[][]> ans2 = solver.solveSudo(sudoku[1]);
+        printSuduAns(ans2);
+    }
+
+    private static void printSuduAns(ArrayList<int[][]> ans) {
         if(ans == null || ans.isEmpty())
             System.out.println("Null Answer");
         else
@@ -61,6 +68,7 @@ public class Main_train {
                     System.out.println(Arrays.toString(an));
                 }
             }
+        System.out.println();
     }
 
     /**

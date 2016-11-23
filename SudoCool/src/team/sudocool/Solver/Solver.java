@@ -13,8 +13,6 @@ import java.util.Stack;
  * @since 2016/11/22
  */
 public class Solver {
-    private static final int SIZE = 9;
-
     private boolean finish;
     private int[][] curSudo;
     private ArrayList<int[][]> ansSudo;
@@ -61,8 +59,8 @@ public class Solver {
             throw new AssertionError();
 
         ArrayList<Pair<Integer, Integer>> nullPoint = new ArrayList<>();
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 if(curSudo[i][j] == 0)
                     nullPoint.add(new Pair<>(i, j));
             }
@@ -83,7 +81,7 @@ public class Solver {
             int j = point.getValue();
             ArrayList<Integer> readyNumber = new ArrayList<>();
 
-            for(int value = 1; value < SIZE+1; value++)
+            for(int value = 1; value < 10; value++)
             {
                 if(checkHorAndVer(i, j, value)) {
                     readyNumber.add(value);
@@ -116,8 +114,11 @@ public class Solver {
             if(readyNumber.size() == 1)
             {
                 findUnique = true;
+
                 curSudo[point.getKey()][point.getValue()] = readyNumber.get(0);
                 it.remove();
+
+                break;
             }
         }
 
@@ -176,7 +177,8 @@ public class Solver {
         if(curSudoReadyNum.isEmpty())
         {
             ansSudo.add(copyMatrix(curSudo));
-            finish = true;
+//            finish = true;
+            backState();
         }
     }
 
@@ -205,13 +207,18 @@ public class Solver {
         if (curSudo == null)
             throw new AssertionError();
 
-        for(int k = 0; k < curSudo[i].length; k++)
+        for(int k = 0; k < 9; k++)
             if(k != j && curSudo[i][k] == value)
                 return false;
 
-        for (int k = 0; k < curSudo.length; k++)
+        for (int k = 0; k < 9; k++)
             if (k != i && curSudo[k][j] == value)
                 return false;
+
+        for (int k = (i/3)*3; k < (i/3)*3+3; k++)
+            for(int w = (j/3)*3; w < (j/3)*3+3; w++)
+                if((k != i || w != j) && curSudo[k][w] == value)
+                    return false;
 
         return true;
     }
@@ -221,8 +228,8 @@ public class Solver {
      * @return true or false
      */
     private boolean checkAnswer() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 if(curSudo[i][j] == 0 || !checkHorAndVer(i, j, curSudo[i][j]))
                     return false;
             }

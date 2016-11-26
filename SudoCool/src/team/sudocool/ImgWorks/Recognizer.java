@@ -240,9 +240,11 @@ public class Recognizer {
         List<Point> clockwised = Utils.clockwise(this.Bound.toList());
         Function<Integer, Point>
                 l1=Utils.lineDivPointFunc
-                (clockwised.get(0), clockwised.get(3), E.SUDOKU_SIZE),
+                (clockwised.get(Utils.UP_LEFT), clockwised.get(Utils.DOWN_LEFT),
+                        E.SUDOKU_SIZE),
                 l2=Utils.lineDivPointFunc
-                        (clockwised.get(1), clockwised.get(2), E.SUDOKU_SIZE);
+                        (clockwised.get(Utils.UP_RIGHT), clockwised.get(Utils.DOWN_RIGHT),
+                                E.SUDOKU_SIZE);
         for(int y=0; y<E.SUDOKU_SIZE; y++) {
             for (int x = 0; x < E.SUDOKU_SIZE; x++) {
                 Point pl=l1.apply(y+1), pr=l2.apply(y+1);
@@ -262,7 +264,7 @@ public class Recognizer {
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
-                                (width/(E.SUDOKU_SIZE))*0.9,
+                                (width/(E.SUDOKU_SIZE))*0.8,
                                 isSolved?(new Scalar(0,0,255)):(new Scalar(255,0,0)),
                                 2);
             }

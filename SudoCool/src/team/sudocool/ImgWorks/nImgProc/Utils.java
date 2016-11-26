@@ -39,6 +39,11 @@ public class Utils {
 
     }
 
+    public static final int UP_LEFT=0,
+    UP_RIGHT=1,
+    DOWN_LEFT=3,
+    DOWN_RIGHT=2;
+
     public static List<Point> clockwise( List<Point> quatrePointList){
 
         MatOfPoint bbound=new MatOfPoint();

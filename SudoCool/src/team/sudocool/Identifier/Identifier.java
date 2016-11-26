@@ -15,12 +15,12 @@ import java.util.Arrays;
 public class Identifier {
     private BP bp_image = null;
     private double[][][] train_data;
+    private int data_num;                               //training data number
 
     private static final int size = 28;                 //input matrix of data size
     private static final double allow_error = 0.01;     //when training once allow error
-    private static final int data_num = 1;            //training data number 892
     private static final int layer_num_hidden = 120;     //hidden number
-    private static final double rate = 0.05;            //study rate
+    private static final double rate = 0.001;            //study rate
     private static final double mo_rate = 0.8;          //momentum rate
 
 
@@ -55,6 +55,10 @@ public class Identifier {
 
         ReadData file = new ReadData();
         train_data = file.getData(train_path, size);
+
+        data_num = train_data[0].length;
+        for (int i = 1; i < 9; i++)
+            data_num = Math.min(data_num, train_data[i].length);
     }
 
     /**

@@ -24,8 +24,9 @@ public class Main_train {
 
         String path_test = "D:/patterns28/";
         String path_train = "D:/patterns28_60/";
+        String path_x = "D:/patterns_x/";
 
-        Identifier iden = new Identifier(path_train);
+        Identifier iden = new Identifier(path_x);
 
 //        iden.learnAndTest(0.001);
 

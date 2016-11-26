@@ -18,7 +18,7 @@ public class Identifier {
 
     private static final int size = 28;                 //input matrix of data size
     private static final double allow_error = 0.01;     //when training once allow error
-    private static final int data_num = 892;            //training data number
+    private static final int data_num = 1;            //training data number 892
     private static final int layer_num_hidden = 120;     //hidden number
     private static final double rate = 0.05;            //study rate
     private static final double mo_rate = 0.8;          //momentum rate

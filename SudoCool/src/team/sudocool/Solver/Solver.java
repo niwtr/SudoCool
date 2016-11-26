@@ -30,19 +30,21 @@ public class Solver {
         sudoBuffer = new Stack<>();
         curSudoReadyNum = new HashMap<>();
 
-        ArrayList<Pair<Integer, Integer>> nullPoint = isNullUnit();
-        if(nullPoint.isEmpty())
+        if(checkValid())
         {
-            if(checkAnswer())
-                ansSudo.add(this.curSudo);
-        }
-        else
-        {
-            if(findAvaFill(nullPoint))
+            ArrayList<Pair<Integer, Integer>> nullPoint = isNullUnit();
+            if(nullPoint.isEmpty())
             {
-                while(!finish) {
-                    fillUnit();
-                    updateSudoReadyNum();
+                ansSudo.add(this.curSudo);
+            }
+            else
+            {
+                if(findAvaFill(nullPoint))
+                {
+                    while(!finish) {
+                        fillUnit();
+                        updateSudoReadyNum();
+                    }
                 }
             }
         }
@@ -224,13 +226,13 @@ public class Solver {
     }
 
     /**
-     * check whether current sudoku is the answer
+     * check whether current sudoku is the valid
      * @return true or false
      */
-    private boolean checkAnswer() {
+    private boolean checkValid() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(curSudo[i][j] == 0 || !checkHorAndVer(i, j, curSudo[i][j]))
+                if(curSudo[i][j] != 0 && !checkHorAndVer(i, j, curSudo[i][j]))
                     return false;
             }
         }

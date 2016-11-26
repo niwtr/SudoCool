@@ -21,7 +21,7 @@ public class Identifier {
     private static final double allow_error = 0.01;     //when training once allow error
     private static final int layer_num_hidden = 120;     //hidden number
     private static final double rate = 0.001;            //study rate
-    private static final double mo_rate = 0.8;          //momentum rate
+    private static final double mo_rate = 0.3;          //momentum rate
 
 
     /**

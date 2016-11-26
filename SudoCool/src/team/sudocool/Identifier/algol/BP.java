@@ -275,13 +275,4 @@ public class BP {
     private double sigMoid(double val) {
         return 1d / (1d + Math.exp(-val));
     }
-
-    /**
-     * relu funciton
-     * @param val input value
-     * @return answer
-     */
-    private double relu(double val) {
-        return Math.log(1d + Math.exp(val));
-    }
 }

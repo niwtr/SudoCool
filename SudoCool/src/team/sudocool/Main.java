@@ -7,6 +7,7 @@ import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
 import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.*;
+import team.sudocool.Solver.Solver;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -89,13 +90,16 @@ public class Main {
 
 
 
-        Mat img=Highgui.imread("./test/sdk3.jpg");
+        Mat img=Highgui.imread("/Users/Heranort/Desktop/u.png");
 
         Recognizer r=new Recognizer();
         img=r.Recognize(img);
-        Highgui.imwrite("/Users/Heranort/Desktop/a.jpg", img);
+        Highgui.imwrite("/Users/Heranort/Desktop/a.png", img);
 
         Eye e=new Eye();
+
+
+
 
         //e.Watch();
 

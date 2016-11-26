@@ -11,6 +11,7 @@ import team.sudocool.Solver.Solver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -45,8 +46,8 @@ public class Recognizer {
     private int[][] ArrangedNumbers;
     private int[][][] RecognizedNumbersHistory;
     private int[][] SolvedNumbers;
-
-    private boolean firstRush=true;
+    private boolean firstRush=true;//有时候相机刚启动的时候会导致神奇的现象发生——导致一个神奇的正方形被捕捉到。
+    //所以我们需要把第一次采样的结果扔掉。
 
 
     public Recognizer(){
@@ -161,21 +162,15 @@ public class Recognizer {
         if(i>8)return false;
 
         for(int ind=0;ind<this.RecognizedNumbersHistory[i][j].length;ind++){
+
             arr[i][j]=this.RecognizedNumbersHistory[i][j][ind];
+
+
+
             ArrayList<int[][]> ans=S.solveSudo(arr);
             if(ans.size()>0){
                 this.Answers=ans;
-/*
-                for(int y=0;y<arr.length;y++){
-                    for(int x=0;x<arr[y].length;x++){
-                        System.out.printf("%d ", arr[y][x]);
-                    }
-                    System.out.println();
 
-                }
-
-                System.out.println();
-*/
                 return true;
             } else {
                 return sol(arr, i + (j == 8 ? 1 : 0), (j == 8) ? 0 : (j + 1));
@@ -239,85 +234,45 @@ public class Recognizer {
     @FunctionalInterface
     interface Function3 <A, B, C, R> {public R apply (A a, B b, C c);}
 
-
-    private Recognizer drawRecognizedNumbers(){
-
-
-
-        MatOfPoint bound= E.getBound();
-
-        if(bound==null || RecognizedNumbers==null)return this;
-
-
-        List<Point> clockwised= Utils.clockwise(this.Bound.toList());
-
-
+    private Recognizer drawRecognizedNumbers() {
+        MatOfPoint bound = E.getBound();
+        if (bound == null || RecognizedNumbers == null) return this;
+        List<Point> clockwised = Utils.clockwise(this.Bound.toList());
         Function<Integer, Point>
                 l1=Utils.lineDivPointFunc
-                (clockwised.get(0), clockwised.get(1), E.SUDOKU_SIZE),
+                (clockwised.get(0), clockwised.get(3), E.SUDOKU_SIZE),
                 l2=Utils.lineDivPointFunc
-                        (clockwised.get(0), clockwised.get(3), E.SUDOKU_SIZE);
-
-        Function3<Integer, Integer, Integer, Point> __=(zero, x, y)->
-        {
-            Point pO=l1.apply(0), pE=l1.apply(x), pW=l2.apply(y);
-            double
-                    deltay1=pW.y-pO.y,
-                    deltay2=pE.y-pO.y,
-                    deltax1=pW.x-pO.x,
-                    deltax2=pE.x-pO.x,
-                    px=pO.x+deltax1+deltax2,
-                    py=pO.y+deltay1+deltay2;
-            return new Point(px, py);
-        };
-
-
-        Point p=new Point();
-        for(int y=0; y<E.SUDOKU_SIZE; y++){
-            for(int x=0; x<E.SUDOKU_SIZE; x++){
-
-                Point
-                        p0=__.apply(0, x, y),
-                        p1=__.apply(0, x+1, y),
-                        p3=__.apply(0, x, y+1);
-
-                double
-                        p0x=p0.x,
-                        p1x=p1.x,
-                        p0y=p0.y,
-                        p3x=p3.x,
-                        p3y=p3.y,
-                        width=Math.abs(p1x-p0x);
-
-                p.x=p0x;
-                p.y=p3y;
-
-
-                p.x=p0x;
-                p.y=p3y;
+                        (clockwised.get(1), clockwised.get(2), E.SUDOKU_SIZE);
+        for(int y=0; y<E.SUDOKU_SIZE; y++) {
+            for (int x = 0; x < E.SUDOKU_SIZE; x++) {
+                Point pl=l1.apply(y+1), pr=l2.apply(y+1);
+                BiFunction<Integer, Integer, Point> __=(z, w)->
+                {
+                    Function<Integer, Point> l3=Utils.lineDivPointFunc(pl,pr, E.SUDOKU_SIZE);
+                    return l3.apply(z);
+                };
+                double width=Math.abs(pl.x-pr.x)/E.SUDOKU_SIZE;
+                Point p=__.apply(x,y);
                 int num;
                 if(!isSolved)
-                        num=ArrangedNumbers[y][x];
+                    num=ArrangedNumbers[y][x];
                 else num=SolvedNumbers[y][x];
                 Core.putText
                         (Img,
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
-                                (width/(E.SUDOKU_SIZE))*0.7,
+                                (width/(E.SUDOKU_SIZE))*0.9,
                                 isSolved?(new Scalar(0,0,255)):(new Scalar(255,0,0)),
                                 2);
             }
         }
-
         if(firstRush){
             this.firstRush=false;
             this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
         }
         return this;
     }
-
-
 
 
     public Mat __getTransformedBound(Mat img){//will be removed in the future.

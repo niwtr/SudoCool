@@ -235,6 +235,27 @@ public class Solver {
         return true;
     }
 
+
+    public boolean checkHorAndVer(int[][]curSud,int i, int j, int value) {
+        if (curSud == null)
+            throw new AssertionError();
+
+        for(int k = 0; k < 9; k++)
+            if(k != j && curSud[i][k] == value)
+                return false;
+
+        for (int k = 0; k < 9; k++)
+            if (k != i && curSud[k][j] == value)
+                return false;
+
+        for (int k = (i/3)*3; k < (i/3)*3+3; k++)
+            for(int w = (j/3)*3; w < (j/3)*3+3; w++)
+                if((k != i || w != j) && curSud[k][w] == value)
+                    return false;
+
+        return true;
+    }
+
     /**
      * check whether current sudoku is the valid
      * @return true or false
@@ -243,6 +264,17 @@ public class Solver {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if(curSudo[i][j] != NULLUNIT && !checkHorAndVer(i, j, curSudo[i][j]))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean checkValid(int[][] curSud){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(curSud[i][j] != NULLUNIT && !checkHorAndVer(curSud,i, j, curSud[i][j]))
                     return false;
             }
         }

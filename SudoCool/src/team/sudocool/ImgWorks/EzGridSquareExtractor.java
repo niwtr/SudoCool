@@ -167,13 +167,16 @@ public class EzGridSquareExtractor {
 
 
     private Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
+
+
+
     public boolean Extract2(Mat img){
         List<Mat>rst=new ArrayList<>();
         MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
         if(bound==null)return false;
         Mat tr=transform4(img);
 
-        Mat Out=new Mat(tr.size(), CV_8UC1);
+        Mat Out=Mat.zeros(tr.size(), CV_8UC1);
         Mat OutPat=new Mat(tr.size(), CV_8UC1);
 
 

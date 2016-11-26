@@ -107,10 +107,13 @@ public class Utils {
         int xbound=bm.rows();
         int ybound=bm.cols();
         int [][]rst=new int[xbound][ybound];
-
+        byte [] x=new byte[3];
         for(int i=0;i<xbound;i++){
             for(int j=0;j<ybound;j++){
-                rst[i][j]=(int)(bm.get(i,j)[0]>0?1:0);
+
+                bm.get(i,j,x);
+                //rst[i][j]=(int)(bm.get(i,j)[0]>0?1:0);
+                rst[i][j]=(int)x[0]<0?1:0;
             }
         }
         return rst;

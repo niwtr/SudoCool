@@ -2,6 +2,7 @@ package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
 import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
 import team.sudocool.ImgWorks.Recognizer;
@@ -10,6 +11,8 @@ import team.sudocool.ImgWorks.nImgProc.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.opencv.imgproc.Imgproc.*;
 
 
 public class Main {
@@ -40,6 +43,9 @@ public class Main {
         String path = "/Users/Heranort/Desktop/patterns/" + String.valueOf(type) + ".pat";
         File f = new File(path);
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
+
+        //Imgproc.cvtColor(imgi, imgi, COLOR_RGB2GRAY);
+        //Imgproc.adaptiveThreshold(imgi,imgi,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
         FileOutputStream of;
         if(f.exists()){
             try {
@@ -67,7 +73,7 @@ public class Main {
 
     private static void do_run(int __x){
                 /* 有史以来写得最烂的一堆代码，我自己都嫌弃。  */
-        String filePath="/Users/Heranort/Desktop/train-images-60k/"; //"t10k-images/";
+        String filePath="/Users/Heranort/Desktop/train_imc/"; //"t10k-images/";
 
         List<String>patternFiles=new ArrayList<>();
 
@@ -88,7 +94,8 @@ public class Main {
 
 
 
-        Eye e=new Eye();
+//        Eye e=new Eye();
+        do_run(1);
         //e.Watch();
 
 

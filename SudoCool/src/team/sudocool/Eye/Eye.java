@@ -4,7 +4,7 @@ package team.sudocool.Eye;
  * Created by Heranort on 16/11/15.
  */
 import org.opencv.core.Mat;
-import team.sudocool.ImgWorks.GridSquareExtractor;
+
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
 import java.awt.*;
@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 public class Eye extends JFrame {
     private JPanel contentPane;
 
-    public static final int WIDTH=800;
+    public static final int WIDTH=600;
     public  Mat captured;
     private VideoCap videoCap;// = new VideoCap();
 

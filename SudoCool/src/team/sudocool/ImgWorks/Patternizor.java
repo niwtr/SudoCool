@@ -94,7 +94,7 @@ public class Patternizor {
         Mat _1=Utils.convertByteM(Cropper.nomalize(bimg,size,size));
         Imgproc.resize(_1,_1,new Size(28,28));
 
-        Utils.showResult(_1);
+        //Utils.showResult(_1);
         return Utils.convertMat(_1);
     }
 
@@ -104,33 +104,11 @@ public class Patternizor {
         if(bimg.length==0)return new int[size][size];
         Mat _1=Utils.convertByteM(Cropper.nomalize(bimg,size,size));
         Imgproc.resize(_1,_1,new Size(28,28));
+        //Utils.showMatrix(Utils.convertMat(_1));
         return Utils.convertMat(_1);
 
     }
 
-    /*
-    private static int[][] pattern (Mat oimg, Mat img, int size) {
-
-
-        List<MatOfPoint> contours=new ArrayList<>();
-
-        int[][] bimg = Cropper.crop(Utils.convertMat(img), 1);
-
-
-        if(bimg.length==0)return new int[size][size];//all empty matrix.
-
-
-
-    //Utils.showMatrix(Cropper.nomalize(bimg,size,size));
-        Mat _1=Utils.convertByteM(Cropper.nomalize(bimg,size,size));
-        Imgproc.resize(_1,_1,new Size(140,140));
-        bimg=Utils.convertMat(Skeletonizor.Skeletonize(_1));
-
-
-        //Utils.showMatrix(bimg);
-                return divPattern(bimg, size);
-
-    }*/
 
     private static double calcVal(int [][]img, int x1,int x2, int y1, int y2){
         int sum=0, wcount=0;

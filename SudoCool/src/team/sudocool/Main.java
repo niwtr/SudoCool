@@ -89,10 +89,11 @@ public class Main {
 
 
 
-        //Mat img=Highgui.imread("/Users/Heranort/Desktop/snap1.jpg");//
+        Mat img=Highgui.imread("./test/sdk3.jpg");
 
-
-
+        Recognizer r=new Recognizer();
+        //img=r.Recognize(img);
+        Highgui.imwrite("/Users/Heranort/Desktop/a.jpg", img);
 
        Eye e=new Eye();
 

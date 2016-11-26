@@ -30,9 +30,9 @@ public class Recognizer {
     public static final int STANDARD_SCISSOR_SIZE=5;//old: three
     public static final int STANDARD_SUDOKU_SIZE=9;
 
-    private Patternizor P;
-    private Identifier  I;
-    private Solver      S;
+    private Patternizor           P;
+    private Identifier            I;
+    private Solver                S;
     private EzGridSquareExtractor E;
     private Mat Img;
     private Mat ThresholdImg;
@@ -98,6 +98,7 @@ public class Recognizer {
                 this.ArrangedNumbers[i][j]=this.RecognizedNumbers.get(i*E.SUDOKU_SIZE+j);
             }
         }
+
         return this;
     }
 
@@ -107,6 +108,7 @@ public class Recognizer {
         ArrayList<int[][]> rst=S.solveSudo(this.ArrangedNumbers);
         if(rst.size()>0){
             isSolved=true;
+            System.out.println("Solfec");
             this.SolvedNumbers=rst.get(0);
         }
         return this;
@@ -125,8 +127,6 @@ public class Recognizer {
         this.Bound.fromList(abound.toList());
         List<MatOfPoint> mp=new ArrayList<>();
         mp.add(Bound);
-
-        //mp.add(bound);
         Core.polylines(Img, mp, true, new Scalar(255,255,0), 3);
         return this;
     }

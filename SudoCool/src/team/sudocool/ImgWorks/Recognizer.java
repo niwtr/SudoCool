@@ -5,6 +5,7 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import team.sudocool.Identifier.Identifier;
 import team.sudocool.ImgWorks.nImgProc.Utils;
+import team.sudocool.Solver.Solver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +31,17 @@ public class Recognizer {
     public static final int STANDARD_SUDOKU_SIZE=9;
 
     private Patternizor P;
-    private Identifier I;
+    private Identifier  I;
+    private Solver      S;
     private EzGridSquareExtractor E;
     private Mat Img;
     private Mat ThresholdImg;
     private MatOfPoint Bound;
 
+    private boolean isSolved=false;
     private List<Integer> RecognizedNumbers;
     private int[][] ArrangedNumbers;
-
+    private int[][] SolvedNumbers;
 
     public Recognizer(){
 
@@ -46,6 +49,7 @@ public class Recognizer {
         I=new Identifier();
         E=new EzGridSquareExtractor(STANDARD_SUDOKU_SIZE, STANDARD_OUTERBOUND_SIZEX,
                 STANDARD_OUTERBOUND_SIZEY, STANDARD_SCISSOR_SIZE);
+        S=new Solver();
 
         this.Bound=new MatOfPoint();
     }
@@ -85,6 +89,7 @@ public class Recognizer {
     }
 
 
+
     private Recognizer arrangeNumbersMatrix(){
         if(this.RecognizedNumbers==null)return this;
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
@@ -95,6 +100,18 @@ public class Recognizer {
         }
         return this;
     }
+
+    private Recognizer solveNumbers(){
+        if(this.ArrangedNumbers==null)return this;
+
+        ArrayList<int[][]> rst=S.solveSudo(this.ArrangedNumbers);
+        if(rst.size()>0){
+            isSolved=true;
+            this.SolvedNumbers=rst.get(0);
+        }
+        return this;
+    }
+
 
     private Recognizer drawOuterBound (){
         MatOfPoint bound= E.getBound();
@@ -121,8 +138,8 @@ public class Recognizer {
     private Recognizer drawRecognizedNumbers(){
 
         MatOfPoint bound= E.getBound();
-        List<Integer> numList=this.RecognizedNumbers;
-        if(bound==null || numList==null)return this;
+
+        if(bound==null || RecognizedNumbers==null)return this;
 
 
         List<Point> clockwised= Utils.clockwise(this.Bound.toList());
@@ -171,14 +188,17 @@ public class Recognizer {
 
                 p.x=p0x;
                 p.y=p3y;
-                int num=numList.get(y*E.SUDOKU_SIZE+x);
+                int num;
+                if(!isSolved)
+                        num=ArrangedNumbers[y][x];
+                else num=SolvedNumbers[y][x];
                 Core.putText
                         (Img,
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
                                 (width/(E.SUDOKU_SIZE))*0.7,
-                                new Scalar(0,0,255),
+                                isSolved?(new Scalar(0,0,255)):(new Scalar(255,0,0)),
                                 2);
             }
         }
@@ -202,6 +222,7 @@ public class Recognizer {
                 .extractOuterBound()
                 .recognizeNumbers()
                 .arrangeNumbersMatrix()
+                .solveNumbers()
                 .drawOuterBound()
                 .drawRecognizedNumbers();
 

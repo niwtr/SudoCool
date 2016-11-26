@@ -2,86 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../camera9/app/src/main/assets/bp_net.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../camera9/app/src/main/res/bp_net.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r2.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r2.3.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r3.0.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.0.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.0.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.1.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.3.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libnative_camera_r4.4.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libopencv_info.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi-v7a/libopencv_java.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r2.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r2.3.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r3.0.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.0.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.0.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.1.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.3.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libnative_camera_r4.4.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libopencv_info.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/armeabi/libopencv_java.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libnative_camera_r4.0.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libnative_camera_r4.1.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libnative_camera_r4.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libnative_camera_r4.3.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libnative_camera_r4.4.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libopencv_info.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/mips/libopencv_java.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r2.3.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r3.0.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r4.0.3.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r4.1.1.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r4.2.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r4.3.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libnative_camera_r4.4.0.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libopencv_info.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../camera9/app/src/main/jniLibs/x86/libopencv_java.so" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileDebugAidl/dependency.store" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileDebugAidl/dependency.store" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileDebugAndroidTestAidl/dependency.store" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileDebugAndroidTestAidl/dependency.store" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileReleaseAidl/dependency.store" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/compileReleaseAidl/dependency.store" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/outputs/aar/openCVLibrary2410-debug.aar" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/outputs/aar/openCVLibrary2410-debug.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/outputs/aar/openCVLibrary2410-release.aar" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/outputs/aar/openCVLibrary2410-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Main.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/build.gradle" afterPath="$PROJECT_DIR$/../camera9/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/MainActivity.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/Identifier/Identifier.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/Identifier/Identifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/Identifier/algol/BP.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/Identifier/algol/BP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/EzGridSquareExtractor.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/EzGridSquareExtractor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/Patternizor.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/Patternizor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/Recognizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/nImgProc/Utils.java" afterPath="$PROJECT_DIR$/../camera9/app/src/main/java/com/bupt/sudocool/mobile/kern/ImgWorks/nImgProc/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/blame/res/androidTest/debug/multi/values.json" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/blame/res/androidTest/debug/multi/values.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/debug/R.txt" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/R.txt" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/bundles/release/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental-safeguard/release/tag.txt" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental-safeguard/release/tag.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeDebugShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseAssets/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseShaders/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/mergeReleaseShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/incremental/packageReleaseResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifests/aapt/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifests/aapt/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifests/aapt/release/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/manifests/aapt/release/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/symbols/androidTest/debug/R.txt" afterPath="$PROJECT_DIR$/../camera9/openCVLibrary2410/build/intermediates/symbols/androidTest/debug/R.txt" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,8 +28,8 @@
       <file leaf-file-name="Patternizor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="80" column="103" selection-start-line="79" selection-start-column="10" selection-end-line="80" selection-end-column="103" />
+            <state relative-caret-position="315">
+              <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -123,31 +45,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mat.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/Downloads/opencv-2.4.13/bin/opencv-2413.jar!/org/opencv/core/Mat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39375">
-              <caret line="2627" column="0" selection-start-line="2627" selection-start-column="0" selection-end-line="2627" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EzGridSquareExtractor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="110" column="33" selection-start-line="110" selection-start-column="33" selection-end-line="110" selection-end-column="33" />
+            <state relative-caret-position="383">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
+            <state relative-caret-position="682">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Solver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="212">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BP.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1845">
+              <caret line="103" column="55" selection-start-line="103" selection-start-column="55" selection-end-line="103" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -163,21 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
+            <state relative-caret-position="-2026">
+              <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -186,8 +108,8 @@
       <file leaf-file-name="VideoCap.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+            <state relative-caret-position="174">
+              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -262,12 +184,12 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Cropper.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/SquareArranger.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Main.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
       </list>
     </option>
   </component>
@@ -316,8 +238,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -352,6 +272,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sudocool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sudocool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Solver" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -489,6 +431,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -741,7 +685,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6387665" sideWeight="0.509693" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6363636" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6363636" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24232633" sideWeight="0.49295774" order="0" side_tool="false" content_ui="combo" />
@@ -813,13 +757,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Skeletonizor.java" />
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -879,13 +816,6 @@
     <entry file="file://$PROJECT_DIR$/test/sudo.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/sdk_clean.jpg">
@@ -993,7 +923,7 @@
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1215">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1002,14 +932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39375">
           <caret line="2627" column="0" selection-start-line="2627" selection-start-column="0" selection-end-line="2627" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1040,34 +962,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/algol/BP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1845">
+          <caret line="103" column="55" selection-start-line="103" selection-start-column="55" selection-end-line="103" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="110" column="33" selection-start-line="110" selection-start-column="33" selection-end-line="110" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="80" column="103" selection-start-line="79" selection-start-column="10" selection-end-line="80" selection-end-column="103" />
+        <state relative-caret-position="383">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
+        <state relative-caret-position="682">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Patternizor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2026">
+          <caret line="40" column="34" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
           <folding />
         </state>
       </provider>

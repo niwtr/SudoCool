@@ -94,8 +94,8 @@ public class Main {
 
 
 
-//        Eye e=new Eye();
-        do_run(1);
+       Eye e=new Eye();
+
         //e.Watch();
 
 

@@ -106,7 +106,7 @@ public class Recognizer {
     private int[] setAdd(int[] arr, int n){
         for(int i=0;i<arr.length;i++){
             if(arr[i]==n)return arr;
-            if(arr[i]==0){
+            if(arr[i]==0){//找到第一个空位
                 arr[i]=n;return arr;
             }
         }
@@ -131,6 +131,7 @@ public class Recognizer {
                 int[]anf=this.RecognizedNumbersHistory[i][j];
 
 
+                if(!contains(anf, -1))//有-1说明该格子其实是空的。
                     this.RecognizedNumbersHistory[i][j]=setAdd(anf, num);
 
 
@@ -300,7 +301,7 @@ public class Recognizer {
                 else num=SolvedNumbers[y][x];
                 Core.putText
                         (Img,
-                                (num==0?"":""+num),
+                                (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
                                 (width/(E.SUDOKU_SIZE))*0.7,

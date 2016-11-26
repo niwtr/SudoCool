@@ -56,6 +56,9 @@ public class Main_train {
 
         ArrayList<int[][]> ans2 = solver.solveSudo(sudoku[1]);
         printSuduAns(ans2);
+
+        ArrayList<int[][]> ans3 = solver.solveSudo(sudoku[2]);
+        printSuduAns(ans3);
     }
 
     private static void printSuduAns(ArrayList<int[][]> ans) {
@@ -75,10 +78,9 @@ public class Main_train {
 
     /**
      * Read some matrix from file
-     *
      * @param path file_path
      * @param size matrix_size
-     * @return matrix
+     * @return matrix(-1 replace 0)
      * @throws IOException file can`t read
      */
     private static int[][][] readMatrixFile(String path, int size) throws IOException {
@@ -94,7 +96,7 @@ public class Main_train {
 
             while ((temp = in.read()) != -1) {
                 if (temp >= 48 && temp < 58)
-                    ans_ele[i][j++] = temp - 48;
+                    ans_ele[i][j++] = temp == 48 ? -1 : (temp-48);  //when read 0, write -1
 
                 if (j == size) {
                     j = 0;

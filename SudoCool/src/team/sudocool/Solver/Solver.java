@@ -13,12 +13,22 @@ import java.util.Stack;
  * @since 2016/11/22
  */
 public class Solver {
+    private static final int NULLUNIT = -1;
+
     private boolean finish;
     private int[][] curSudo;
     private ArrayList<int[][]> ansSudo;
     private HashMap<Pair<Integer, Integer>, ArrayList<Integer>> curSudoReadyNum;
     private Stack<Pair<int[][], HashMap<Pair<Integer, Integer>, ArrayList<Integer>>>> sudoBuffer;
 
+    /**
+     * Initial
+     */
+    public Solver(){
+        ansSudo = new ArrayList<>();
+        sudoBuffer = new Stack<>();
+        curSudoReadyNum = new HashMap<>();
+    }
 
     /**
      * This is the function for solving the Sudoku
@@ -26,13 +36,13 @@ public class Solver {
     public ArrayList<int[][]> solveSudo(int[][] sudo) {
         finish = false;
         curSudo = copyMatrix(sudo);
-        ansSudo = new ArrayList<>();
-        sudoBuffer = new Stack<>();
-        curSudoReadyNum = new HashMap<>();
+        ansSudo.clear();
+        sudoBuffer.clear();
+        curSudoReadyNum.clear();
 
         if(checkValid())
         {
-            ArrayList<Pair<Integer, Integer>> nullPoint = isNullUnit();
+            ArrayList<Pair<Integer, Integer>> nullPoint = getNullUnit();
             if(nullPoint.isEmpty())
             {
                 ansSudo.add(this.curSudo);
@@ -56,14 +66,14 @@ public class Solver {
      * judge the matrix whether have null unit
      * @return  the null unit point list
      */
-    private ArrayList<Pair<Integer, Integer>> isNullUnit() {
+    private ArrayList<Pair<Integer, Integer>> getNullUnit() {
         if (curSudo == null)
             throw new AssertionError();
 
         ArrayList<Pair<Integer, Integer>> nullPoint = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(curSudo[i][j] == 0)
+                if(curSudo[i][j] == NULLUNIT)
                     nullPoint.add(new Pair<>(i, j));
             }
         }
@@ -232,7 +242,7 @@ public class Solver {
     private boolean checkValid() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(curSudo[i][j] != 0 && !checkHorAndVer(i, j, curSudo[i][j]))
+                if(curSudo[i][j] != NULLUNIT && !checkHorAndVer(i, j, curSudo[i][j]))
                     return false;
             }
         }

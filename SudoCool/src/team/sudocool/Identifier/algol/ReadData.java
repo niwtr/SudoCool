@@ -20,7 +20,7 @@ public class ReadData {
     private double[][] readFile(String path, int size) throws IOException
     {
         double[] ans_ele = new double[size*size];
-        ArrayList<double[]> ans = new ArrayList<double[]>();
+        ArrayList<double[]> ans = new ArrayList<>();
 
         int j = 0;
         FileReader in = null;
@@ -55,11 +55,11 @@ public class ReadData {
      * @return all the ten digit data
      */
     public double[][][] getData(String ppath, int size) {
-        double[][][] ans = new double[10][][];
-        for (int i = 0; i < 10; i++) {
+        double[][][] ans = new double[9][][];
+        for (int i = 1; i < 10; i++) {
             String path = ppath + String.valueOf(i) + ".pat";
             try{
-                ans[i] = readFile(path, size);
+                ans[i-1] = readFile(path, size);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -68,7 +68,7 @@ public class Identifier {
      */
     public int toDigit(int[][] in) {
         if(BasisFunc.isNull(in))      //input data is null
-            return -1;
+            return 0;
 
         double[] out = bp_image.forwardProp(BasisFunc.convertOne(in));
         return BasisFunc.getMax(out)+1;

@@ -59,7 +59,7 @@ public class EzGridSquareExtractor {
         List<MatOfPoint> bound=contours.stream().filter(mp ->
         {
             //first filter out small pieces.
-            if(Imgproc.contourArea(mp)<(imgSizex * imgSizey /35))//used: 9
+            if(Imgproc.contourArea(mp)<(imgSizex * imgSizey /9))//used: 9
                 return false;
 
             //second, filter out non-rec things.
@@ -165,6 +165,8 @@ public class EzGridSquareExtractor {
         return true;
     }
 
+
+    private Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
     public boolean Extract2(Mat img){
         List<Mat>rst=new ArrayList<>();
         MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
@@ -172,7 +174,7 @@ public class EzGridSquareExtractor {
         Mat tr=transform4(img);
 
         Mat Out=new Mat(tr.size(), CV_8UC1);
-
+        Mat OutPat=new Mat(tr.size(), CV_8UC1);
 
 
         double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
@@ -183,11 +185,18 @@ public class EzGridSquareExtractor {
                 Mat mask=new Mat(tr.size(), CV_8UC1, new Scalar(0));
                 Core.rectangle(mask, new Point(r.x,r.y), new Point(r.x+r.width, r.y+r.height), new Scalar(255), Core.FILLED);
                 tr.copyTo(Out, mask);
-                rst.add(new Mat(tr, r));
+
+                Mat smallPiece=new Mat(tr,r);
+
+                rst.add(smallPiece);
 
             }
         }
         this.ExtractedCells=rst;
+
+
+
+
         this.ExtractedCellsGraph=Out;
         return true;
     }

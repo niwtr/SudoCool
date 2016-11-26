@@ -42,8 +42,8 @@ public class VideoCap {
         captured=mn;
         double rate=captured.size().width/captured.size().height;
         Imgproc.resize(captured,captured, new Size(WIDTH, WIDTH/rate));
-
-        return Utils.Mat2BufferedImg(R.Recognize(captured), WIDTH);
+        Mat img=R.Recognize(captured);
+        return Utils.Mat2BufferedImg(img, WIDTH);
     }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();

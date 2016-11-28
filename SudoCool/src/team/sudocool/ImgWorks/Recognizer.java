@@ -46,8 +46,12 @@ public class Recognizer {
     private int[][] ArrangedNumbers;
     private int[][][] RecognizedNumbersHistory;
     private int[][] SolvedNumbers;
+    private int[][] __empty;//all -1 arr.
     private boolean firstRush=true;//有时候相机刚启动的时候会导致神奇的现象发生——导致一个神奇的正方形被捕捉到。
     //所以我们需要把第一次采样的结果扔掉。
+
+
+
 
 
     public Recognizer(){
@@ -60,8 +64,16 @@ public class Recognizer {
 
         this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
 
-
         this.Bound=new MatOfPoint();
+
+        this.__empty=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+        for(int i=0;i<E.SUDOKU_SIZE;i++){
+            for(int j=0;j<E.SUDOKU_SIZE;j++)
+                this.__empty[i][j]=-1;
+        }
+
+
+
     }
 
     public void setScissor(int scissorWidth){
@@ -182,33 +194,25 @@ public class Recognizer {
     }
 
 
+    private boolean bruteForce=true;
 
     private Recognizer solveNumbers(){
         if(this.ArrangedNumbers==null || isSolved)return this;
 
         ArrayList<int[][]> rst=new ArrayList<>();//=S.solveSudo(this.ArrangedNumbers);
 
-        if(sol(copyMatrix(this.ArrangedNumbers),0,0)){
-            rst=Answers;
+        if(bruteForce) {
+            if (sol(copyMatrix(this.ArrangedNumbers), 0, 0)) {
+                rst = Answers;
+            }
+        } else {
+            rst=S.solveSudo(this.ArrangedNumbers);//alert: potential bug
         }
 
         if(rst.size()!=0 && !firstRush){
             isSolved=true;
-
             this.SolvedNumbers=rst.get(0);
-            System.out.println("Wowser!");
             this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
-
-            for(int y=0;y<SolvedNumbers.length;y++){
-                for(int x=0;x<SolvedNumbers[y].length;x++){
-                    System.out.printf("%d ", SolvedNumbers[y][x]);
-                }
-                System.out.println();
-
-            }
-
-            System.out.println();
-
         }
         return this;
     }
@@ -285,7 +289,8 @@ public class Recognizer {
 
     }
 
-    public Mat Recognize(Mat img){
+    public Mat RecognizeAndSolve(Mat img){
+
         this
                 .getImg(img)
                 .preProcessImg()
@@ -300,6 +305,46 @@ public class Recognizer {
                 .Img;
     }
 
+    public Mat RecognizeOnly(Mat img){
+        this.getImg(img)
+                .preProcessImg()
+                .extractOuterBound()
+                .recognizeNumbers()
+                .arrangeNumbersMatrix()
+                .drawOuterBound()
+                .drawRecognizedNumbers();
+        return this.Img;
+    }
+
+    //solving function that triggered by user.
+    public boolean Solve(){
+        this.solveNumbers();
+        return isSolved;
+    }
+
+
+    //获取当前识别好的数独矩阵，用-1来表示空
+    public int[][] GetRecognizedSudoku(){
+        return this.ArrangedNumbers!=null?this.ArrangedNumbers:__empty;
+    }
+    //User set number to the sudoku matrix.
+    public void SetRecognizedNumbers(int y, int x, int num){
+        this.bruteForce=false;
+        for(int i=0;i<9;i++)
+            this.RecognizedNumbersHistory[y][x][i]=0;
+        this.RecognizedNumbersHistory[y][x][0]=num;
+
+    }
+    //reset all, prepare for the next scan.
+    public void Reset(){
+        this.isSolved=false;
+        this.RecognizedNumbers.clear();
+        this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
+        this.SolvedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+        this.firstRush=true;
+        this.bruteForce=true;
+    }
 
 
 }

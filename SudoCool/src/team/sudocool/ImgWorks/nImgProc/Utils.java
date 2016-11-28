@@ -151,6 +151,17 @@ public static void printMatrixNonZeros(int [][]bimg){
     if(flag)printMatrix(bimg);
 }
 
+
+    public static void printNMatrix(int [][]bimg){
+        for(int i=0;i<bimg.length;i++){
+            int count=0;
+            for(int j=0;j<bimg[i].length;j++){
+                System.out.printf("%d ", bimg[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
     public static void printMatrix(int [][]bimg){
         for(int i=0;i<bimg.length;i++){
             int count=0;

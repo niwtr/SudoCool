@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Main.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Main.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,11 +47,11 @@
       <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="311" column="19" selection-start-line="311" selection-start-column="19" selection-end-line="311" selection-end-column="19" />
+            <state relative-caret-position="370">
+              <caret line="321" column="24" selection-start-line="321" selection-start-column="24" selection-end-line="321" selection-end-column="24" />
               <folding>
-                <element signature="e#9759#9760#0" expanded="true" />
-                <element signature="e#9837#9838#0" expanded="true" />
+                <element signature="e#9743#9744#0" expanded="true" />
+                <element signature="e#9821#9822#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1029,11 +1025,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="311" column="19" selection-start-line="311" selection-start-column="19" selection-end-line="311" selection-end-column="19" />
+        <state relative-caret-position="370">
+          <caret line="321" column="24" selection-start-line="321" selection-start-column="24" selection-end-line="321" selection-end-column="24" />
           <folding>
-            <element signature="e#9759#9760#0" expanded="true" />
-            <element signature="e#9837#9838#0" expanded="true" />
+            <element signature="e#9743#9744#0" expanded="true" />
+            <element signature="e#9821#9822#0" expanded="true" />
           </folding>
         </state>
       </provider>

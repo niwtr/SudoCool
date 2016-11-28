@@ -194,33 +194,25 @@ public class Recognizer {
     }
 
 
+    private boolean bruteForce=true;
 
     private Recognizer solveNumbers(){
         if(this.ArrangedNumbers==null || isSolved)return this;
 
         ArrayList<int[][]> rst=new ArrayList<>();//=S.solveSudo(this.ArrangedNumbers);
 
-        if(sol(copyMatrix(this.ArrangedNumbers),0,0)){
-            rst=Answers;
+        if(bruteForce) {
+            if (sol(copyMatrix(this.ArrangedNumbers), 0, 0)) {
+                rst = Answers;
+            }
+        } else {
+            rst=S.solveSudo(this.ArrangedNumbers);//alert: potential bug
         }
 
         if(rst.size()!=0 && !firstRush){
             isSolved=true;
-
             this.SolvedNumbers=rst.get(0);
-            System.out.println("Wowser!");
             this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
-
-            for(int y=0;y<SolvedNumbers.length;y++){
-                for(int x=0;x<SolvedNumbers[y].length;x++){
-                    System.out.printf("%d ", SolvedNumbers[y][x]);
-                }
-                System.out.println();
-
-            }
-
-            System.out.println();
-
         }
         return this;
     }
@@ -324,6 +316,12 @@ public class Recognizer {
         return this.Img;
     }
 
+    //solving function that triggered by user.
+    public boolean Solve(){
+        this.solveNumbers();
+        return isSolved;
+    }
+
 
     //获取当前识别好的数独矩阵，用-1来表示空
     public int[][] GetRecognizedSudoku(){
@@ -331,6 +329,7 @@ public class Recognizer {
     }
     //User set number to the sudoku matrix.
     public void SetRecognizedNumbers(int y, int x, int num){
+        this.bruteForce=false;
         for(int i=0;i<9;i++)
             this.RecognizedNumbersHistory[y][x][i]=0;
         this.RecognizedNumbersHistory[y][x][0]=num;
@@ -344,6 +343,7 @@ public class Recognizer {
         this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
         this.SolvedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         this.firstRush=true;
+        this.bruteForce=true;
     }
 
 

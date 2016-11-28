@@ -90,11 +90,7 @@ public class Main {
 
 
 
-        Mat img=Highgui.imread("/Users/Heranort/Desktop/u.png");
 
-        Recognizer r=new Recognizer();
-        img=r.Recognize(img);
-        Highgui.imwrite("/Users/Heranort/Desktop/a.png", img);
 
         Eye e=new Eye();
 

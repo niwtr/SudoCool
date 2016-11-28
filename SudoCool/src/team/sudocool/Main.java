@@ -89,12 +89,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-
-        Mat img=Highgui.imread("/Users/Heranort/Desktop/u.png");
-
-        Recognizer r=new Recognizer();
-        img=r.Recognize(img);
-        Highgui.imwrite("/Users/Heranort/Desktop/a.png", img);
+//
+//        Mat img=Highgui.imread("/Users/Heranort/Desktop/u.png");
+//
+//        Recognizer r=new Recognizer();
+//        img=r.Recognize(img);
+//        Highgui.imwrite("/Users/Heranort/Desktop/a.png", img);
 
         Eye e=new Eye();
 

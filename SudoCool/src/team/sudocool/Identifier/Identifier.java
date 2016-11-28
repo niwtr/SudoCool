@@ -1,6 +1,7 @@
 package team.sudocool.Identifier;
 
 import team.sudocool.Identifier.algol.BP;
+import team.sudocool.Identifier.algol.BP_relu;
 import team.sudocool.Identifier.algol.BasisFunc;
 import team.sudocool.Identifier.algol.ReadData;
 
@@ -13,15 +14,14 @@ import java.util.Arrays;
  * @since 2016/11/9
  */
 public class Identifier {
-    private BP bp_image = null;
+    private BP_relu bp_image = null;
     private double[][][] train_data;
     private int data_num;                               //training data number
 
     private static final int size = 28;                 //input matrix of data size
-    private static final double allow_error = 0.01;     //when training once allow error
     private static final int layer_num_hidden = 120;     //hidden number
-    private static final double rate = 0.001;            //study rate
-    private static final double mo_rate = 0.3;          //momentum rate
+    private static final double rate = 0.0001;            //study rate
+    private static final double mo_rate = 0.8;          //momentum rate
 
 
     /**
@@ -37,7 +37,7 @@ public class Identifier {
 //        int test = (int) (Math.sqrt(0.43*layer_num[0]*layer_num[2] + 0.12*layer_num[2]*layer_num[2]
 //                + 2.54*layer_num[0] + 0.77*layer_num[2] + 0.35 + 0.51));
 
-        bp_image = new BP(layer_num, rate, mo_rate);
+        bp_image = new BP_relu(layer_num, rate, mo_rate);
 
         try {
             bp_image.loadWeight();
@@ -83,7 +83,7 @@ public class Identifier {
         double[] out = new double[9];
         out[num-1] = 1d;
 
-        bp_image.trainNet(BasisFunc.convertOne(in), out, allow_error);
+        bp_image.trainNet(BasisFunc.convertOne(in), out);
 
         //save the network weight
         try {
@@ -110,7 +110,7 @@ public class Identifier {
                     double[] out = new double[9];
                     out[k] = 1;
 
-                    bp_image.trainNet(train_data[k][j], out, allow_error);
+                    bp_image.trainNet(train_data[k][j], out);
                 }
 
         //save the network weight
@@ -162,7 +162,7 @@ public class Identifier {
 
             out_error = out_error / 9;
 
-            bp_image.adjustRate(out_error, last_error);
+//            bp_image.adjustRate(out_error, last_error);
 
             System.out.println("Error: " + new DecimalFormat("##.##").format(out_error*100) + "%\n");
             if(out_error < error)

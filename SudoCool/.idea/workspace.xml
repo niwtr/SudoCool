@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
     </list>
     <ignored path="testOpenCV.iws" />
@@ -27,15 +28,13 @@
       <file leaf-file-name="Eye.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="438">
+              <caret line="226" column="23" selection-start-line="226" selection-start-column="23" selection-end-line="226" selection-end-column="23" />
               <folding>
                 <element signature="docComment;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="method#SudoFrame#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="method#paintSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="method#paintButton#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
-                <element signature="e#7536#7537#0" expanded="true" />
-                <element signature="e#7577#7578#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,11 +43,11 @@
       <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="125" column="11" selection-start-line="125" selection-start-column="11" selection-end-line="125" selection-end-column="11" />
+            <state relative-caret-position="397">
+              <caret line="321" column="5" selection-start-line="321" selection-start-column="5" selection-end-line="321" selection-end-column="5" />
               <folding>
-                <marker date="1480402654600" expanded="false" signature="2323:2333" ph=" { " />
-                <marker date="1480402654600" expanded="false" signature="2366:2372" ph=" }" />
+                <marker date="1480403624154" expanded="false" signature="2323:2333" ph=" { " />
+                <marker date="1480403624154" expanded="false" signature="2366:2372" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -680,12 +679,12 @@
       <workItem from="1480326108344" duration="10261000" />
       <workItem from="1480337636345" duration="807000" />
       <workItem from="1480396421622" duration="5620000" />
-      <workItem from="1480402211136" duration="443000" />
+      <workItem from="1480402211136" duration="1685000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44491000" />
+    <option name="totallyTimeSpent" value="45733000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -698,7 +697,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6387665" sideWeight="0.509693" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883242" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36153847" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36153847" sideWeight="0.49030694" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="GhcMod" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -969,26 +968,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        <state relative-caret-position="438">
+          <caret line="226" column="23" selection-start-line="226" selection-start-column="23" selection-end-line="226" selection-end-column="23" />
           <folding>
             <element signature="docComment;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="method#SudoFrame#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="method#paintSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="method#paintButton#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
-            <element signature="e#7536#7537#0" expanded="true" />
-            <element signature="e#7577#7578#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="125" column="11" selection-start-line="125" selection-start-column="11" selection-end-line="125" selection-end-column="11" />
+        <state relative-caret-position="397">
+          <caret line="321" column="5" selection-start-line="321" selection-start-column="5" selection-end-line="321" selection-end-column="5" />
           <folding>
-            <marker date="1480402654600" expanded="false" signature="2323:2333" ph=" { " />
-            <marker date="1480402654600" expanded="false" signature="2366:2372" ph=" }" />
+            <marker date="1480403624154" expanded="false" signature="2323:2333" ph=" { " />
+            <marker date="1480403624154" expanded="false" signature="2366:2372" ph=" }" />
           </folding>
         </state>
       </provider>

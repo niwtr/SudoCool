@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * create all the frame
@@ -223,6 +224,8 @@ public class Eye {
                     }
                 }
 
+                if(!R.Solve(sudoData))
+                    JOptionPane.showMessageDialog(null, "no answer!", "alert", JOptionPane.ERROR_MESSAGE);
             }
         }
 

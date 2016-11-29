@@ -9,6 +9,8 @@ import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.*;
 import team.sudocool.Solver.Solver;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

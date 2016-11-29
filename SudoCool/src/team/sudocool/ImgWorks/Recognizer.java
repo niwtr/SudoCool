@@ -1,7 +1,5 @@
 package team.sudocool.ImgWorks;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import team.sudocool.Identifier.Identifier;
@@ -10,7 +8,6 @@ import team.sudocool.Solver.Solver;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -289,7 +286,7 @@ public class Recognizer {
 
     }
 
-    public Mat RecognizeAndSolve(Mat img){
+    public Mat RecognizeAndSolve(Mat img){//印刷体识别接口
 
         this
                 .getImg(img)
@@ -305,7 +302,7 @@ public class Recognizer {
                 .Img;
     }
 
-    public Mat RecognizeOnly(Mat img){
+    public Mat RecognizeOnly(Mat img){//手写体识别，只有识别不求解
         this.getImg(img)
                 .preProcessImg()
                 .extractOuterBound()
@@ -323,12 +320,13 @@ public class Recognizer {
     }
 
 
-    //获取当前识别好的数独矩阵，用-1来表示空
-    public int[][] GetRecognizedSudoku(){
+
+    public int[][] GetCurrentSudoku(){//获取当前识别好的数独矩阵，用-1来表示空
+        if(isSolved)return this.SolvedNumbers;else
         return this.ArrangedNumbers!=null?this.ArrangedNumbers:__empty;
     }
     //User set number to the sudoku matrix.
-    public void SetRecognizedNumbers(int y, int x, int num){
+    public void SetRecognizedNumbers(int y, int x, int num){//更改对应（X,Y)位置的识别结果
         this.bruteForce=false;
         for(int i=0;i<9;i++)
             this.RecognizedNumbersHistory[y][x][i]=0;
@@ -337,6 +335,9 @@ public class Recognizer {
     }
     //reset all, prepare for the next scan.
     public void Reset(){
+        if(this.RecognizedNumbers == null)
+            return;
+
         this.isSolved=false;
         this.RecognizedNumbers.clear();
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];

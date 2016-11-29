@@ -88,14 +88,7 @@ public class Main {
     }
     public static void main(String[] args) {
 
-
-
-
-
         Eye e=new Eye();
-
-
-
 
         //e.Watch();
 

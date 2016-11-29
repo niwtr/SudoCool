@@ -279,7 +279,8 @@ public class Recognizer {
 
     }
 
-    public Mat RecognizeAndSolve(Mat img){//印刷体识别接口
+    //印刷体识别接口
+    public synchronized Mat RecognizeAndSolve(Mat img){
 
         this
                 .getImg(img)
@@ -295,7 +296,8 @@ public class Recognizer {
                 .Img;
     }
 
-    public Mat RecognizeOnly(Mat img){//手写体识别，只有识别不求解
+
+    public synchronized Mat RecognizeOnly(Mat img){
         this.getImg(img)
                 .preProcessImg()
                 .extractOuterBound()
@@ -307,7 +309,7 @@ public class Recognizer {
     }
 
     //solving function that triggered by user.
-    public boolean Solve(int[][] input){
+    public synchronized boolean Solve(int[][] input){
         assert (input.length==E.SUDOKU_SIZE);
         assert (input[0].length==E.SUDOKU_SIZE);
         this.bruteForce=false;
@@ -333,9 +335,9 @@ public class Recognizer {
 
 
     //reset all, prepare for the next scan.
-    public void Reset(){
-        if(this.RecognizedNumbers == null)
-            return;
+    public synchronized void Reset(){
+//        if(this.RecognizedNumbers == null)
+//            return;
 
         this.isSolved=false;
         this.RecognizedNumbers.clear();

@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,9 +44,12 @@
       <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="313" column="28" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="-442">
+              <caret line="281" column="6" selection-start-line="281" selection-start-column="6" selection-end-line="281" selection-end-column="6" />
+              <folding>
+                <marker date="1480402477746" expanded="false" signature="2323:2333" ph=" { " />
+                <marker date="1480402477746" expanded="false" signature="2366:2372" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -678,12 +680,12 @@
       <workItem from="1480326108344" duration="10261000" />
       <workItem from="1480337636345" duration="807000" />
       <workItem from="1480396421622" duration="5620000" />
-      <workItem from="1480402211136" duration="114000" />
+      <workItem from="1480402211136" duration="275000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44162000" />
+    <option name="totallyTimeSpent" value="44323000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -982,9 +984,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="313" column="28" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="-442">
+          <caret line="281" column="6" selection-start-line="281" selection-start-column="6" selection-end-line="281" selection-end-column="6" />
+          <folding>
+            <marker date="1480402477746" expanded="false" signature="2323:2333" ph=" { " />
+            <marker date="1480402477746" expanded="false" signature="2366:2372" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>

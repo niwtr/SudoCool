@@ -1,7 +1,9 @@
 package team.sudocool.Eye;
 
+import oracle.jrockit.jfr.JFR;
 import org.opencv.core.Mat;
 import team.sudocool.ImgWorks.Recognizer;
+import team.sudocool.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,7 @@ import java.util.Arrays;
  */
 public class Eye {
     public static final int PRINTING = 0;
-    public static final int HANDWRITING = 0;
+    public static final int HANDWRITING = 1;
 
     private EyeFrame E;
     private SudoFrame S;
@@ -39,6 +41,12 @@ public class Eye {
         S = new SudoFrame();
         V = new VideoCap();
         R = new Recognizer();
+
+//        JFrame MainWindow = new JFrame();
+//        MainWindow.setLayout(new GridLayout(1, 2));
+//        MainWindow.add(E);
+//        MainWindow.add(S);
+//        MainWindow.setVisible(true);
 
         eyethread = new EyeThread();
         mode = PRINTING;
@@ -84,7 +92,7 @@ public class Eye {
             topPanel = new JPanel();
             bottomPanel = new JPanel();
             pauseButton = new JButton("PAUSE");
-            shiftButton = new JButton("to HANDWRITING");
+            shiftButton = new JButton("TO HANDWRITING");
             solveButton = new JButton("SOLVE");
             resetButton = new JButton("RESET");
             sudoSpinner = new JSpinner[9][9];
@@ -114,7 +122,7 @@ public class Eye {
             paintSudo();
             paintButton();
 
-            this.setBounds(900, 100, 400, 400);
+            this.setBounds(900, 100, 450, 450);
     //        this.pack();
             this.setResizable(true);
             this.setVisible(true);
@@ -183,7 +191,7 @@ public class Eye {
          * when sudo changed, update the table
          * @param sudoData current sudoku
          */
-        public void updateSudo(int[][] sudoData) {
+        private void updateSudo(int[][] sudoData) {
             for(int i = 0; i < 9; i++)
                 for(int j = 0; j < 9; j++)
                     sudoSpinner[i][j].setValue(sudoData[i][j] == -1 ? 0 : sudoData[i][j]);
@@ -219,13 +227,13 @@ public class Eye {
         private class switchEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent event) {
-                if(shiftButton.getText().equals("to HANDWRITING"))
+                if(shiftButton.getText().equals("TO HANDWRITING"))
                 {
-                    shiftButton.setText("to PRINTING");
+                    shiftButton.setText("TO PRINTING");
                     mode = HANDWRITING;
                 }
-                else if(shiftButton.getText().equals("to PRINTING")){
-                    shiftButton.setText("to HANDWRITING");
+                else if(shiftButton.getText().equals("TO PRINTING")){
+                    shiftButton.setText("TO HANDWRITING");
                     mode = PRINTING;
                     solveButton.setEnabled(false);
                 }
@@ -250,6 +258,8 @@ public class Eye {
 
                 if(!R.Solve(sudoData))
                     JOptionPane.showMessageDialog(null, "no answer!", "alert", JOptionPane.ERROR_MESSAGE);
+                else
+                    updateSudo(R.GetCurrentSudoku());
             }
         }
 

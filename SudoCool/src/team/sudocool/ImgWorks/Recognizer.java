@@ -310,10 +310,13 @@ public class Recognizer {
 
     //solving function that triggered by user.
     public synchronized boolean Solve(int[][] input){
-        assert (input.length==E.SUDOKU_SIZE);
-        assert (input[0].length==E.SUDOKU_SIZE);
+        if (input.length != E.SUDOKU_SIZE)
+            throw new AssertionError();
+        if (input[0].length != E.SUDOKU_SIZE)
+            throw new AssertionError();
+
         this.bruteForce=false;
-        this.ArrangedNumbers=input;
+        this.ArrangedNumbers = input;
         this.solveNumbers();
         return isSolved;
     }

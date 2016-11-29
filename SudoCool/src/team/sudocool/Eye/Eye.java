@@ -28,6 +28,13 @@ public class Eye {
     private int mode;
 
     public Eye() {
+        try{
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         E = new EyeFrame();
         S = new SudoFrame();
         V = new VideoCap();
@@ -77,7 +84,7 @@ public class Eye {
             topPanel = new JPanel();
             bottomPanel = new JPanel();
             pauseButton = new JButton("PAUSE");
-            shiftButton = new JButton("HANDWRITING");
+            shiftButton = new JButton("to HANDWRITING");
             solveButton = new JButton("SOLVE");
             resetButton = new JButton("RESET");
             sudoSpinner = new JSpinner[9][9];
@@ -86,6 +93,10 @@ public class Eye {
                     sudoSpinner[i][j] = new JSpinner();
                 }
             }
+
+            setEditSudo(false);
+            if(mode == PRINTING)
+                solveButton.setEnabled(false);
 
             this.setTitle("Soduku");
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,6 +171,14 @@ public class Eye {
             bottomPanel.add(Box.createHorizontalGlue());
         }
 
+        private void setEditSudo(boolean edit) {
+            for(int i = 0; i < 9; i++)
+                for(int j = 0; j < 9; j++)
+                {
+                    sudoSpinner[i][j].setEnabled(edit);
+                }
+        }
+
         /**
          * when sudo changed, update the table
          * @param sudoData current sudoku
@@ -180,11 +199,15 @@ public class Eye {
                 {
                     eyethread.suspend();
                     pauseButton.setText("CONTINUE");
+                    setEditSudo(true);
+                    solveButton.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
                 {
                     eyethread.resume();
                     pauseButton.setText("PAUSE");
+                    setEditSudo(false);
+                    solveButton.setEnabled(false);
                 }
             }
         }
@@ -196,14 +219,15 @@ public class Eye {
         private class switchEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent event) {
-                if(shiftButton.getText().equals("HANDWRITING"))
+                if(shiftButton.getText().equals("to HANDWRITING"))
                 {
-                    shiftButton.setText("PRINTING");
+                    shiftButton.setText("to PRINTING");
                     mode = HANDWRITING;
                 }
-                else if(shiftButton.getText().equals("PRINTING")){
-                    shiftButton.setText("HANDWRITING");
+                else if(shiftButton.getText().equals("to PRINTING")){
+                    shiftButton.setText("to HANDWRITING");
                     mode = PRINTING;
+                    solveButton.setEnabled(false);
                 }
 
                 R.Reset();
@@ -219,8 +243,8 @@ public class Eye {
                     for(int j = 0; j < 9; j++)
                     {
                         sudoData[i][j] = (Integer) sudoSpinner[i][j].getValue();
-                        if(sudoData[i][j] == -1)
-                            sudoData[i][j] = 0;
+                        if(sudoData[i][j] == 0)
+                            sudoData[i][j] = -1;
                     }
                 }
 

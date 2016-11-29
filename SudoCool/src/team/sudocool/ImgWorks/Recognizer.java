@@ -187,15 +187,20 @@ public class Recognizer {
     private boolean bruteForce=true;
 
     private Recognizer solveNumbers(){
+
         if(this.ArrangedNumbers==null || isSolved)return this;
 
         ArrayList<int[][]> rst=new ArrayList<>();//=S.solveSudo(this.ArrangedNumbers);
 
         if(bruteForce) {
+            System.out.println("i am in wring place..");
             if (sol(copyMatrix(this.ArrangedNumbers), 0, 0)) {
                 rst = Answers;
             }
         } else {
+
+            System.out.println("hello");
+
             rst=S.solveSudo(this.ArrangedNumbers);//alert: potential bug
         }
 
@@ -309,14 +314,17 @@ public class Recognizer {
     }
 
     //solving function that triggered by user.
-    public synchronized boolean Solve(int[][] input){
+    public boolean Solve(int[][] input){
+
         if (input.length != E.SUDOKU_SIZE)
             throw new AssertionError();
         if (input[0].length != E.SUDOKU_SIZE)
             throw new AssertionError();
 
+
         this.bruteForce=false;
         this.ArrangedNumbers = input;
+
         this.solveNumbers();
         return isSolved;
     }
@@ -338,7 +346,7 @@ public class Recognizer {
     }
 
     //reset all, prepare for the next scan.
-    public synchronized void Reset(){
+    public  void Reset(){
         if(this.RecognizedNumbers == null)
             return;
 

@@ -256,6 +256,7 @@ public class Eye {
                     }
                 }
 
+
                 if(!R.Solve(sudoData))
                     JOptionPane.showMessageDialog(null, "no answer!", "alert", JOptionPane.ERROR_MESSAGE);
                 else

@@ -1,14 +1,15 @@
 package team.sudocool.Eye;
 
-import oracle.jrockit.jfr.JFR;
 import org.opencv.core.Mat;
 import team.sudocool.ImgWorks.Recognizer;
-import team.sudocool.Main;
+import team.sudocool.Solver.ReadSudo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -18,8 +19,8 @@ import java.util.Arrays;
  * @since 2016/11/28
  */
 public class Eye {
-    public static final int PRINTING = 0;
-    public static final int HANDWRITING = 1;
+    private static final int PRINTING = 0;
+    private static final int HANDWRITING = 1;
 
     private EyeFrame E;
     private SudoFrame S;
@@ -32,6 +33,10 @@ public class Eye {
     public Eye() {
         try{
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+
+            UIManager.put("nimbusBase", Color.PINK);
+//            UIManager.put("nimbusBlueGrey", Color.PINK);
+//            UIManager.put("control", Color.PINK);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +85,7 @@ public class Eye {
      * the sudoku table frame
      */
     public class SudoFrame extends JFrame {
-        private JButton pauseButton, shiftButton, solveButton, resetButton;
+        private JButton pauseButton, shiftButton, solveButton, resetButton, fileOpenButton;
         private JPanel topPanel, bottomPanel;
         private JSpinner[][] sudoSpinner;
 
@@ -95,6 +100,8 @@ public class Eye {
             shiftButton = new JButton("HANDWRITING");
             solveButton = new JButton("SOLVE");
             resetButton = new JButton("RESET");
+            fileOpenButton = new JButton("OPEN");
+
             sudoSpinner = new JSpinner[9][9];
             for(int i = 0; i < 9; i++) {
                 for(int j = 0; j < 9; j++) {
@@ -105,9 +112,11 @@ public class Eye {
             setEditSudo(false);
             if(mode == PRINTING)
                 solveButton.setEnabled(false);
+            fileOpenButton.setEnabled(false);
+            solveButton.setEnabled(true);
 
-            this.setTitle("Soduku");
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setTitle("Soduku");
 
             JPanel contentPaneBoss = new JPanel();
             this.setContentPane(contentPaneBoss);
@@ -117,7 +126,7 @@ public class Eye {
             contentPaneBoss.add(topPanel);
             contentPaneBoss.add(Box.createVerticalStrut(10));
             contentPaneBoss.add(bottomPanel);
-            contentPaneBoss.add(Box.createVerticalStrut(5));
+            contentPaneBoss.add(Box.createVerticalStrut(7));
 
             paintSudo();
             paintButton();
@@ -132,26 +141,28 @@ public class Eye {
          * paint the sudo table
          */
         private void paintSudo() {
-            topPanel.setLayout(new GridLayout(10, 10));
+            topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+            topPanel.add(Box.createHorizontalStrut(10));
+            JPanel sudoTable = new JPanel(new GridLayout(3, 3));
+            topPanel.add(sudoTable);
+            topPanel.add(Box.createHorizontalStrut(10));
 
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (i == 0 && j == 0)
-                        topPanel.add(new Label());
-                    else {
-                        if (j == 0) {
-                            JLabel label = new JLabel(String.valueOf(i));
-                            label.setHorizontalAlignment(JLabel.CENTER);
-                            topPanel.add(label);
-                        } else if (i == 0) {
-                            JLabel label = new JLabel(String.valueOf(j));
-                            label.setHorizontalAlignment(JLabel.CENTER);
-                            topPanel.add(label);
-                        } else {
-                            JSpinner num = sudoSpinner[i-1][j-1];
+            for(int w = 0; w < 3; w++)
+            {
+                for(int q = 0; q < 3; q++)
+                {
+                    JPanel boxPanel = new JPanel(new GridLayout(3, 3));
+                    boxPanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+                    sudoTable.add(boxPanel);
+
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            JSpinner num = sudoSpinner[w*3+i][q*3+j];
                             SpinnerModel model = new SpinnerNumberModel(0, 0, 9, 1);
                             num.setModel(model);
-                            topPanel.add(num);
+
+//                            num.getEditor().getComponent(0).setForeground(Color.PINK);
+                            boxPanel.add(num);
                         }
                     }
                 }
@@ -166,8 +177,11 @@ public class Eye {
             shiftButton.addActionListener(new switchEventListener());
             solveButton.addActionListener(new solveEventListener());
             resetButton.addActionListener(new resetEventListener());
+            fileOpenButton.addActionListener(new openEventListener());
 
             bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+            bottomPanel.add(Box.createHorizontalGlue());
+            bottomPanel.add(fileOpenButton);
             bottomPanel.add(Box.createHorizontalGlue());
             bottomPanel.add(pauseButton);
             bottomPanel.add(Box.createHorizontalGlue());
@@ -210,6 +224,7 @@ public class Eye {
                     setEditSudo(true);
                     solveButton.setEnabled(true);
                     resetButton.setEnabled(false);
+                    fileOpenButton.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
                 {
@@ -218,6 +233,7 @@ public class Eye {
                     setEditSudo(false);
                     solveButton.setEnabled(false);
                     resetButton.setEnabled(true);
+                    fileOpenButton.setEnabled(false);
                 }
             }
         }
@@ -243,6 +259,9 @@ public class Eye {
             }
         }
 
+        /**
+         * solve button listener
+         */
         private class solveEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,10 +287,41 @@ public class Eye {
             }
         }
 
+        /**
+         * reset button listener
+         */
         private class resetEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 R.Reset();
+            }
+        }
+
+        /**
+         * open file button listener
+         */
+        private class openEventListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent eve) {
+                JFileChooser fd = new JFileChooser();
+                //fd.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fd.showOpenDialog(null);
+                File f = fd.getSelectedFile();
+                if(f != null){
+                    int[][][] sudoData = null;
+                    try{
+                        sudoData = ReadSudo.readMatrixFile(f.getPath(), 9);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(sudoData == null)
+                        throw new AssertionError();
+                    updateSudo(sudoData[0]);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Open Error!", "Alert", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

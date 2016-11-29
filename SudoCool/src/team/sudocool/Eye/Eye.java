@@ -320,6 +320,7 @@ public class Eye {
                     Mat image = Highgui.imread(f.getPath());
                     Mat result = R.RecognizeAndSolve(image);
                     Utils.showResult(result);
+
                     updateSudo(R.GetCurrentSudoku());
                 }
             }

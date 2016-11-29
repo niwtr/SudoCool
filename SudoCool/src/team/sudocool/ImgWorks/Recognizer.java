@@ -283,7 +283,7 @@ public class Recognizer {
 
     }
 
-    public Mat RecognizeAndSolve(Mat img){
+    public synchronized Mat RecognizeAndSolve(Mat img){
 
         this
                 .getImg(img)
@@ -299,7 +299,7 @@ public class Recognizer {
                 .Img;
     }
 
-    public Mat RecognizeOnly(Mat img){
+    public synchronized Mat RecognizeOnly(Mat img){
         this.getImg(img)
                 .preProcessImg()
                 .extractOuterBound()
@@ -311,7 +311,7 @@ public class Recognizer {
     }
 
     //solving function that triggered by user.
-    public boolean Solve(int[][] input){
+    public synchronized boolean Solve(int[][] input){
         assert (input.length==E.SUDOKU_SIZE);
         assert (input[0].length==E.SUDOKU_SIZE);
         this.bruteForce=false;
@@ -336,7 +336,7 @@ public class Recognizer {
 
 
     //reset all, prepare for the next scan.
-    public void Reset(){
+    public synchronized void Reset(){
         this.isSolved=false;
         this.RecognizedNumbers.clear();
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];

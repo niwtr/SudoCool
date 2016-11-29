@@ -2,6 +2,7 @@ package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
+import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
 
 import team.sudocool.ImgWorks.nImgProc.*;
@@ -83,8 +84,8 @@ public class Main {
     }
     public static void main(String[] args) {
 
-        //Eye e=new Eye();
-   
+        Eye e=new Eye();
+
 
 
 

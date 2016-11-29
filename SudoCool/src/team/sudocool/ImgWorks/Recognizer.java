@@ -123,7 +123,7 @@ public class Recognizer {
 
 
 
-    private Recognizer arrangeNumbersMatrix(){
+    private synchronized Recognizer arrangeNumbersMatrix(){
         if(this.RecognizedNumbers==null || isSolved) {
 
             return this;
@@ -340,7 +340,7 @@ public class Recognizer {
             return;
 
         this.isSolved=false;
-        this.RecognizedNumbers.clear();
+        this.RecognizedNumbers=null;
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
         this.SolvedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];

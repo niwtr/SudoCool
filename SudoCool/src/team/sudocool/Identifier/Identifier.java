@@ -1,6 +1,6 @@
 package team.sudocool.Identifier;
 
-import team.sudocool.Identifier.algol.BP;
+//import team.sudocool.Identifier.algol.BP;
 import team.sudocool.Identifier.algol.BP_relu;
 import team.sudocool.Identifier.algol.BasisFunc;
 import team.sudocool.Identifier.algol.ReadData;

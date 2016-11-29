@@ -70,8 +70,9 @@ public class Utils {
 
     public static void showResult(Mat img) {
         if(img.empty())return;
+        img=img.clone();
 
-        //Imgproc.resize(img,img,new Size(500,500));
+        Imgproc.resize(img,img,new Size(500,500));
 
         MatOfByte matOfByte = new MatOfByte();
         Highgui.imencode(".jpg", img, matOfByte);

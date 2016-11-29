@@ -2,18 +2,13 @@ package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
-import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
-import team.sudocool.ImgWorks.Recognizer;
+
 import team.sudocool.ImgWorks.nImgProc.*;
-import team.sudocool.Solver.Solver;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.opencv.imgproc.Imgproc.*;
 
 
 public class Main {
@@ -88,37 +83,11 @@ public class Main {
     }
     public static void main(String[] args) {
 
+        //Eye e=new Eye();
+   
 
 
 
-
-        Eye e=new Eye();
-
-
-
-
-        //e.Watch();
-
-
-        //List<Mat> outseq=GridSquareExtractor.GridExtract(img);
-
-
-/*
-        EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
-
-        List<Mat> outseq2=ege.Extract(img);
-
-        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-        Identifier I=new Identifier();
-
-        List<Integer> x=outseq2.stream().map(P::Patternize28x28).map(I::toDigit).collect(Collectors.toList());
-
-        for(int u=0;u<x.size();u++)
-        {
-            System.out.printf("%d ", x.get(u));
-            if((u+1)%9==0)System.out.println();
-        }
-*/
 
     }
 }

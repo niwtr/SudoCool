@@ -72,8 +72,6 @@ public class Recognizer {
                 this.__empty[i][j]=-1;
         }
 
-
-
     }
 
     public void setScissor(int scissorWidth){
@@ -147,8 +145,6 @@ public class Recognizer {
                 if(!contains(anf, -1))//有-1说明该格子其实是空的。
                     this.RecognizedNumbersHistory[i][j]=setAdd(anf, num);
 
-
-
             }
         }
 
@@ -176,8 +172,6 @@ public class Recognizer {
         for(int ind=0;ind<this.RecognizedNumbersHistory[i][j].length;ind++){
 
             arr[i][j]=this.RecognizedNumbersHistory[i][j][ind];
-
-
 
             ArrayList<int[][]> ans=S.solveSudo(arr);
             if(ans.size()>0){
@@ -317,7 +311,11 @@ public class Recognizer {
     }
 
     //solving function that triggered by user.
-    public boolean Solve(){
+    public boolean Solve(int[][] input){
+        assert (input.length==E.SUDOKU_SIZE);
+        assert (input[0].length==E.SUDOKU_SIZE);
+        this.bruteForce=false;
+        this.ArrangedNumbers=input;
         this.solveNumbers();
         return isSolved;
     }
@@ -325,16 +323,18 @@ public class Recognizer {
 
     //获取当前识别好的数独矩阵，用-1来表示空
     public int[][] GetRecognizedSudoku(){
+
+        if(isSolved)return this.SolvedNumbers; else
         return this.ArrangedNumbers!=null?this.ArrangedNumbers:__empty;
     }
     //User set number to the sudoku matrix.
-    public void SetRecognizedNumbers(int y, int x, int num){
-        this.bruteForce=false;
-        for(int i=0;i<9;i++)
-            this.RecognizedNumbersHistory[y][x][i]=0;
-        this.RecognizedNumbersHistory[y][x][0]=num;
 
-    }
+
+
+
+
+
+
     //reset all, prepare for the next scan.
     public void Reset(){
         this.isSolved=false;

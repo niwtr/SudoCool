@@ -327,17 +327,17 @@ public class Recognizer {
     }
 
     //User set number to the sudoku matrix.
-    public void SetRecognizedNumbers(int y, int x, int num){//更改对应（X,Y)位置的识别结果
-        this.bruteForce=false;
-        for(int i=0;i<9;i++)
-            this.RecognizedNumbersHistory[y][x][i]=0;
-        this.RecognizedNumbersHistory[y][x][0]=num;
-
+    public void SetRecognizedNumbers(int y, int x, int num) {//更改对应（X,Y)位置的识别结果
+        this.bruteForce = false;
+        for (int i = 0; i < 9; i++)
+            this.RecognizedNumbersHistory[y][x][i] = 0;
+        this.RecognizedNumbersHistory[y][x][0] = num;
+    }
 
     //reset all, prepare for the next scan.
     public synchronized void Reset(){
-//        if(this.RecognizedNumbers == null)
-//            return;
+        if(this.RecognizedNumbers == null)
+            return;
 
         this.isSolved=false;
         this.RecognizedNumbers.clear();

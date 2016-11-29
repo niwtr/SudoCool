@@ -82,6 +82,7 @@ public class Utils {
             InputStream in = new ByteArrayInputStream(byteArray);
             bufImage = ImageIO.read(in);
             JFrame frame = new JFrame();
+            frame.setTitle("Picture-Recognized");
             frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)));
             frame.pack();
             frame.setVisible(true);

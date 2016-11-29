@@ -92,7 +92,7 @@ public class Eye {
             topPanel = new JPanel();
             bottomPanel = new JPanel();
             pauseButton = new JButton("PAUSE");
-            shiftButton = new JButton("TO HANDWRITING");
+            shiftButton = new JButton("HANDWRITING");
             solveButton = new JButton("SOLVE");
             resetButton = new JButton("RESET");
             sudoSpinner = new JSpinner[9][9];
@@ -149,7 +149,7 @@ public class Eye {
                             topPanel.add(label);
                         } else {
                             JSpinner num = sudoSpinner[i-1][j-1];
-                            SpinnerModel model = new SpinnerNumberModel(0, -1, 9, 1);
+                            SpinnerModel model = new SpinnerNumberModel(0, 0, 9, 1);
                             num.setModel(model);
                             topPanel.add(num);
                         }
@@ -209,6 +209,7 @@ public class Eye {
                     pauseButton.setText("CONTINUE");
                     setEditSudo(true);
                     solveButton.setEnabled(true);
+                    resetButton.setEnabled(false);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
                 {
@@ -216,6 +217,7 @@ public class Eye {
                     pauseButton.setText("PAUSE");
                     setEditSudo(false);
                     solveButton.setEnabled(false);
+                    resetButton.setEnabled(true);
                 }
             }
         }
@@ -227,15 +229,14 @@ public class Eye {
         private class switchEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent event) {
-                if(shiftButton.getText().equals("TO HANDWRITING"))
+                if(shiftButton.getText().equals("HANDWRITING"))
                 {
-                    shiftButton.setText("TO PRINTING");
-                    mode = HANDWRITING;
-                }
-                else if(shiftButton.getText().equals("TO PRINTING")){
-                    shiftButton.setText("TO HANDWRITING");
+                    shiftButton.setText("PRINTING");
                     mode = PRINTING;
-                    solveButton.setEnabled(false);
+                }
+                else if(shiftButton.getText().equals("PRINTING")){
+                    shiftButton.setText("HANDWRITING");
+                    mode = HANDWRITING;
                 }
 
                 R.Reset();
@@ -258,9 +259,12 @@ public class Eye {
 
 
                 if(!R.Solve(sudoData))
-                    JOptionPane.showMessageDialog(null, "no answer!", "alert", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No answer!", "Alert", JOptionPane.ERROR_MESSAGE);
                 else
+                {
                     updateSudo(R.GetCurrentSudoku());
+                    JOptionPane.showMessageDialog(null, "Let`s see it!", "Congratulation", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
 

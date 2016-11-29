@@ -193,13 +193,13 @@ public class Recognizer {
         ArrayList<int[][]> rst=new ArrayList<>();//=S.solveSudo(this.ArrangedNumbers);
 
         if(bruteForce) {
-            System.out.println("i am in wring place..");
+//            System.out.println("i am in wring place..");
             if (sol(copyMatrix(this.ArrangedNumbers), 0, 0)) {
                 rst = Answers;
             }
         } else {
 
-            System.out.println("hello");
+//            System.out.println("hello");
 
             rst=S.solveSudo(this.ArrangedNumbers);//alert: potential bug
         }
@@ -347,8 +347,6 @@ public class Recognizer {
 
     //reset all, prepare for the next scan.
     public  void Reset(){
-        if(this.RecognizedNumbers == null)
-            return;
 
         this.isSolved=false;
         this.RecognizedNumbers=null;

@@ -21,7 +21,7 @@ import java.util.Random;
  * @version 1.0
  * @since 2016/11/7
  */
-public class BP {
+public class BP_relu {
     private int[] layer_num;
     private double[][] layer_out;
     private double[][] layer_grad;
@@ -36,7 +36,7 @@ public class BP {
      * @param rate network learn rate
      * @param mo_rate Momentum coefficient
      */
-    public BP(int[] layer_num, double rate, double mo_rate) {
+    public BP_relu(int[] layer_num, double rate, double mo_rate) {
         int len = layer_num.length;
 
         this.layer_num = Arrays.copyOf(layer_num, len);
@@ -183,7 +183,12 @@ public class BP {
                 {
                     temp += layer_out[i][k] * layer_weight[i][k][j];
                 }
-                layer_out[i+1][j] = sigMoid(temp);
+
+                if(i == len-2)
+                    layer_out[i+1][j] = sigMoid(temp);
+                else
+                    layer_out[i+1][j] = softPlus(temp);
+
             }
         }
 
@@ -223,7 +228,7 @@ public class BP {
                 }
 
                 //calculate the next local gradient
-                layer_grad[i][j] = layer_out[i][j] * (1-layer_out[i][j]) * temp_gradient;
+                layer_grad[i][j] = sigMoid(reverseSoftPlus(layer_out[i][j])) * temp_gradient;
             }
         }
     }
@@ -233,22 +238,9 @@ public class BP {
      * @param in training data
      * @param out expect output
      */
-    public void trainNet(double[] in, double[] out, double allow_err) {
-        double last_error = 0d;
-        double out_error = 0d;
-
-        while(true) {
-            last_error = out_error;
-            out_error = 0d;
-
-            double[] ans = this.forwardProp(in);
-            this.backProp(out);
-            for(int i = 0; i < ans.length; i++)
-                out_error += (out[i] - ans[i]) * (out[i] - ans[i]) / 2;
-
-            if(Math.abs(last_error-out_error) < allow_err)
-                break;
-        }
+    public void trainNet(double[] in, double[] out) {
+        this.forwardProp(in);
+        this.backProp(out);
     }
 
     /**
@@ -274,5 +266,23 @@ public class BP {
      */
     private double sigMoid(double val) {
         return 1d / (1d + Math.exp(-val));
+    }
+
+    /**
+     * SoftPlus function(relu function)
+     * @param val input
+     * @return output
+     */
+    private double softPlus(double val) {
+        return Math.log(1 + Math.exp(val));
+    }
+
+    /**
+     * reverse of softplus function
+     * @param val input
+     * @return output
+     */
+    private double reverseSoftPlus(double val) {
+        return Math.log(Math.exp(val) - 1);
     }
 }

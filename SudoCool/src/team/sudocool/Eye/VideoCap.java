@@ -9,12 +9,10 @@ import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
-import team.sudocool.ImgWorks.EzGridSquareExtractor;
 import team.sudocool.ImgWorks.Recognizer;
-import team.sudocool.ImgWorks.nImgProc.Mat2Image;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
-import static team.sudocool.Eye.Eye.WIDTH;
+import static team.sudocool.Eye.EyeFrame.WIDTH;
 
 public class VideoCap {
     static{
@@ -22,7 +20,7 @@ public class VideoCap {
     }
 
     VideoCapture cap;
-    Recognizer R=new Recognizer();
+//    Recognizer R=new Recognizer();
     public Mat captured;
 
     VideoCap(){
@@ -33,18 +31,18 @@ public class VideoCap {
 
     Mat getMat(){
         getOneFrame();
-        return captured;}
-
-
-    BufferedImage getRectedFrame(){
-        Mat mn=new Mat();
-        cap.read(mn);
-        captured=mn;
-        double rate=captured.size().width/captured.size().height;
-        Imgproc.resize(captured,captured, new Size(WIDTH, WIDTH/rate));
-        Mat img=R.RecognizeOnly(captured);
-        return Utils.Mat2BufferedImg(img, WIDTH);
+        return captured;
     }
+
+//    BufferedImage getRectedFrame(int mode){
+//        Mat mn=new Mat();
+//        cap.read(mn);
+//        captured=mn;
+//        double rate=captured.size().width/captured.size().height;
+//        Imgproc.resize(captured,captured, new Size(WIDTH, WIDTH/rate));
+//        Mat img = mode == Eye.HANDWRITEING ? R.RecognizeOnly(captured) : R.RecognizeAndSolve(captured);
+//        return Utils.Mat2BufferedImg(img, WIDTH);
+//    }
     BufferedImage getOneFrame() {
         Mat mn=new Mat();
         cap.read(mn);

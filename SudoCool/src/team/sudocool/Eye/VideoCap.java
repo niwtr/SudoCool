@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
+import org.opencv.highgui.Highgui;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import team.sudocool.ImgWorks.Recognizer;
@@ -20,13 +21,14 @@ public class VideoCap {
     }
 
     VideoCapture cap;
-//    Recognizer R=new Recognizer();
     public Mat captured;
 
-    VideoCap(){
+    VideoCap(int num) {
         captured=new Mat();
         cap = new VideoCapture();
-        cap.open(0);
+        cap.open(num);
+        cap.set(Highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+        cap.set(Highgui.CV_CAP_PROP_FRAME_HEIGHT, 480);
     }
 
     Mat getMat(){

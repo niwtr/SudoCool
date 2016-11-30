@@ -4,14 +4,12 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.*;
 import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.Utils;
-import team.sudocool.Solver.ReadSudo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -46,7 +44,7 @@ public class Eye {
 
         E = new EyeFrame();
         S = new SudoFrame();
-        V = new VideoCap();
+        V = new VideoCap(0);
         R = new Recognizer();
 
 //        JFrame MainWindow = new JFrame();

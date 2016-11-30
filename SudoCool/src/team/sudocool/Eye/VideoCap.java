@@ -25,10 +25,10 @@ public class VideoCap {
 //    Recognizer R=new Recognizer();
     public Mat captured;
 
-    VideoCap(){
+    VideoCap(int num){
         captured=new Mat();
         cap = new VideoCapture();
-        cap.open(0);
+        cap.open(num);
         cap.set(CV_CAP_PROP_FRAME_WIDTH,640);
         cap.set(CV_CAP_PROP_FRAME_HEIGHT,480);
 

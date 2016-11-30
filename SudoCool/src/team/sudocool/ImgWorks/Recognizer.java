@@ -285,7 +285,7 @@ public class Recognizer {
     }
 
     //印刷体识别接口
-    public synchronized Mat RecognizeAndSolve(Mat img){
+    public Mat RecognizeAndSolve(Mat img){
 
         this
                 .getImg(img)
@@ -302,7 +302,7 @@ public class Recognizer {
     }
 
 
-    public synchronized Mat RecognizeOnly(Mat img){
+    public Mat RecognizeOnly(Mat img){
         this.getImg(img)
                 .preProcessImg()
                 .extractOuterBound()

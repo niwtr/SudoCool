@@ -1,7 +1,9 @@
 package team.sudocool.Eye;
 
 import org.opencv.core.Mat;
+import org.opencv.highgui.*;
 import team.sudocool.ImgWorks.Recognizer;
+import team.sudocool.ImgWorks.nImgProc.Utils;
 import team.sudocool.Solver.ReadSudo;
 
 import javax.swing.*;
@@ -97,7 +99,7 @@ public class Eye {
             topPanel = new JPanel();
             bottomPanel = new JPanel();
             pauseButton = new JButton("PAUSE");
-            shiftButton = new JButton("HANDWRITING");
+            shiftButton = new JButton("PRINTING");
             solveButton = new JButton("SOLVE");
             resetButton = new JButton("RESET");
             fileOpenButton = new JButton("OPEN");
@@ -223,7 +225,7 @@ public class Eye {
                     pauseButton.setText("CONTINUE");
                     setEditSudo(true);
                     solveButton.setEnabled(true);
-                    resetButton.setEnabled(false);
+//                    resetButton.setEnabled(false);
                     fileOpenButton.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
@@ -232,7 +234,7 @@ public class Eye {
                     pauseButton.setText("PAUSE");
                     setEditSudo(false);
                     solveButton.setEnabled(false);
-                    resetButton.setEnabled(true);
+//                    resetButton.setEnabled(true);
                     fileOpenButton.setEnabled(false);
                 }
             }
@@ -294,6 +296,10 @@ public class Eye {
             @Override
             public void actionPerformed(ActionEvent e) {
                 R.Reset();
+
+                if(pauseButton.getText().equals("CONTINUE")) {
+                    updateSudo(R.GetCurrentSudoku());
+                }
             }
         }
 
@@ -309,19 +315,14 @@ public class Eye {
                 fd.showOpenDialog(null);
                 File f = fd.getSelectedFile();
                 if(f != null){
-                    int[][][] sudoData = null;
-                    try{
-                        sudoData = ReadSudo.readMatrixFile(f.getPath(), 9);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    R.Reset();
 
-                    if(sudoData == null)
-                        throw new AssertionError();
-                    updateSudo(sudoData[0]);
+                    Mat image = Highgui.imread(f.getPath());
+                    Mat result = R.RecognizeAndSolve(image);
+                    Utils.showResult(result);
+
+                    updateSudo(R.GetCurrentSudoku());
                 }
-                else
-                    JOptionPane.showMessageDialog(null, "Open Error!", "Alert", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

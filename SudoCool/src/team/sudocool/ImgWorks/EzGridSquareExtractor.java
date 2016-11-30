@@ -141,6 +141,7 @@ public class EzGridSquareExtractor {
                 Converters.vector_Point2f_to_Mat(dstl));
         Mat rst=new Mat();
         Imgproc.warpPerspective(img, rst, perspectiveTransform, new Size(outerBoundSizex, outerBoundSizey));
+        Utils.showResult(rst);
         return rst;
     }
 
@@ -171,6 +172,13 @@ public class EzGridSquareExtractor {
 
 
     public boolean Extract2(Mat img){
+        Mat img2=img.clone();
+        Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
+        Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
+        //the background should be in white.
+
+        this.ExtractOuterBoundContour(img2);
+
         List<Mat>rst=new ArrayList<>();
         MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
         if(bound==null)return false;
@@ -201,6 +209,7 @@ public class EzGridSquareExtractor {
 
 
         this.ExtractedCellsGraph=Out;
+        Utils.showResult(Out);
         return true;
     }
 

@@ -25,6 +25,7 @@ public class Eye {
     private static final int HANDWRITING = 1;
 
     private EyeFrame E;
+    private EyeTransformed T;
     private SudoFrame S;
     private VideoCap V;
     private Recognizer R;
@@ -48,6 +49,7 @@ public class Eye {
         S = new SudoFrame();
         V = new VideoCap();
         R = new Recognizer();
+        T = new EyeTransformed();
 
 //        JFrame MainWindow = new JFrame();
 //        MainWindow.setLayout(new GridLayout(1, 2));
@@ -72,8 +74,10 @@ public class Eye {
                 Mat result = mode == HANDWRITING
                         ? R.RecognizeOnly(image) : R.RecognizeAndSolve(image);
                 E.setCaptured(result);
+                T.setCaptured(R.GetTransformedImage());
                 S.updateSudo(R.GetCurrentSudoku());
                 E.repaint();
+                T.repaint();
 
                 try { Thread.sleep(3);
                 } catch (InterruptedException e) {

@@ -12,6 +12,8 @@ import org.opencv.imgproc.Imgproc;
 import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
+import static org.opencv.highgui.Highgui.CV_CAP_PROP_FRAME_HEIGHT;
+import static org.opencv.highgui.Highgui.CV_CAP_PROP_FRAME_WIDTH;
 import static team.sudocool.Eye.EyeFrame.WIDTH;
 
 public class VideoCap {
@@ -27,6 +29,9 @@ public class VideoCap {
         captured=new Mat();
         cap = new VideoCapture();
         cap.open(0);
+        cap.set(CV_CAP_PROP_FRAME_WIDTH,640);
+        cap.set(CV_CAP_PROP_FRAME_HEIGHT,480);
+
     }
 
     Mat getMat(){

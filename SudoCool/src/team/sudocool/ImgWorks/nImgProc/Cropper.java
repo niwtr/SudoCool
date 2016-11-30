@@ -170,7 +170,7 @@ public class Cropper {
             int x=(int)(mom.get_m10()/mom.get_m00()),
                     y=(int)(mom.get_m01()/mom.get_m00());
 
-            double th=0.1;
+            double th=0.1;//old:0.1
 
             if(x<xx*th || x>xx*(1-th) || y<yy*th || y>yy* (1-th)) {
 

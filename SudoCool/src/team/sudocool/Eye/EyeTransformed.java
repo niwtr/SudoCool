@@ -3,53 +3,36 @@ package team.sudocool.Eye;
 /**
  * Created by Heranort on 16/11/15.
  */
+
 import org.opencv.core.Mat;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import team.sudocool.ImgWorks.nImgProc.Utils;
 
-public class EyeFrame extends JFrame {
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class EyeTransformed extends JFrame {
     private JPanel contentPane;
 
-    public static final int WIDTH=600;
+    public static final int WIDTH=300;
     public Mat captured;
 
-    /**
-     * Launch the application.
-     */
-    public void Watch() {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    EyeFrame frame = new EyeFrame();
-
-                    frame.setVisible(true);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the frame.
      */
-    public EyeFrame() {
+    public EyeTransformed() {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setBounds(100, 100, WIDTH, (int)(WIDTH*0.75));
+        setBounds(100, 100, WIDTH, WIDTH);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        setTitle("Camera");
+        setTitle("Transformed");
         setVisible(true);
     }
 

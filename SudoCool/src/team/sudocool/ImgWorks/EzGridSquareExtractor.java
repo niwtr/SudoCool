@@ -28,6 +28,8 @@ public class EzGridSquareExtractor {
     public Mat ExtractedCellsGraph=new Mat();
     public MatOfPoint getBound(){return this.Bound;}//brings getOuterBoundContour() to passive.
 
+    private Mat Transformed=null;
+    public Mat getTransformed(){return Transformed;}
     public List<Mat> getExtractedCells(){return this.ExtractedCells;}
 
 
@@ -91,6 +93,7 @@ public class EzGridSquareExtractor {
         }).collect(Collectors.toList());
 
         this.Bound=bound.size()>=1?bound.get(0):null;
+
         return this.Bound;
     }
 
@@ -141,6 +144,7 @@ public class EzGridSquareExtractor {
                 Converters.vector_Point2f_to_Mat(dstl));
         Mat rst=new Mat();
         Imgproc.warpPerspective(img, rst, perspectiveTransform, new Size(outerBoundSizex, outerBoundSizey));
+
         return rst;
     }
 
@@ -153,6 +157,7 @@ public class EzGridSquareExtractor {
         if(bound==null)return false;
         Mat tr=transform4(img);
 
+        this.Transformed=tr;
         double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
         for(int y=0;y<SUDOKU_SIZE;y++){//0 to 8
             for(int x=0;x<SUDOKU_SIZE;x++){
@@ -171,18 +176,28 @@ public class EzGridSquareExtractor {
 
 
     public boolean Extract2(Mat img){
+        Mat img2=img.clone();
+        Imgproc.cvtColor(img,img2,Imgproc.COLOR_RGB2GRAY);//morph into gray pic
+        Imgproc.adaptiveThreshold(img2,img2,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 151,1);
+        //the background should be in white.
+
+        this.ExtractOuterBoundContour(img2);
+
         List<Mat>rst=new ArrayList<>();
         MatOfPoint bound= getBound();   //GetOuterBoundContour(img);
         if(bound==null)return false;
         Mat tr=transform4(img);
 
         Mat Out=Mat.zeros(tr.size(), CV_8UC1);
-        Mat OutPat=new Mat(tr.size(), CV_8UC1);
+
+
 
 
         double dx= outerBoundSizex /SUDOKU_SIZE,dy= outerBoundSizey /SUDOKU_SIZE;
         for(int y=0;y<SUDOKU_SIZE;y++){//0 to 8
             for(int x=0;x<SUDOKU_SIZE;x++){
+
+
                 Rect r=new Rect((int)(x*dx+scissorWidth), (int)(y*dy+scissorWidth),(int)dx-2* scissorWidth,(int)dy-2* scissorWidth);
 
                 Mat mask=new Mat(tr.size(), CV_8UC1, new Scalar(0));
@@ -201,6 +216,7 @@ public class EzGridSquareExtractor {
 
 
         this.ExtractedCellsGraph=Out;
+
         return true;
     }
 

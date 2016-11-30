@@ -76,7 +76,10 @@ public class Recognizer {
     }
 
     private Recognizer getImg(Mat img){
-        this.Img=img;return this;
+        this.Img=img;
+        
+        return this;
+
     }
 
     private Recognizer preProcessImg(){
@@ -96,6 +99,7 @@ public class Recognizer {
     private Recognizer recognizeNumbers(){
         if(isSolved)return this;
         if(E.Extract(this.ThresholdImg)){
+
             this.RecognizedNumbers=E
                     .getExtractedCells()
                     .stream()
@@ -184,6 +188,20 @@ public class Recognizer {
     }
 
 
+
+    private int[][]sudoXor(int[][]a, int[][]b){
+        int [][]dst=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+
+        for(int i=0;i<E.SUDOKU_SIZE;i++){
+            for(int j=0;j<E.SUDOKU_SIZE;j++){
+                if(a[i][j]!=-1 && b[i][j]==-1)
+                dst[i][j]=a[i][j];
+                else dst[i][j]=-1;
+            }
+        }
+        return dst;
+    }
+
     private boolean bruteForce=true;
 
     private Recognizer solveNumbers(){
@@ -193,24 +211,26 @@ public class Recognizer {
         ArrayList<int[][]> rst=new ArrayList<>();//=S.solveSudo(this.ArrangedNumbers);
 
         if(bruteForce) {
-//            System.out.println("i am in wring place..");
+
             if (sol(copyMatrix(this.ArrangedNumbers), 0, 0)) {
                 rst = Answers;
             }
         } else {
 
-//            System.out.println("hello");
+
 
             rst=S.solveSudo(this.ArrangedNumbers);//alert: potential bug
         }
 
         if(rst.size()!=0 && !firstRush){
             isSolved=true;
-            this.SolvedNumbers=rst.get(0);
+            this.SolvedNumbers= sudoXor(rst.get(0), this.ArrangedNumbers);
             this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
         }
         return this;
     }
+
+
 
 
     private Recognizer drawOuterBound (){
@@ -230,6 +250,31 @@ public class Recognizer {
         return this;
     }
 
+
+    private Recognizer drawText(){
+        if(this.Img==null)return this;
+        String txt="";
+
+        if(E.getBound()==null)
+            txt = "Targeting...";
+        else if(isSolved)
+            txt="Solved.";
+        else txt="Scanning...";
+
+
+        Core.putText(Img,
+                txt,
+                new Point(50,50),
+                Core.FONT_HERSHEY_PLAIN,
+                2,
+                new Scalar(0,255,0),2
+        );
+
+        return this;
+
+    }
+
+
     @FunctionalInterface
     interface Function3 <A, B, C, R> {public R apply (A a, B b, C c);}
 
@@ -244,6 +289,10 @@ public class Recognizer {
                 l2=Utils.lineDivPointFunc
                         (clockwised.get(Utils.UP_RIGHT), clockwised.get(Utils.DOWN_RIGHT),
                                 E.SUDOKU_SIZE);
+
+
+
+
         for(int y=0; y<E.SUDOKU_SIZE; y++) {
             for (int x = 0; x < E.SUDOKU_SIZE; x++) {
                 Point pl=l1.apply(y+1), pr=l2.apply(y+1);
@@ -254,6 +303,7 @@ public class Recognizer {
                 };
                 double width=Math.abs(pl.x-pr.x)/E.SUDOKU_SIZE;
                 Point p=__.apply(x,y);
+
                 int num;
                 if(!isSolved)
                     num=ArrangedNumbers[y][x];
@@ -294,6 +344,7 @@ public class Recognizer {
                 .recognizeNumbers()
                 .arrangeNumbersMatrix()
                 .solveNumbers()
+                .drawText()
                 .drawOuterBound()
                 .drawRecognizedNumbers();
 
@@ -308,6 +359,7 @@ public class Recognizer {
                 .extractOuterBound()
                 .recognizeNumbers()
                 .arrangeNumbersMatrix()
+                .drawText()
                 .drawOuterBound()
                 .drawRecognizedNumbers();
         return this.Img;
@@ -356,4 +408,8 @@ public class Recognizer {
         this.firstRush=true;
         this.bruteForce=true;
     }
+
+    private Mat black=new Mat();
+    public Mat GetTransformedImage(){return E.getTransformed()==null?black:E.getTransformed();}
+
 }

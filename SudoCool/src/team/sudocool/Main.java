@@ -2,20 +2,13 @@ package team.sudocool;
 
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
 import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
-import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.*;
-import team.sudocool.Solver.Solver;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.opencv.imgproc.Imgproc.*;
 
 
 public class Main {
@@ -95,14 +88,8 @@ public class Main {
         //e.Watch();
 
 
-        //List<Mat> outseq=GridSquareExtractor.GridExtract(img);
-
 
 /*
-        EzGridSquareExtractor ege=new EzGridSquareExtractor(450,450,3);
-
-        List<Mat> outseq2=ege.Extract(img);
-
         Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
         Identifier I=new Identifier();
 

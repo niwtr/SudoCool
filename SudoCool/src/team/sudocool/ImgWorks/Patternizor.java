@@ -77,8 +77,6 @@ public class Patternizor {
     public int[][] Patternize28x28(Mat img){
         Mat iimg=img.clone();
         if(img.empty())return new int[size][size];
-        //Imgproc.cvtColor(img, img, COLOR_RGB2GRAY);
-        //Imgproc.adaptiveThreshold(img,img,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY_INV, 151,1);
         Imgproc.threshold(img, img, 127,255, COLOR);//+THRESH_OTSU);
         return ezPattern28x28(iimg, img, size); //old: pattern28x28.
     }
@@ -104,7 +102,6 @@ public class Patternizor {
         if(bimg.length==0)return new int[size][size];
         Mat _1=Utils.convertByteM(Cropper.nomalize(bimg,size,size));
         Imgproc.resize(_1,_1,new Size(28,28));
-        //Utils.showMatrix(Utils.convertMat(_1));
         return Utils.convertMat(_1);
 
     }

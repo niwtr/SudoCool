@@ -7,9 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/SudoCool_jar/SudoCool.jar" afterPath="$PROJECT_DIR$/out/artifacts/SudoCool_jar/SudoCool.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SudoCool.iml" afterPath="$PROJECT_DIR$/SudoCool.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,28 +37,33 @@
       <file leaf-file-name="Eye.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+            <state relative-caret-position="4460">
+              <caret line="409" column="33" selection-start-line="409" selection-start-column="33" selection-end-line="409" selection-end-column="33" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="docComment;method#updateSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="method#updateSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="docComment;class#pauseEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <element signature="class#pauseEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="docComment;class#switchEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="class#switchEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="docComment;class#solveEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="docComment;class#resetEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <element signature="class#resetEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
                 <element signature="docComment;class#openEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <element signature="class#openEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <element signature="docComment;class#exportEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <element signature="class#exportEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+                <marker date="1480688904695" expanded="false" signature="13899:13944" ph="/**...*/" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoCap.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java">
+      <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state relative-caret-position="-8208">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,36 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Solver.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+      <file leaf-file-name="EyeTransformed.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-520">
-              <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-              <folding>
-                <element signature="method#checkNumValid#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkHorAndVer#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Four#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Five#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Six#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Seven#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Eight#0;class#Solver#0" expanded="false" />
-                <element signature="docComment;method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
-                <element signature="method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
-                <marker date="1480500336787" expanded="false" signature="7395:7548" ph="/**...*/" />
-                <marker date="1480500336787" expanded="false" signature="7918:8071" ph="/**...*/" />
-                <marker date="1480500336787" expanded="false" signature="10538:10691" ph="/**...*/" />
-                <marker date="1480500336787" expanded="false" signature="11060:11213" ph="/**...*/" />
-                <marker date="1480500336787" expanded="false" signature="14941:15094" ph="/**...*/" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main_train.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+            <state relative-caret-position="740">
+              <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -119,7 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/company/ThinningService.java" />
         <option value="$PROJECT_DIR$/src/com/company/test.clj" />
         <option value="$PROJECT_DIR$/src/com/company/ImgProc/Point.java" />
         <option value="$PROJECT_DIR$/src/com/company/ImgProc/Croper.java" />
@@ -164,12 +146,13 @@
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/EzGridSquareExtractor.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Solver/ReadSudo.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Main_train.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java" />
-        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
         <option value="$PROJECT_DIR$/src/team/sudocool/Eye/VideoCap.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
+        <option value="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
       </list>
     </option>
   </component>
@@ -220,6 +203,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -276,7 +260,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Solver" />
+              <option name="myItemId" value="ImgWorks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SudoCool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sudocool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ImgWorks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nImgProc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -318,7 +328,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -744,11 +753,12 @@
       <workItem from="1480479663440" duration="876000" />
       <workItem from="1480481416424" duration="3790000" />
       <workItem from="1480489882439" duration="9777000" />
+      <workItem from="1480667886882" duration="15606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87642000" />
+    <option name="totallyTimeSpent" value="103248000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -761,7 +771,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923076" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -816,28 +826,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/src.zip!/javax/swing/RepaintManager.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/src.zip!/javax/imageio/ImageIO.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Finder.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFinder.java" />
-    <entry file="jar:///usr/local/share/OpenCV/java/opencv-2413.jar!/org/opencv/core/Mat.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Cropper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="146" column="49" selection-start-line="146" selection-start-column="49" selection-end-line="146" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/GridSquareExtractor.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Skeletonizor.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/SquareArranger.java" />
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/nPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/SquareExtractor.java" />
     <entry file="jar://$USER_HOME$/Downloads/opencv-2.4.13/bin/opencv-2413.jar!/org/opencv/core/Mat.java" />
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Mat2Image.java">
@@ -911,51 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="101" column="59" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1377">
-          <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/ImageIcon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="215" column="20" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/java/awt/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5246">
-          <caret line="3378" column="16" selection-start-line="3378" selection-start-column="16" selection-end-line="3378" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/JComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10594">
-          <caret line="963" column="16" selection-start-line="963" selection-start-column="16" selection-end-line="963" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Identifier/Identifier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-360">
@@ -976,15 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
           <caret line="141" column="18" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="287" column="10" selection-start-line="287" selection-start-column="10" selection-end-line="287" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -992,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-780">
           <caret line="63" column="11" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1001,7 +934,7 @@
         <state relative-caret-position="40">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1014,34 +947,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/java/awt/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="20">
+          <caret line="3309" column="16" selection-start-line="3309" selection-start-column="16" selection-end-line="3309" selection-end-column="16" />
+          <folding>
+            <element signature="e#114480#114481#0" expanded="false" />
+            <element signature="e#114527#114528#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-520">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-          <folding>
-            <element signature="method#checkNumValid#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkHorAndVer#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Four#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Five#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Six#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Seven#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Eight#0;class#Solver#0" expanded="false" />
-            <element signature="docComment;method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
-            <element signature="method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
-            <marker date="1480500336787" expanded="false" signature="7395:7548" ph="/**...*/" />
-            <marker date="1480500336787" expanded="false" signature="7918:8071" ph="/**...*/" />
-            <marker date="1480500336787" expanded="false" signature="10538:10691" ph="/**...*/" />
-            <marker date="1480500336787" expanded="false" signature="11060:11213" ph="/**...*/" />
-            <marker date="1480500336787" expanded="false" signature="14941:15094" ph="/**...*/" />
-          </folding>
+        <state relative-caret-position="200">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,25 +971,189 @@
         <state relative-caret-position="360">
           <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Main_train.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/JComboBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1167">
+          <caret line="221" column="11" selection-start-line="221" selection-start-column="11" selection-end-line="221" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Solver/Solver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+          <folding>
+            <element signature="method#checkNumValid#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkHorAndVer#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Four#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Four#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Five#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Five#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Six#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Six#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Seven#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Seven#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Eight#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Eight#0;class#Solver#0" expanded="false" />
+            <element signature="docComment;method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
+            <element signature="method#checkNumValid_Nine#0;class#Solver#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/JTabbedPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="169" column="11" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+          <folding>
+            <element signature="e#5342#5343#0" expanded="false" />
+            <element signature="e#5384#5385#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/JComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="1955" column="20" selection-start-line="1955" selection-start-column="20" selection-end-line="1955" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="416" column="0" selection-start-line="416" selection-start-column="0" selection-end-line="416" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/ImageIcon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/opencv-2413.jar!/org/opencv/core/Scalar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-202">
+          <caret line="66" column="11" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
+          <folding>
+            <element signature="e#1739#1740#0" expanded="false" />
+            <element signature="e#1791#1792#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/opencv-2413.jar!/org/opencv/core/Core.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2160">
+          <caret line="6440" column="23" selection-start-line="6440" selection-start-column="23" selection-end-line="6440" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/nImgProc/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="88" column="31" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="1447" column="19" selection-start-line="1447" selection-start-column="19" selection-end-line="1447" selection-end-column="19" />
+          <folding>
+            <element signature="e#56437#56438#0" expanded="true" />
+            <element signature="e#56514#56515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/opencv-2413.jar!/org/opencv/highgui/Highgui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="583" column="0" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_101/src.zip!/javax/swing/JFileChooser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="128" column="46" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8208">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/export.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        <state relative-caret-position="4460">
+          <caret line="409" column="33" selection-start-line="409" selection-start-column="33" selection-end-line="409" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="docComment;method#updateSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="method#updateSudo#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="docComment;class#pauseEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <element signature="class#pauseEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="docComment;class#switchEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="class#switchEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="docComment;class#solveEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="docComment;class#resetEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <element signature="class#resetEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
             <element signature="docComment;class#openEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <element signature="class#openEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <element signature="docComment;class#exportEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <element signature="class#exportEventListener#0;class#SudoFrame#0;class#Eye#0" expanded="false" />
+            <marker date="1480688904695" expanded="false" signature="13899:13944" ph="/**...*/" />
           </folding>
         </state>
       </provider>

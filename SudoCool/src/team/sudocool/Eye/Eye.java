@@ -4,13 +4,16 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.*;
 import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.Utils;
+import team.sudocool.Main;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 
 /**
  * create all the frame
@@ -43,17 +46,11 @@ public class Eye {
             e.printStackTrace();
         }
 
+        T = new EyeTransformed();
         E = new EyeFrame();
         S = new SudoFrame();
         V = new VideoCap(0);
         R = new Recognizer();
-        T = new EyeTransformed();
-
-//        JFrame MainWindow = new JFrame();
-//        MainWindow.setLayout(new GridLayout(1, 2));
-//        MainWindow.add(E);
-//        MainWindow.add(S);
-//        MainWindow.setVisible(true);
 
         eyethread = new EyeThread();
         mode = PRINTING;
@@ -71,11 +68,9 @@ public class Eye {
                 Mat image = V.getMat();
                 Mat result = mode == HANDWRITING
                         ? R.RecognizeOnly(image) : R.RecognizeAndSolve(image);
-                E.setCaptured(result);
-                T.setCaptured(R.GetTransformedImage());
                 S.updateSudo(R.GetCurrentSudoku());
-                E.repaint();
-                T.repaint();
+                E.repaint(result);
+                T.repaint(R.GetTransformedImage());
 
                 try { Thread.sleep(3);
                 } catch (InterruptedException e) {
@@ -89,8 +84,11 @@ public class Eye {
      * the sudoku table frame
      */
     public class SudoFrame extends JFrame {
-        private JButton pauseButton, shiftButton, solveButton, resetButton, fileOpenButton;
-        private JPanel topPanel, bottomPanel;
+        private JButton pauseButton, shiftButton, solveButton,
+                resetButton, openButton, exportButton;
+        private JComboBox suduTypeComboBox;
+        private JPanel bottomPanel;
+        private JTabbedPane topPanel;
         private JSpinner[][] sudoSpinner;
 
 
@@ -98,26 +96,11 @@ public class Eye {
          * creat all the frame
          */
         public SudoFrame() {
-            topPanel = new JPanel();
+            topPanel = new JTabbedPane();
             bottomPanel = new JPanel();
-            pauseButton = new JButton("PAUSE");
-            shiftButton = new JButton("PRINTING");
-            solveButton = new JButton("SOLVE");
-            resetButton = new JButton("RESET");
-            fileOpenButton = new JButton("OPEN");
 
-            sudoSpinner = new JSpinner[9][9];
-            for(int i = 0; i < 9; i++) {
-                for(int j = 0; j < 9; j++) {
-                    sudoSpinner[i][j] = new JSpinner();
-                }
-            }
-
-            setEditSudo(false);
-            if(mode == PRINTING)
-                solveButton.setEnabled(false);
-            fileOpenButton.setEnabled(false);
-            solveButton.setEnabled(true);
+            paintButton();
+            paintSudo();
 
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setTitle("Soduku");
@@ -132,12 +115,9 @@ public class Eye {
             contentPaneBoss.add(bottomPanel);
             contentPaneBoss.add(Box.createVerticalStrut(7));
 
-            paintSudo();
-            paintButton();
-
             this.setBounds(900, 100, 450, 450);
     //        this.pack();
-            this.setResizable(true);
+            this.setResizable(false);
             this.setVisible(true);
         }
 
@@ -145,11 +125,24 @@ public class Eye {
          * paint the sudo table
          */
         private void paintSudo() {
-            topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
-            topPanel.add(Box.createHorizontalStrut(10));
+            JPanel sudoPanel = new JPanel();
+            topPanel.addTab("Sudoku Table", sudoPanel);
+            topPanel.addTab("Transformed", T);
+            topPanel.setSelectedIndex(0);
+
+            sudoPanel.setLayout(new BoxLayout(sudoPanel, BoxLayout.X_AXIS));
+            sudoPanel.add(Box.createHorizontalStrut(10));
             JPanel sudoTable = new JPanel(new GridLayout(3, 3));
-            topPanel.add(sudoTable);
-            topPanel.add(Box.createHorizontalStrut(10));
+            sudoPanel.add(sudoTable);
+            sudoPanel.add(Box.createHorizontalStrut(10));
+
+            sudoSpinner = new JSpinner[9][9];
+            for(int i = 0; i < 9; i++) {
+                for(int j = 0; j < 9; j++) {
+                    sudoSpinner[i][j] = new JSpinner();
+                }
+            }
+            setEditSudo(false);
 
             for(int w = 0; w < 3; w++)
             {
@@ -177,23 +170,45 @@ public class Eye {
          * paint the button on bottom
          */
         private void paintButton() {
+            pauseButton = new JButton("PAUSE");
+            shiftButton = new JButton("PRINTING");
+            solveButton = new JButton("SOLVE");
+            resetButton = new JButton("RESET");
+            openButton = new JButton("OPEN");
+            exportButton = new JButton("EXPORT");
+
+            String sudoTypes[] = {"4*4", "5*5", "6*6", "7*7", "8*8", "9*9"};
+            suduTypeComboBox = new JComboBox(sudoTypes);
+            suduTypeComboBox.setSelectedIndex(5);
+
+            if(mode == PRINTING)
+                solveButton.setEnabled(false);
+            openButton.setEnabled(false);
+            solveButton.setEnabled(true);
+
             pauseButton.addActionListener(new pauseEventListener());
             shiftButton.addActionListener(new switchEventListener());
             solveButton.addActionListener(new solveEventListener());
             resetButton.addActionListener(new resetEventListener());
-            fileOpenButton.addActionListener(new openEventListener());
+            openButton.addActionListener(new openEventListener());
+            exportButton.addActionListener(new exportEventListener());
+            suduTypeComboBox.addActionListener(new sudoTypeEventListener());
 
-            bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
-            bottomPanel.add(Box.createHorizontalGlue());
-            bottomPanel.add(fileOpenButton);
+            bottomPanel.setLayout(new FlowLayout());
             bottomPanel.add(Box.createHorizontalGlue());
             bottomPanel.add(pauseButton);
+            bottomPanel.add(Box.createHorizontalGlue());
+            bottomPanel.add(openButton);
+            bottomPanel.add(Box.createHorizontalGlue());
+            bottomPanel.add(exportButton);
             bottomPanel.add(Box.createHorizontalGlue());
             bottomPanel.add(solveButton);
             bottomPanel.add(Box.createHorizontalGlue());
             bottomPanel.add(resetButton);
             bottomPanel.add(Box.createHorizontalGlue());
             bottomPanel.add(shiftButton);
+            bottomPanel.add(Box.createHorizontalGlue());
+            bottomPanel.add(suduTypeComboBox);
             bottomPanel.add(Box.createHorizontalGlue());
         }
 
@@ -228,7 +243,7 @@ public class Eye {
                     setEditSudo(true);
                     solveButton.setEnabled(true);
 //                    resetButton.setEnabled(false);
-                    fileOpenButton.setEnabled(true);
+                    openButton.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
                 {
@@ -237,7 +252,7 @@ public class Eye {
                     setEditSudo(false);
                     solveButton.setEnabled(false);
 //                    resetButton.setEnabled(true);
-                    fileOpenButton.setEnabled(false);
+                    openButton.setEnabled(false);
                 }
             }
         }
@@ -282,11 +297,17 @@ public class Eye {
 
 
                 if(!R.Solve(sudoData))
-                    JOptionPane.showMessageDialog(null, "No answer!", "Alert", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "No answer!",
+                            "Alert",
+                            JOptionPane.ERROR_MESSAGE);
                 else
                 {
                     updateSudo(R.GetCurrentSudoku());
-                    JOptionPane.showMessageDialog(null, "Let`s see it!", "Congratulation", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "Let`s see it!",
+                            "Congratulation",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -312,18 +333,81 @@ public class Eye {
 
             @Override
             public void actionPerformed(ActionEvent eve) {
-                JFileChooser fd = new JFileChooser();
-                //fd.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fd.showOpenDialog(null);
-                File f = fd.getSelectedFile();
-                if(f != null){
-                    R.Reset();
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                String extj[] = {"jpeg", "jpg", "png", "bmp"};
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG Image", extj);
+                chooser.setFileFilter(filter);
 
+                int rtnval = chooser.showOpenDialog(bottomPanel);
+                if(rtnval == JFileChooser.APPROVE_OPTION){
+                    File f = chooser.getSelectedFile();
+
+                    R.Reset();
                     Mat image = Highgui.imread(f.getPath());
                     Mat result = R.RecognizeAndSolve(image);
                     Utils.showResult(result);
 
                     updateSudo(R.GetCurrentSudoku());
+                }
+            }
+        }
+
+        /**
+         * export the sudoku to an image
+         */
+        private class exportEventListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Mat image = R.ExportAnswerToStandardSudokuImage();
+
+                if(image == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "No sudoku answer to export!",
+                            "Alert", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                String extj[] = {"jpeg", "jpg", "png", "bmp"};
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG Image", extj);
+                chooser.setFileFilter(filter);
+
+                int rtnval = chooser.showSaveDialog(bottomPanel);
+                if(rtnval == JFileChooser.APPROVE_OPTION){
+                    File f = chooser.getSelectedFile();
+
+                    File saveFile = new File(f.getAbsolutePath() + "/export.png");
+
+                    if(saveFile.exists())
+                    {
+                        int overwriteSelect = JOptionPane.showConfirmDialog(bottomPanel,
+                                "File " + saveFile.getName() + " already exists. Overwritten?",
+                                "Overwritten?",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.WARNING_MESSAGE);
+                        if (overwriteSelect != JOptionPane.YES_OPTION)
+                        {
+                            return;
+                        }
+                    }
+
+                    Highgui.imwrite(saveFile.getAbsolutePath(), image);
+                }
+            }
+        }
+
+        /**
+         * select a sudo type
+         */
+        private class sudoTypeEventListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(suduTypeComboBox.getSelectedIndex() != -1) {
+                    System.out.println(suduTypeComboBox.getSelectedIndex() + 4);
                 }
             }
         }

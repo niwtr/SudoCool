@@ -4,6 +4,7 @@ import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import team.sudocool.Eye.Eye;
 import team.sudocool.ImgWorks.Patternizor;
+import team.sudocool.ImgWorks.Recognizer;
 import team.sudocool.ImgWorks.nImgProc.*;
 
 import java.io.*;
@@ -83,24 +84,9 @@ public class Main {
     }
     public static void main(String[] args) {
 
+
+
         Eye e=new Eye();
-
-        //e.Watch();
-
-
-
-/*
-        Patternizor P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);
-        Identifier I=new Identifier();
-
-        List<Integer> x=outseq2.stream().map(P::Patternize28x28).map(I::toDigit).collect(Collectors.toList());
-
-        for(int u=0;u<x.size();u++)
-        {
-            System.out.printf("%d ", x.get(u));
-            if((u+1)%9==0)System.out.println();
-        }
-*/
 
     }
 }

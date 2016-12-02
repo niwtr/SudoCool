@@ -1,6 +1,8 @@
 package team.sudocool.ImgWorks;
 
+import com.sun.tools.corba.se.idl.constExpr.Xor;
 import org.opencv.core.*;
+import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import team.sudocool.Identifier.Identifier;
 import team.sudocool.ImgWorks.nImgProc.Utils;
@@ -48,9 +50,6 @@ public class Recognizer {
     //所以我们需要把第一次采样的结果扔掉。
 
 
-
-
-
     public Recognizer(){
 
         P=new Patternizor(7, Patternizor.WHITE_BACKGROUND);//default is white background.
@@ -77,7 +76,7 @@ public class Recognizer {
 
     private Recognizer getImg(Mat img){
         this.Img=img;
-        
+
         return this;
 
     }
@@ -224,7 +223,7 @@ public class Recognizer {
 
         if(rst.size()!=0 && !firstRush){
             isSolved=true;
-            this.SolvedNumbers= sudoXor(rst.get(0), this.ArrangedNumbers);
+            this.SolvedNumbers=rst.get(0);
             this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
         }
         return this;
@@ -278,9 +277,16 @@ public class Recognizer {
     @FunctionalInterface
     interface Function3 <A, B, C, R> {public R apply (A a, B b, C c);}
 
+
+
     private Recognizer drawRecognizedNumbers() {
         MatOfPoint bound = E.getBound();
         if (bound == null || RecognizedNumbers == null) return this;
+
+        int[][]Xored=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+        if(isSolved)Xored=sudoXor(this.SolvedNumbers, this.ArrangedNumbers);
+
+
         List<Point> clockwised = Utils.clockwise(this.Bound.toList());
         Function<Integer, Point>
                 l1=Utils.lineDivPointFunc
@@ -307,7 +313,7 @@ public class Recognizer {
                 int num;
                 if(!isSolved)
                     num=ArrangedNumbers[y][x];
-                else num=SolvedNumbers[y][x];
+                else num=Xored[y][x];
                 Core.putText
                         (Img,
                                 (num==-1?"":""+num),
@@ -411,5 +417,47 @@ public class Recognizer {
 
     private Mat black=new Mat();
     public Mat GetTransformedImage(){return E.getTransformed()==null?black:E.getTransformed();}
+
+    public Mat ExportAnswerToStandardSudokuImage()
+    {
+        Mat img=Highgui.imread("./resources/blankSudoku.png");
+
+
+        if(!isSolved)return null;
+
+        int offsetx=970
+                , offsety=1200;
+
+        int dx=330,dy=343;
+        Point p=new Point();
+
+        for(int y=0;y<E.SUDOKU_SIZE;y++){
+            for(int x=0;x<E.SUDOKU_SIZE;x++){
+
+
+                int xx=offsetx+dx*x, yy=offsety+dy*y,
+                        num=this.SolvedNumbers[y][x];
+                p.x=xx;
+                p.y=yy;
+                Core.putText
+                        (img,
+                                (num==-1?"":""+num),
+                                p,
+                                Core.FONT_HERSHEY_PLAIN,
+                                20,
+                                new Scalar(0,0,0),
+                                10);
+
+            }
+        }
+
+        return img;
+
+
+
+    }
+
+
+
 
 }

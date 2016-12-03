@@ -91,13 +91,13 @@ public class Eye {
         private JTabbedPane topPanel;
         private JSpinner[][] sudoSpinner;
 
-
         /**
          * creat all the frame
          */
         public SudoFrame() {
             topPanel = new JTabbedPane();
             bottomPanel = new JPanel();
+            bottomPanel.setOpaque(false);
 
             paintButton();
             paintSudo();
@@ -105,7 +105,7 @@ public class Eye {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setTitle("Soduku");
 
-            JPanel contentPaneBoss = new JPanel();
+            JPanel contentPaneBoss = new ContentPanel();
             this.setContentPane(contentPaneBoss);
 
             contentPaneBoss.setLayout(new BoxLayout(contentPaneBoss, BoxLayout.Y_AXIS));
@@ -126,6 +126,8 @@ public class Eye {
          */
         private void paintSudo() {
             SudoTablePanle sudoPanel = new SudoTablePanle();
+            sudoPanel.setOpaque(false);
+
             topPanel.addTab("Sudoku Table", sudoPanel);
             topPanel.addTab("Transformed", T);
             topPanel.setSelectedIndex(0);
@@ -204,6 +206,19 @@ public class Eye {
         }
 
         /**
+         * Main content panel with image background
+         */
+        private class ContentPanel extends JPanel{
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                g.drawImage(image.getImage(),0,0,this);
+            }
+        }
+
+        /**
          * Sudoku Table Panel with different size
          */
         private class SudoTablePanle extends JPanel {
@@ -213,7 +228,8 @@ public class Eye {
                 setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
                 add(Box.createHorizontalStrut(10));
 
-                sudoTablePanel = new sudoTabel();
+                sudoTablePanel = new JPanel();
+                sudoTablePanel.setOpaque(false);
                 add(sudoTablePanel);
                 add(Box.createHorizontalStrut(10));
 
@@ -307,14 +323,12 @@ public class Eye {
                 setEditSudo(false);
             }
 
-            private class sudoTabel extends JPanel {
-                @Override
-                public void paintComponent(Graphics g)
-                {
-                    super.paintComponent(g);
-                    ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
-                    g.drawImage(image.getImage(),0,0,this);
-                }
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                g.drawImage(image.getImage(),0,0,this);
             }
         }
 

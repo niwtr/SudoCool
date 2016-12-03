@@ -13,29 +13,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class EyeTransformed extends JPanel {
-    private JPanel contentPane;
-
-    public static final int WIDTH=295;
-    public Mat captured;
-
+    private static final int WIDTH=295;
+    private Mat captured;
+    private ImageIcon backgroundImage;
 
     /**
      * Create the frame.
      */
     public EyeTransformed() {
-        contentPane = this;
+        backgroundImage = new ImageIcon("./resources/sudokuBackground.jpg");
 
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setBounds(100, 100, WIDTH, WIDTH);
-//        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//        setContentPane(contentPane);
-
-        contentPane.setLayout(null);
-
-//        setTitle("Transformed");
-//        setVisible(true);
+//        setBounds(100, 100, WIDTH, WIDTH);
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.setLayout(null);
     }
 
     /**
@@ -48,9 +38,10 @@ public class EyeTransformed extends JPanel {
         if(captured == null) {
             return;
         }
+        g.drawImage(backgroundImage.getImage(), 0, 0, this);
 
         BufferedImage bfi = Utils.Mat2BufferedImg(captured, WIDTH);
-        g.drawImage(bfi, 77, 3, this);
+        g.drawImage(bfi, 77, 0, this);
     }
 
     /**

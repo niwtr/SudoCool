@@ -167,7 +167,7 @@ public class Recognizer {
     }
     private boolean sol(int [][] arr, int i, int j){
 
-        if(i>8)return false;
+        if(i>E.SUDOKU_SIZE-1)return false;
 
         for(int ind=0;ind<this.RecognizedNumbersHistory[i][j].length;ind++){
 
@@ -179,7 +179,7 @@ public class Recognizer {
 
                 return true;
             } else {
-                return sol(arr, i + (j == 8 ? 1 : 0), (j == 8) ? 0 : (j + 1));
+                return sol(arr, i + (j == E.SUDOKU_SIZE-1 ? 1 : 0), (j == E.SUDOKU_SIZE-1) ? 0 : (j + 1));
             }
         }
 

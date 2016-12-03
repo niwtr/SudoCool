@@ -167,7 +167,7 @@ public class Recognizer {
     }
     private boolean sol(int [][] arr, int i, int j){
 
-        if(i>E.SUDOKU_SIZE-1)return false;
+        if(i>8)return false;
 
         for(int ind=0;ind<this.RecognizedNumbersHistory[i][j].length;ind++){
 
@@ -179,7 +179,7 @@ public class Recognizer {
 
                 return true;
             } else {
-                return sol(arr, i + (j == E.SUDOKU_SIZE-1 ? 1 : 0), (j == E.SUDOKU_SIZE-1) ? 0 : (j + 1));
+                return sol(arr, i + (j == E.SUDOKU_SIZE-1 ? 1 : 0), (j == E.SUDOKU_SIZE-1 ) ? 0 : (j + 1));
             }
         }
 
@@ -422,6 +422,17 @@ public class Recognizer {
 
     public void SetSudokuSize(int size){
         E.SetSize(size);
+
+        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+
+        this.Bound=new MatOfPoint();
+
+        this.__empty=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
+        for(int i=0;i<E.SUDOKU_SIZE;i++){
+            for(int j=0;j<E.SUDOKU_SIZE;j++)
+                this.__empty[i][j]=-1;
+        }
+
     }
 
 

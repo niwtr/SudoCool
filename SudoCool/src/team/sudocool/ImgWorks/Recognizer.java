@@ -9,6 +9,7 @@ import team.sudocool.Solver.Solver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -247,7 +248,9 @@ public class Recognizer {
         this.Bound.fromList(abound.toList());
         List<MatOfPoint> mp=new ArrayList<>();
         mp.add(Bound);
-        Core.polylines(Img, mp, true, new Scalar(255,255,0), 3);
+        if(isSolved)
+            Core.polylines(Img, mp, true, getRandomScalar(),3);
+        else Core.polylines(Img, mp, true, new Scalar(255,255,0),3);
         return this;
     }
 
@@ -281,7 +284,24 @@ public class Recognizer {
 
 
 
+    Random r=new Random(255);
 
+    private int getRandomColor(){
+        return (r.nextInt()%200)+55;
+    }
+
+    Scalar[] colorTable={
+            new Scalar(255,0,0),
+            new Scalar(255,255,0),
+            new Scalar(255,0,255),
+            new Scalar(0,255,255),
+            new Scalar(255,255,255),
+            new Scalar(0,255,0),
+            new Scalar(0,0,255)
+    } ;
+    private Scalar getRandomScalar(){
+        return colorTable[r.nextInt(colorTable.length)];
+    }
 
 
     private Recognizer drawRecognizedNumbers() {
@@ -319,13 +339,15 @@ public class Recognizer {
                 if(!isSolved)
                     num=ArrangedNumbers[y][x];
                 else num=Xored[y][x];
+
+
                 Core.putText
                         (Img,
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
                                 (width/(9))*0.8,
-                                isSolved?(new Scalar(0,0,255)):(new Scalar(255,0,0)),
+                                isSolved?(new Scalar(0,0,255)):new Scalar(255,0,0),
                                 2);
             }
         }

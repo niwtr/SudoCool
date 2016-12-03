@@ -22,6 +22,7 @@ import java.io.FilenameFilter;
  * @since 2016/11/28
  */
 public class Eye {
+    static final String backgroundImage = "";
     private static final int PRINTING = 0;
     private static final int HANDWRITING = 1;
 
@@ -109,11 +110,11 @@ public class Eye {
             this.setContentPane(contentPaneBoss);
 
             contentPaneBoss.setLayout(new BoxLayout(contentPaneBoss, BoxLayout.Y_AXIS));
-            contentPaneBoss.add(Box.createVerticalStrut(10));
+//            contentPaneBoss.add(Box.createVerticalStrut(5));
             contentPaneBoss.add(topPanel);
-            contentPaneBoss.add(Box.createVerticalStrut(7));
+            contentPaneBoss.add(Box.createVerticalStrut(5));
             contentPaneBoss.add(bottomPanel);
-            contentPaneBoss.add(Box.createVerticalStrut(7));
+            contentPaneBoss.add(Box.createVerticalStrut(5));
 
             this.setBounds(900, 100, 450, 450);
     //        this.pack();
@@ -152,6 +153,7 @@ public class Eye {
                 solveButton.setEnabled(false);
             openButton.setEnabled(false);
             solveButton.setEnabled(true);
+            suduTypeComboBox.setEnabled(false);
 
             pauseButton.addActionListener(new pauseEventListener());
             shiftButton.addActionListener(new switchEventListener());
@@ -201,7 +203,11 @@ public class Eye {
                     return;
 
                 for(int j = 0; j < sudoSpinner.length; j++)
+                {
+                    if(sudoSpinner[i][j] == null)
+                        return;
                     sudoSpinner[i][j].setValue(sudoData[i][j] == -1 ? 0 : sudoData[i][j]);
+                }
             }
         }
 
@@ -213,7 +219,7 @@ public class Eye {
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
-                ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                ImageIcon image = new ImageIcon(backgroundImage);
                 g.drawImage(image.getImage(),0,0,this);
             }
         }
@@ -327,7 +333,7 @@ public class Eye {
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
-                ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                ImageIcon image = new ImageIcon(backgroundImage);
                 g.drawImage(image.getImage(),0,0,this);
             }
         }
@@ -345,6 +351,7 @@ public class Eye {
                     setEditSudo(true);
                     solveButton.setEnabled(true);
                     openButton.setEnabled(true);
+                    suduTypeComboBox.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
                 {
@@ -353,6 +360,7 @@ public class Eye {
                     setEditSudo(false);
                     solveButton.setEnabled(false);
                     openButton.setEnabled(false);
+                    suduTypeComboBox.setEnabled(false);
                 }
             }
         }
@@ -509,8 +517,14 @@ public class Eye {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(suduTypeComboBox.getSelectedIndex() != -1) {
+                    int sudoSize = suduTypeComboBox.getSelectedIndex() + 4;
+                    if(sudoSize == 9)
+                        exportButton.setEnabled(true);
+                    else
+                        exportButton.setEnabled(false);
+
                     R.Reset();
-                    R.SetSudokuSize(suduTypeComboBox.getSelectedIndex() + 4);
+                    R.SetSudokuSize(sudoSize);
 
                     topPanel.removeAll();
                     paintSudo();

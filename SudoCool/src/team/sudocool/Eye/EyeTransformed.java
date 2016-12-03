@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class EyeTransformed extends JPanel {
-    private static final int WIDTH=295;
+    private static final int WIDTH=293;
     private Mat captured;
     private ImageIcon backgroundImage;
 
@@ -21,9 +21,8 @@ public class EyeTransformed extends JPanel {
      * Create the frame.
      */
     public EyeTransformed() {
-        backgroundImage = new ImageIcon("./resources/sudokuBackground.jpg");
+        backgroundImage = new ImageIcon(Eye.backgroundImage);
 
-//        setBounds(100, 100, WIDTH, WIDTH);
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
         this.setLayout(null);
     }

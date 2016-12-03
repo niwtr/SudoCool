@@ -213,7 +213,7 @@ public class Eye {
                 setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
                 add(Box.createHorizontalStrut(10));
 
-                sudoTablePanel = new JPanel();
+                sudoTablePanel = new sudoTabel();
                 add(sudoTablePanel);
                 add(Box.createHorizontalStrut(10));
 
@@ -256,6 +256,7 @@ public class Eye {
                         int b = sudoSize/m;
                         JPanel boxPanel = new JPanel(new GridLayout(a, b));
                         boxPanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+                        boxPanel.setOpaque(false);
                         sudoTablePanel.add(boxPanel);
 
                         for (int i = 0; i < a; i++) {
@@ -263,6 +264,10 @@ public class Eye {
                                 JSpinner num = sudoSpinner[w*a+i][q*b+j];
                                 SpinnerModel model = new SpinnerNumberModel(0, 0, sudoSize, 1);
                                 num.setModel(model);
+
+                                num.setOpaque(false);
+                                num.getEditor().setOpaque(false);
+                                ((JSpinner.DefaultEditor)num.getEditor()).getTextField().setOpaque(false);
 
                                 boxPanel.add(num);
                             }
@@ -282,6 +287,11 @@ public class Eye {
                         JSpinner num = sudoSpinner[w][q];
                         SpinnerModel model = new SpinnerNumberModel(0, 0, sudoSize, 1);
                         num.setModel(model);
+
+                        num.setOpaque(false);
+                        num.getEditor().setOpaque(false);
+                        ((JSpinner.DefaultEditor)num.getEditor()).getTextField().setOpaque(false);
+
                         sudoTablePanel.add(num);
                     }
                 }
@@ -295,6 +305,16 @@ public class Eye {
                     }
                 }
                 setEditSudo(false);
+            }
+
+            private class sudoTabel extends JPanel {
+                @Override
+                public void paintComponent(Graphics g)
+                {
+                    super.paintComponent(g);
+                    ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                    g.drawImage(image.getImage(),0,0,this);
+                }
             }
         }
 

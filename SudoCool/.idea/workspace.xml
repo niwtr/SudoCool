@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba737c19-100a-41c0-b4ba-dc59ce5f0fa4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/Eye.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java" afterPath="$PROJECT_DIR$/src/team/sudocool/Eye/EyeTransformed.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" afterPath="$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java" />
     </list>
     <ignored path="testOpenCV.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="Recognizer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3120">
-              <caret line="173" column="41" selection-start-line="173" selection-start-column="41" selection-end-line="173" selection-end-column="41" />
+            <state relative-caret-position="3220">
+              <caret line="174" column="41" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -751,12 +750,12 @@
       <workItem from="1480402211136" duration="723000" />
       <workItem from="1480740990195" duration="5569000" />
       <workItem from="1480746808182" duration="1746000" />
-      <workItem from="1480767157760" duration="1713000" />
+      <workItem from="1480767157760" duration="1901000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53799000" />
+    <option name="totallyTimeSpent" value="53987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -975,8 +974,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/team/sudocool/ImgWorks/Recognizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3120">
-          <caret line="173" column="41" selection-start-line="173" selection-start-column="41" selection-end-line="173" selection-end-column="41" />
+        <state relative-caret-position="3220">
+          <caret line="174" column="41" selection-start-line="174" selection-start-column="41" selection-end-line="174" selection-end-column="41" />
           <folding />
         </state>
       </provider>

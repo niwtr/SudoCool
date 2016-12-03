@@ -13,6 +13,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static org.opencv.core.Core.FONT_HERSHEY_COMPLEX;
 import static org.opencv.imgproc.Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C;
 import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
 import static org.opencv.imgproc.Imgproc.approxPolyDP;
@@ -280,6 +281,9 @@ public class Recognizer {
 
 
 
+
+
+
     private Recognizer drawRecognizedNumbers() {
         MatOfPoint bound = E.getBound();
         if (bound == null || RecognizedNumbers == null) return this;
@@ -320,7 +324,7 @@ public class Recognizer {
                                 (num==-1?"":""+num),
                                 p,
                                 Core.FONT_HERSHEY_PLAIN,
-                                (width/(E.SUDOKU_SIZE))*0.8,
+                                (width/(9))*0.8,
                                 isSolved?(new Scalar(0,0,255)):(new Scalar(255,0,0)),
                                 2);
             }
@@ -423,9 +427,7 @@ public class Recognizer {
     public void SetSudokuSize(int size){
         E.SetSize(size);
 
-        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
-
-        this.Bound=new MatOfPoint();
+        Reset();
 
         this.__empty=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         for(int i=0;i<E.SUDOKU_SIZE;i++){

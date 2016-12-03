@@ -2,6 +2,7 @@ package team.sudocool;
 
 import team.sudocool.Identifier.Identifier;
 import team.sudocool.Identifier.algol.ReadData;
+import team.sudocool.Solver.ReadSudo;
 import team.sudocool.Solver.Solver;
 
 import java.io.FileReader;
@@ -26,38 +27,35 @@ public class Main_train {
         String path_train = "D:/patterns28_60/";
         String path_x = "D:/patterns_x/";
 
-        Identifier iden = new Identifier(path_test);
+//        Identifier iden = new Identifier(path_test);
 
 //        iden.learnAndTest(0.001);
 
-        double ave = 0d;
-        for (int i = 1; i < 10; i++) {
-            double ans = iden.testData(i);
-            ave += ans;
-            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans * 100) + "%");
-        }
-        System.out.println("Average: " + new DecimalFormat("##.##").format(ave * 100/9) + "%");
-
-
-//        int[][][] sudoku = null;
-//        try {
-//            sudoku = readMatrixFile("D:/sudoku.txt", 9);
-//        } catch (IOException e) {
-//            e.printStackTrace();
+//        double ave = 0d;
+//        for (int i = 1; i < 10; i++) {
+//            double ans = iden.testData(i);
+//            ave += ans;
+//            System.out.println(i + ": " + new DecimalFormat("##.##").format(ans * 100) + "%");
 //        }
-//
-//        assert sudoku != null;
-//
-//        Solver solver = new Solver();
-//
-//        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
-//        printSuduAns(ans);
-//
+//        System.out.println("Average: " + new DecimalFormat("##.##").format(ave * 100/9) + "%");
+
+
+        int[][][] sudoku = null;
+        try {
+            sudoku = ReadSudo.readMatrixFile("D:/suduku_test.txt", 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assert sudoku != null;
+
+        Solver solver = new Solver();
+
+        ArrayList<int[][]> ans = solver.solveSudo(sudoku[0]);
+        printSuduAns(ans);
+
 //        ArrayList<int[][]> ans2 = solver.solveSudo(sudoku[1]);
 //        printSuduAns(ans2);
-//
-//        ArrayList<int[][]> ans3 = solver.solveSudo(sudoku[2]);
-//        printSuduAns(ans3);
     }
 
     private static void printSuduAns(ArrayList<int[][]> ans) {

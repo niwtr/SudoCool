@@ -50,6 +50,7 @@ public class EyeFrame extends JFrame {
         contentPane.setLayout(null);
 
         setTitle("Camera");
+        setResizable(false);
         setVisible(true);
     }
 
@@ -67,10 +68,11 @@ public class EyeFrame extends JFrame {
     }
 
     /**
-     * set the captured matrix
+     * set the captured matrix and repaint
      * @param captured input
      */
-    public void setCaptured(Mat captured) {
+    public void repaint(Mat captured) {
         this.captured = captured.clone();
+        this.repaint();
     }
 }

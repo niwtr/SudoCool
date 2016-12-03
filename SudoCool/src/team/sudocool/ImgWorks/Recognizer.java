@@ -1,6 +1,5 @@
 package team.sudocool.ImgWorks;
 
-import com.sun.tools.corba.se.idl.constExpr.Xor;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;

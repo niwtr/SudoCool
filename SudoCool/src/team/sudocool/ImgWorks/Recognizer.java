@@ -20,6 +20,8 @@ import static org.opencv.imgproc.Imgproc.approxPolyDP;
 /**
  * Created by Heranort on 16/11/19.
  */
+
+//cowsay: write func "set sudoku size"
 public class Recognizer {
 
     //background color of sudoku.
@@ -57,7 +59,7 @@ public class Recognizer {
                 STANDARD_OUTERBOUND_SIZEY, STANDARD_SCISSOR_SIZE);
         S=new Solver();
 
-        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
+        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
 
         this.Bound=new MatOfPoint();
 
@@ -223,7 +225,7 @@ public class Recognizer {
         if(rst.size()!=0 && !firstRush){
             isSolved=true;
             this.SolvedNumbers=rst.get(0);
-            this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
+            this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         }
         return this;
     }
@@ -325,7 +327,7 @@ public class Recognizer {
         }
         if(firstRush){
             this.firstRush=false;
-            this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
+            this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         }
         return this;
     }
@@ -397,7 +399,7 @@ public class Recognizer {
     //User set number to the sudoku matrix.
     public void SetRecognizedNumbers(int y, int x, int num) {//更改对应（X,Y)位置的识别结果
         this.bruteForce = false;
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < E.SUDOKU_SIZE; i++)
             this.RecognizedNumbersHistory[y][x][i] = 0;
         this.RecognizedNumbersHistory[y][x][0] = num;
     }
@@ -408,7 +410,7 @@ public class Recognizer {
         this.isSolved=false;
         this.RecognizedNumbers=null;
         this.ArrangedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
-        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][9];
+        this.RecognizedNumbersHistory=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         this.SolvedNumbers=new int[E.SUDOKU_SIZE][E.SUDOKU_SIZE];
         this.firstRush=true;
         this.bruteForce=true;
@@ -416,6 +418,12 @@ public class Recognizer {
 
     private Mat black=new Mat();
     public Mat GetTransformedImage(){return E.getTransformed()==null?black:E.getTransformed();}
+
+
+    public void SetSudokuSize(int size){
+        E.SetSize(size);
+    }
+
 
     public Mat ExportAnswerToStandardSudokuImage()
     {

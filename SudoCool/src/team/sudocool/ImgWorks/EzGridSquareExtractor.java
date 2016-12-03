@@ -41,6 +41,14 @@ public class EzGridSquareExtractor {
         this.scissorWidth =scissor;
     }
 
+    public void SetSize(int size){
+        assert size>0;
+        this.SUDOKU_SIZE=size;
+        this.outerBoundSizex=size*50;
+        this.outerBoundSizey=size*50;
+
+    }
+
     public  MatOfPoint ExtractOuterBoundContour(Mat img){
         //Mat img2=img.clone();
         Mat img2=img.clone();

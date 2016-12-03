@@ -111,13 +111,13 @@ public class Eye {
             contentPaneBoss.setLayout(new BoxLayout(contentPaneBoss, BoxLayout.Y_AXIS));
             contentPaneBoss.add(Box.createVerticalStrut(10));
             contentPaneBoss.add(topPanel);
-            contentPaneBoss.add(Box.createVerticalStrut(10));
+            contentPaneBoss.add(Box.createVerticalStrut(7));
             contentPaneBoss.add(bottomPanel);
             contentPaneBoss.add(Box.createVerticalStrut(7));
 
             this.setBounds(900, 100, 450, 450);
     //        this.pack();
-            this.setResizable(false);
+//            this.setResizable(false);
             this.setVisible(true);
         }
 
@@ -125,45 +125,10 @@ public class Eye {
          * paint the sudo table
          */
         private void paintSudo() {
-            JPanel sudoPanel = new JPanel();
+            SudoTablePanle sudoPanel = new SudoTablePanle();
             topPanel.addTab("Sudoku Table", sudoPanel);
             topPanel.addTab("Transformed", T);
             topPanel.setSelectedIndex(0);
-
-            sudoPanel.setLayout(new BoxLayout(sudoPanel, BoxLayout.X_AXIS));
-            sudoPanel.add(Box.createHorizontalStrut(10));
-            JPanel sudoTable = new JPanel(new GridLayout(3, 3));
-            sudoPanel.add(sudoTable);
-            sudoPanel.add(Box.createHorizontalStrut(10));
-
-            sudoSpinner = new JSpinner[9][9];
-            for(int i = 0; i < 9; i++) {
-                for(int j = 0; j < 9; j++) {
-                    sudoSpinner[i][j] = new JSpinner();
-                }
-            }
-            setEditSudo(false);
-
-            for(int w = 0; w < 3; w++)
-            {
-                for(int q = 0; q < 3; q++)
-                {
-                    JPanel boxPanel = new JPanel(new GridLayout(3, 3));
-                    boxPanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
-                    sudoTable.add(boxPanel);
-
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 0; j < 3; j++) {
-                            JSpinner num = sudoSpinner[w*3+i][q*3+j];
-                            SpinnerModel model = new SpinnerNumberModel(0, 0, 9, 1);
-                            num.setModel(model);
-
-//                            num.getEditor().getComponent(0).setForeground(Color.PINK);
-                            boxPanel.add(num);
-                        }
-                    }
-                }
-            }
         }
 
         /**
@@ -213,8 +178,8 @@ public class Eye {
         }
 
         private void setEditSudo(boolean edit) {
-            for(int i = 0; i < 9; i++)
-                for(int j = 0; j < 9; j++)
+            for(int i = 0; i < sudoSpinner.length; i++)
+                for(int j = 0; j < sudoSpinner[i].length; j++)
                 {
                     sudoSpinner[i][j].setEnabled(edit);
                 }
@@ -225,9 +190,132 @@ public class Eye {
          * @param sudoData current sudoku
          */
         private void updateSudo(int[][] sudoData) {
-            for(int i = 0; i < 9; i++)
-                for(int j = 0; j < 9; j++)
+            if(sudoData.length != sudoSpinner.length)
+                return;
+
+            for(int i = 0; i < sudoSpinner.length; i++)
+            {
+                if(sudoSpinner[i].length != sudoData[i].length)
+                    return;
+
+                for(int j = 0; j < sudoSpinner.length; j++)
                     sudoSpinner[i][j].setValue(sudoData[i][j] == -1 ? 0 : sudoData[i][j]);
+            }
+        }
+
+        /**
+         * Sudoku Table Panel with different size
+         */
+        private class SudoTablePanle extends JPanel {
+            private JPanel sudoTablePanel;
+
+            SudoTablePanle() {
+                setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+                add(Box.createHorizontalStrut(10));
+
+                sudoTablePanel = new sudoTabel();
+                add(sudoTablePanel);
+                add(Box.createHorizontalStrut(10));
+
+                int sudoSize = suduTypeComboBox.getSelectedIndex() + 4;
+                initSudoSpinner(sudoSize);
+
+                switch (sudoSize) {
+                    case 4:
+                        paintSudoTabel_Regular(2, 2, 4);
+                        break;
+                    case 5:
+                        paintSudoTable_Irregular(5);
+                        break;
+                    case 6:
+                        paintSudoTabel_Regular(3, 2, 6);
+                        break;
+                    case 7:
+                        paintSudoTable_Irregular(7);
+                        break;
+                    case 8:
+                        paintSudoTabel_Regular(4, 2, 8);
+                        break;
+                    case 9:
+                        paintSudoTabel_Regular(3, 3, 9);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            private void paintSudoTabel_Regular(int n, int m, int sudoSize) {
+                sudoTablePanel.setLayout(new GridLayout(n, m));
+
+                for(int w = 0; w < n; w++)
+                {
+                    for(int q = 0; q < m; q++)
+                    {
+                        int a = sudoSize/n;
+                        int b = sudoSize/m;
+                        JPanel boxPanel = new JPanel(new GridLayout(a, b));
+                        boxPanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+                        boxPanel.setOpaque(false);
+                        sudoTablePanel.add(boxPanel);
+
+                        for (int i = 0; i < a; i++) {
+                            for (int j = 0; j < b; j++) {
+                                JSpinner num = sudoSpinner[w*a+i][q*b+j];
+                                SpinnerModel model = new SpinnerNumberModel(0, 0, sudoSize, 1);
+                                num.setModel(model);
+
+                                num.setOpaque(false);
+                                num.getEditor().setOpaque(false);
+                                ((JSpinner.DefaultEditor)num.getEditor()).getTextField().setOpaque(false);
+
+                                boxPanel.add(num);
+                            }
+                        }
+                    }
+                }
+            }
+
+            private void paintSudoTable_Irregular(int sudoSize) {
+                sudoTablePanel.setLayout(new GridLayout(sudoSize, sudoSize));
+                sudoTablePanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+
+                for(int w = 0; w < sudoSize; w++)
+                {
+                    for(int q = 0; q < sudoSize; q++)
+                    {
+                        JSpinner num = sudoSpinner[w][q];
+                        SpinnerModel model = new SpinnerNumberModel(0, 0, sudoSize, 1);
+                        num.setModel(model);
+
+                        num.setOpaque(false);
+                        num.getEditor().setOpaque(false);
+                        ((JSpinner.DefaultEditor)num.getEditor()).getTextField().setOpaque(false);
+
+                        sudoTablePanel.add(num);
+                    }
+                }
+            }
+
+            private void initSudoSpinner(int sudoSize) {
+                sudoSpinner = new JSpinner[sudoSize][sudoSize];
+                for(int i = 0; i < sudoSize; i++) {
+                    for(int j = 0; j < sudoSize; j++) {
+                        sudoSpinner[i][j] = new JSpinner();
+                    }
+                }
+                setEditSudo(false);
+            }
+
+            private class sudoTabel extends JPanel {
+                @Override
+                public void paintComponent(Graphics g)
+                {
+                    super.paintComponent(g);
+                    ImageIcon image = new ImageIcon("./resources/sudokuBackground.jpg");
+                    g.drawImage(image.getImage(),0,0,this);
+                }
+            }
         }
 
         /**
@@ -242,7 +330,6 @@ public class Eye {
                     pauseButton.setText("CONTINUE");
                     setEditSudo(true);
                     solveButton.setEnabled(true);
-//                    resetButton.setEnabled(false);
                     openButton.setEnabled(true);
                 }
                 else if(pauseButton.getText().equals("CONTINUE"))
@@ -251,7 +338,6 @@ public class Eye {
                     pauseButton.setText("PAUSE");
                     setEditSudo(false);
                     solveButton.setEnabled(false);
-//                    resetButton.setEnabled(true);
                     openButton.setEnabled(false);
                 }
             }
@@ -284,10 +370,12 @@ public class Eye {
         private class solveEventListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[][] sudoData = new int[9][9];
-                for(int i = 0; i < 9; i++)
+                int size = sudoSpinner.length;
+
+                int[][] sudoData = new int[size][size];
+                for(int i = 0; i < size; i++)
                 {
-                    for(int j = 0; j < 9; j++)
+                    for(int j = 0; j < size; j++)
                     {
                         sudoData[i][j] = (Integer) sudoSpinner[i][j].getValue();
                         if(sudoData[i][j] == 0)
@@ -407,7 +495,11 @@ public class Eye {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(suduTypeComboBox.getSelectedIndex() != -1) {
-                    System.out.println(suduTypeComboBox.getSelectedIndex() + 4);
+                    R.Reset();
+                    R.SetSudokuSize(suduTypeComboBox.getSelectedIndex() + 4);
+
+                    topPanel.removeAll();
+                    paintSudo();
                 }
             }
         }

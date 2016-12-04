@@ -22,7 +22,7 @@ import java.io.FilenameFilter;
  * @since 2016/11/28
  */
 public class Eye {
-    static final String backgroundImage = "";
+    static final String backgroundImage = "./resources/sudokuBackground1.png";
     private static final int PRINTING = 0;
     private static final int HANDWRITING = 1;
 
@@ -229,8 +229,11 @@ public class Eye {
          */
         private class SudoTablePanle extends JPanel {
             private JPanel sudoTablePanel;
+            private Color borderColor;
 
             SudoTablePanle() {
+                borderColor = new Color(51, 102, 204);
+
                 setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
                 add(Box.createHorizontalStrut(10));
 
@@ -277,7 +280,7 @@ public class Eye {
                         int a = sudoSize/n;
                         int b = sudoSize/m;
                         JPanel boxPanel = new JPanel(new GridLayout(a, b));
-                        boxPanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+                        boxPanel.setBorder(BorderFactory.createLineBorder(borderColor));
                         boxPanel.setOpaque(false);
                         sudoTablePanel.add(boxPanel);
 
@@ -300,7 +303,7 @@ public class Eye {
 
             private void paintSudoTable_Irregular(int sudoSize) {
                 sudoTablePanel.setLayout(new GridLayout(sudoSize, sudoSize));
-                sudoTablePanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
+                sudoTablePanel.setBorder(BorderFactory.createLineBorder(borderColor));
 
                 for(int w = 0; w < sudoSize; w++)
                 {

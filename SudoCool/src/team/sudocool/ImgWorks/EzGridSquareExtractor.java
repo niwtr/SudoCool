@@ -69,7 +69,7 @@ public class EzGridSquareExtractor {
         List<MatOfPoint> bound=contours.stream().filter(mp ->
         {
             //first filter out small pieces.
-            if(Imgproc.contourArea(mp)<(imgSizex * imgSizey /13))//used: 9
+            if(Imgproc.contourArea(mp)<(imgSizex * imgSizey /15))//used: 9
                 return false;
 
             //second, filter out non-rec things.

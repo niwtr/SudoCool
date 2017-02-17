@@ -3,7 +3,17 @@ Let me introduce this software in general.
 
 This is originally an assignment project of lesson "Machine Intelligence" in Beijing University of Posts & Communications (BUPT) but now I'm making it open-source. I learned a lot from other projects available on Github and I also want to share my knowledges. So here it goes.
 
+Our major developers are:
+Tianrui Niu (niwtr)
+Han Liu (laddie 132)
+Jiahui Liu (shunvforever)
+
+
 This is a Webcam Sudoku Recognizer & Solver based on OpenCV 2.4.13 and BPNN. You use your webcam to capture sudoku puzzles on flat platforms (You can either use papers, iPads or your smartphones.) and this one will solve your puzzles "automagically". The solution will be printed on the same screen. You needn't perform any operations during that period since our software will do that for you. It automatically captures the video flow, locates the puzzle, recognizes the numbers and solves them. After you get the solution you are also allowed to export your solution in PDF format.
+
+This picture demonstrates that the software has recognized & solved a sudoku puzzle which is projected on my New iPad.
+
+![](https://github.com/niwtr/SudoCool/blob/master/Screenshots/ss1.png)
 
 This software comes in both source code and precompiled jar packet. You can first take a try before you dive into the code.
 
@@ -31,6 +41,6 @@ The project splits into four major parts:
 
 So if you are here seeking for BPNN, go for **Identifier**, or is you are seeking for image processing techniques, watch for **ImgWorks**. 
 
-Code and glory awaits!
+Hack and glory awaits!
 
 Tianrui Niu (niwtr)

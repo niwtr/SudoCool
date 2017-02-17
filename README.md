@@ -13,7 +13,11 @@ This is a Webcam Sudoku Recognizer & Solver based on OpenCV 2.4.13 and BPNN. You
 
 This picture demonstrates that the software has recognized & solved a sudoku puzzle which is projected on my New iPad.
 
-![](https://github.com/niwtr/SudoCool/blob/master/Screenshots/ss1.png)
+![](https://github.com/niwtr/SudoCool/blob/master/Screenshots/ss2.png)
+
+And this demonstrates the whole recognition procedure:
+
+![](https://github.com/niwtr/SudoCool/blob/master/Screenshots/ss3.gif)
 
 This software comes in both source code and precompiled jar packet. You can first take a try before you dive into the code.
 
